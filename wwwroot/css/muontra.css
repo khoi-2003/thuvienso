@@ -1,0 +1,561 @@
+﻿/* ============================
+   🎯 TAB CHÍNH (Mượn - Trả / Chính sách / Lịch - Thẻ)
+   ============================ */
+
+.tabs-wrapper {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto 25px auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    overflow: hidden;
+    font-family: "Segoe UI", sans-serif;
+    margin-top: 50px;
+}
+
+/* --- Thanh danh sách tab --- */
+.main-tabs {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: #f5f7fb;
+    border-bottom: 1px solid #d6e0f3;
+}
+
+    /* --- Mỗi tab --- */
+    .main-tabs li {
+        flex: 1;
+        text-align: center;
+        padding: 14px 0; /* tăng chiều cao */
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 15.5px; /* tăng chữ */
+        color: #333;
+        border-right: 1px solid #e0e6f7;
+        transition: all 0.25s ease;
+        user-select: none;
+        letter-spacing: 0.3px;
+    }
+
+        .main-tabs li:last-child {
+            border-right: none;
+        }
+
+        /* --- Hover --- */
+        .main-tabs li:hover {
+            background: #e8f0ff;
+            color: #0056d6;
+        }
+
+        /* --- Tab đang chọn --- */
+        .main-tabs li.active {
+            background: linear-gradient(180deg, #007bff, #0062d1);
+            color: #fff;
+            font-weight: 700;
+            box-shadow: inset 0 -3px 0 #004ecb;
+        }
+
+/* --- Nội dung từng tab --- */
+.tab-content {
+    display: none;
+    padding: 24px;
+    animation: fadeIn 0.35s ease;
+}
+
+    .tab-content.active {
+        display: block;
+    }
+
+/* --- Hiệu ứng mượt --- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ==========================================
+   📚 TAB 1 — MƯỢN / TRẢ
+   (Chỉ áp dụng trong #muontra-tab)
+========================================== */
+
+#muontra-tab {
+    padding: 20px 25px;
+    background: #f9fbff;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    font-family: "Segoe UI", sans-serif;
+}
+
+    /* --- Tiêu đề chính --- */
+    #muontra-tab h2 {
+        color: #0047b3;
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    /* --- Tiêu đề phụ --- */
+    #muontra-tab h3,
+    #muontra-tab h4 {
+        color: #222;
+        margin-top: 25px;
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+
+/* --- Container --- */
+.muontra-container {
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+}
+
+/* --- Bảng dữ liệu --- */
+#muontra-tab table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14.5px;
+    margin-top: 8px;
+}
+
+#muontra-tab th {
+    background: #eaf2ff;
+    color: #002b5b;
+    text-align: center;
+    font-weight: 600;
+    padding: 10px;
+    border-bottom: 2px solid #d7e4ff;
+}
+
+#muontra-tab td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #f1f1f1;
+    text-align: center;
+}
+
+#muontra-tab tr:hover {
+    background: #f7faff;
+}
+
+/* --- Phân trang --- */
+#muontra-tab .pagination {
+    text-align: center;
+    margin-top: 12px;
+}
+
+/* --- Alert box --- */
+#muontra-tab .alert-box {
+    display: none;
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: #fff4e5;
+    border-left: 4px solid #ffa600;
+    color: #9a4a00;
+    border-radius: 6px;
+}
+
+/* --- Hành động cuối trang --- */
+#muontra-tab .action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin: 25px 0;
+}
+
+/* --- Giao dịch đã lưu --- */
+#muontra-tab .saved-transactions-card {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+    padding: 20px;
+}
+
+    #muontra-tab .saved-transactions-card h3 {
+        color: #0056d6;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+/* --- Footer: In / Bỏ qua phạt --- */
+#muontra-tab .footer-section-4 {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 25px;
+}
+
+/* --- Form tìm kiếm --- */
+#muontra-tab .muontra-search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 15px 0;
+}
+
+    #muontra-tab .muontra-search input {
+        flex: 1;
+        padding: 8px 12px;
+        border: 1px solid #ccd9ff;
+        border-radius: 6px;
+        outline: none;
+        transition: 0.25s;
+    }
+
+        #muontra-tab .muontra-search input:focus {
+            border-color: #0047b3;
+            box-shadow: 0 0 4px rgba(0,71,179,0.3);
+        }
+
+/* --- Card danh sách mượn trả --- */
+#muontra-tab .muontra-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+    margin-top: 25px;
+}
+
+    #muontra-tab .muontra-card h3 {
+        color: #0047b3;
+        font-weight: 600;
+        margin-bottom: 12px;
+    }
+
+/* --- Bảng danh sách mượn trả --- */
+#muontra-tab .muontra-table thead {
+    background: #ebf3ff;
+    color: #003b85;
+    font-weight: 600;
+}
+
+/* --- Hiệu ứng nhấn nút trong khu vực này (không ảnh hưởng global) --- */
+#muontra-tab button:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.05);
+}
+
+/* --- Hiển thị thông báo nhỏ (toast hoặc alertBox) --- */
+#muontra-tab .show-alert {
+    display: block !important;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* ===== 🎯 Nút phân trang ===== */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 14px;
+    gap: 8px;
+}
+
+    /* ===== Nút "Trước" & "Sau" ===== */
+    .pagination button {
+        background: #fff;
+        border: 1.8px solid #007bff;
+        color: #007bff;
+        padding: 6px 14px;
+        font-size: 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.25s ease;
+    }
+
+        /* Hover */
+        .pagination button:hover:not(:disabled) {
+            background: #007bff;
+            color: #fff;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 6px rgba(0, 123, 255, 0.25);
+        }
+
+        /* Khi bị vô hiệu hóa */
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: #f5f5f5;
+            border-color: #ccc;
+            color: #aaa;
+            box-shadow: none;
+        }
+
+    /* ===== Thông tin trang ===== */
+    .pagination span {
+        font-size: 15px;
+        color: #333;
+        font-weight: 600;
+        background: #f0f4ff;
+        padding: 6px 12px;
+        border-radius: 6px;
+        border: 1px solid #d3e3ff;
+    }
+
+
+/* ===== 🎯 TAB 2 – CHÍNH SÁCH ===== */
+#chinh-sach-tab {
+    padding: 20px 0;
+    font-family: "Segoe UI", sans-serif;
+    color: #333;
+}
+
+    #chinh-sach-tab .policy-container {
+        background: #fff;
+        padding: 25px 30px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        max-width: 950px;
+        margin: 0 auto;
+        animation: fadeIn 0.4s ease;
+    }
+
+    #chinh-sach-tab h2 {
+        text-align: center;
+        color: #1a4ca0;
+        font-size: 20px;
+        margin-bottom: 25px;
+    }
+
+    /* ==== Các khối chính sách ==== */
+    #chinh-sach-tab .policy-section {
+        background: #f9fbff;
+        border: 1px solid #dbe6ff;
+        border-radius: 10px;
+        margin-bottom: 16px;
+        padding: 10px 16px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        transition: all 0.25s ease;
+    }
+
+        #chinh-sach-tab .policy-section summary {
+            font-weight: 600;
+            color: #0d47a1;
+            cursor: pointer;
+            font-size: 15px;
+            padding: 6px 0;
+            list-style: none;
+            transition: color 0.25s;
+        }
+
+        #chinh-sach-tab .policy-section[open] summary {
+            color: #0056d6;
+        }
+
+    /* ==== Form nhóm ==== */
+    #chinh-sach-tab .form-group {
+        display: flex;
+        flex-direction: column;
+        margin: 10px 0 14px 0;
+    }
+
+        #chinh-sach-tab .form-group label {
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #333;
+            font-size: 14px;
+        }
+
+    #chinh-sach-tab .input-box {
+        padding: 8px 10px;
+        border-radius: 6px;
+        border: 1px solid #ccd8ee;
+        font-size: 14px;
+        outline: none;
+        transition: 0.2s;
+    }
+
+        #chinh-sach-tab .input-box:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0,123,255,0.15);
+        }
+
+    /* ==== Ô kết quả / tóm tắt ==== */
+    #chinh-sach-tab .summary-box {
+        margin-top: 10px;
+        background: #f1f6ff;
+        border-left: 4px solid #007bff;
+        padding: 10px 12px;
+        border-radius: 6px;
+        font-size: 14px;
+        color: #004085;
+    }
+
+/* ==== Hiệu ứng mở mượt ==== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* ===== 🎯 TAB 3 – QUẢN LÝ THẺ & LỊCH THƯ VIỆN ===== */
+#lich-tab {
+    font-family: "Segoe UI", sans-serif;
+    color: #333;
+    padding: 25px 0;
+    animation: fadeIn 0.4s ease;
+}
+
+    #lich-tab h2 {
+        text-align: center;
+        color: #1a4ca0;
+        font-size: 20px;
+        margin-bottom: 25px;
+    }
+
+    /* ====== Thống kê nhanh ====== */
+    #lich-tab .summary-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 15px;
+        margin-bottom: 25px;
+    }
+
+    #lich-tab .stat-card {
+        background: #f9fbff;
+        border: 1px solid #dbe6ff;
+        border-radius: 10px;
+        padding: 15px;
+        text-align: center;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+        #lich-tab .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        #lich-tab .stat-card h4 {
+            font-size: 15px;
+            color: #004aad;
+            margin-bottom: 8px;
+        }
+
+        #lich-tab .stat-card p {
+            font-size: 18px;
+            font-weight: bold;
+            color: #111;
+        }
+
+    /* ====== Section chung ====== */
+    #lich-tab .policy-section {
+        background: #fff;
+        border: 1px solid #e3ecff;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        padding: 20px 25px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+        #lich-tab .policy-section h3 {
+            color: #0d47a1;
+            margin-bottom: 15px;
+            font-size: 16px;
+            border-left: 4px solid #0d47a1;
+            padding-left: 8px;
+        }
+
+    /* ====== Tìm kiếm & bảng ====== */
+    #lich-tab .input-box {
+        width: 100%;
+        padding: 8px 10px;
+        margin-bottom: 12px;
+        border: 1px solid #ccd8ee;
+        border-radius: 6px;
+        font-size: 14px;
+        outline: none;
+        transition: 0.2s;
+    }
+
+        #lich-tab .input-box:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0,123,255,0.15);
+        }
+
+    /* ====== Bảng dữ liệu ====== */
+    #lich-tab .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        font-size: 14px;
+    }
+
+        #lich-tab .styled-table th,
+        #lich-tab .styled-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e8eefb;
+            text-align: center;
+        }
+
+        #lich-tab .styled-table th {
+            background: #e8f0ff;
+            font-weight: 600;
+            color: #004aad;
+        }
+
+        #lich-tab .styled-table tr:hover {
+            background-color: #f5f9ff;
+            transition: background 0.2s;
+        }
+
+    /* ====== Lịch hoạt động ====== */
+    #lich-tab .schedule-box {
+        background: #f1f6ff;
+        border-left: 4px solid #007bff;
+        border-radius: 6px;
+        padding: 15px;
+        margin-top: 12px;
+        animation: fadeIn 0.3s ease;
+    }
+
+        #lich-tab .schedule-box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #lich-tab .schedule-box li {
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+/* ====== Hiệu ứng fade-in ====== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,368 @@
+﻿/* ===============================
+   🌿 GIAO DIỆN CHÍNH SÁCH – PHIÊN BẢN TINH GỌN & CÂN ĐỐI
+   =============================== */
+body {
+    background: #f5f8fc;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #2d3436;
+}
+
+/* 🌿 Khung chính */
+.policy-container, .config-section {
+    max-width: 950px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 35px 45px;
+    border: 1px solid #e0e6ed;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+    /* 🌿 Tiêu đề chính */
+    .policy-container h2 {
+        text-align: center;
+        color: #264e86;
+        margin-bottom: 30px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+    }
+
+/* 🌿 Tiêu đề từng mục */
+.policy-section h3 {
+    color: #2b7a78;
+    padding-left: 12px;
+    margin-top: 35px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 19px;
+}
+
+/* 🌿 Nhóm form */
+.form-group {
+    margin-bottom: 22px;
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #34495e;
+}
+
+/* 🌿 Ô nhập liệu */
+.input-box {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid #cfd8dc;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.25s ease;
+    background: #fafbff;
+}
+
+    .input-box:focus {
+        border-color: #3aafa9;
+        background: #fff;
+        box-shadow: 0 0 0 3px rgba(58, 175, 169, 0.15);
+        outline: none;
+    }
+
+/* 🌿 Nút hành động */
+button {
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+/* Nút Lưu */
+.btn-save {
+    background: #3aafa9;
+    color: #fff;
+    padding: 10px 20px;
+}
+
+    .btn-save:hover {
+        background: #2b7a78;
+        transform: translateY(-1px);
+    }
+
+/* Nút Hủy */
+.btn-cancel {
+    background: #e74c3c;
+    color: #fff;
+    padding: 9px 18px;
+}
+
+    .btn-cancel:hover {
+        background: #c0392b;
+    }
+
+/* 🌿 Khung kết quả / thông báo */
+.summary-box {
+    background: #f1fdfd;
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-top: 18px;
+    color: #2d3436;
+    font-size: 15px;
+}
+
+/* 🌿 Danh sách ngày nghỉ */
+#holidayItems li {
+    background: #f7f9fc;
+    padding: 9px 12px;
+    margin-bottom: 6px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #e0e6ed;
+}
+
+/* 🌿 Căn giữa nút thêm */
+.holiday-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+/* 🌿 Cấu hình so sánh */
+.compare-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-bottom: 20px;
+}
+
+.compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 25px;
+}
+
+    .compare-table th {
+        background: #f1fdfd;
+        color: #2b7a78;
+        padding: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        border: 1px solid #e0e0e0;
+        text-align: center;
+    }
+
+    .compare-table td {
+        border: 1px solid #e0e0e0;
+        padding: 15px;
+        text-align: center;
+        background: #fff;
+    }
+
+    .compare-table input[type="file"] {
+        width: 90%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        background: #fafafa;
+    }
+
+/* 🌿 Kết quả so sánh */
+.compare-result {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+}
+
+#diffOutput {
+    font-family: "Consolas", monospace;
+    background: #f9fbff;
+    border-radius: 6px;
+    padding: 15px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+.diff-added {
+    background: #d1f7c4;
+    color: #145a32;
+    padding: 3px 6px;
+    border-radius: 3px;
+}
+
+.diff-removed {
+    background: #ffcccc;
+    color: #c0392b;
+    padding: 3px 6px;
+    border-radius: 3px;
+}
+
+.diff-changed {
+    background: #fff6c4;
+    color: #8e5c00;
+    padding: 3px 6px;
+    border-radius: 3px;
+}
+
+/* 🌿 Các nút nhỏ khác */
+.btn-info, .btn-primary {
+    background: #3aafa9;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 6px;
+}
+
+    .btn-info:hover, .btn-primary:hover {
+        background: #2b7a78;
+        transform: translateY(-1px);
+    }
+
+/* 🌿 Phần kiểm tra hợp lệ giao dịch */
+.policy-section.check-transaction {
+    max-width: 950px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 35px 45px;
+    border: 1px solid #e0e6ed;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+}
+
+    .policy-section.check-transaction .btn-save {
+        display: block;
+        margin: 25px auto 0;
+    }
+
+    .policy-section.check-transaction #checkResult {
+        margin-top: 20px;
+        background: #f1fdfd;
+        padding: 14px 16px;
+        border-radius: 8px;
+        color: #2d3436;
+    }
+
+/* 🌿 Nhỏ gọn cho màn hình nhỏ */
+@media (max-width: 768px) {
+    .policy-container, .config-section {
+        padding: 25px 20px;
+    }
+
+    .compare-table th, .compare-table td {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+/* 🌸 Ngày nghỉ đặc biệt - Dạng thẻ chip hiện đại */
+.holiday-input {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.holiday-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.holiday-chip {
+    background: #eafaf9;
+    border: 1px solid #3aafa9;
+    border-radius: 20px;
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #2d3436;
+    transition: all 0.2s ease;
+}
+
+    .holiday-chip:hover {
+        background: #d7f7f4;
+        transform: translateY(-1px);
+    }
+
+    .holiday-chip button {
+        background: none;
+        border: none;
+        color: #e74c3c;
+        font-weight: bold;
+        cursor: pointer;
+        padding: 0 4px;
+        transition: color 0.2s ease;
+    }
+
+        .holiday-chip button:hover {
+            color: #c0392b;
+        }
+
+<style >
+.policy-container {
+    padding: 20px;
+}
+
+.policy-section {
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    background: #fafafa;
+}
+
+summary {
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.input-box {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn-save, .btn-info, .btn-primary {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 8px;
+}
+
+.btn-save {
+    background: #007bff;
+    color: white;
+}
+
+.btn-info {
+    background: #17a2b8;
+    color: white;
+}
+
+.btn-primary {
+    background: #28a745;
+    color: white;
+}
+
+.summary-box {
+    background: #eef6ff;
+    padding: 10px;
+    border-left: 4px solid #007bff;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+}

@@ -1,0 +1,258 @@
+﻿<link rel="stylesheet" href="~/css/tailieudientu.css" asp-append-version="true" />
+<body>
+<div class="container-fluid" id="digital-assets" style="padding-left:30px; padding-right:30px">
+        <header class="page-header">
+        <h2><i class="glyphicon glyphicon-folder-open"></i><span> </span> Quản lý Tài liệu Điện tử (Digital Assets)</h2>
+        </header>
+    <ul class="nav nav-tabs" id="assetTabs">
+        <li class="active"><a href="#storage" data-toggle="tab">Lưu trữ</a></li>
+        <li><a href="#permission" data-toggle="tab">Phân quyền</a></li>
+        <li><a href="#viewer" data-toggle="tab">Hiển thị</a></li>
+        <li><a href="#extract" data-toggle="tab">Giải nén</a></li>
+        <li><a href="#file" data-toggle="tab">Tệp/Thư mục</a></li>
+        <li><a href="#media" data-toggle="tab">Media</a></li>
+        <li><a href="#report" data-toggle="tab">Báo cáo</a></li>
+    </ul>
+
+    <div class="tab-content" style="margin-top:20px">
+
+        <!-- Lưu trữ -->
+        <div class="tab-pane fade in active" id="storage">
+            <div class="panel panel-primary">
+                <div class="panel-heading"><strong><span class="glyphicon glyphicon-save-file"></span> Lưu trữ & Tích hợp dữ liệu</strong></div>
+                <div class="panel-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Tên tài liệu</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" placeholder="Nhập tên tài liệu...">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Loại tài liệu</label>
+                            <div class="col-sm-4">
+                                <select class="form-control">
+                                    <option>PDF</option>
+                                    <option>Hình ảnh</option>
+                                    <option>Video</option>
+                                    <option>Khác</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Chọn tệp</label>
+                            <div class="col-sm-6">
+                                <input type="file" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Ghi chú</label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" rows="3" placeholder="Mô tả nội dung tài liệu..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="button" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-upload"></span> Tải lên
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phân quyền -->
+        <div class="tab-pane fade" id="permission">
+            <div class="panel panel-info">
+                <div class="panel-heading"><strong><span class="glyphicon glyphicon-lock"></span> Phân quyền, Kiểm soát tải xuống</strong></div>
+                <div class="panel-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Người dùng</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" placeholder="Nhập tên người dùng...">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Vai trò</label>
+                            <div class="col-sm-3">
+                                <select class="form-control">
+                                    <option>Người xem</option>
+                                    <option>Người chỉnh sửa</option>
+                                    <option>Quản trị viên</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Trạng thái tải xuống</label>
+                            <div class="col-sm-3">
+                                <select class="form-control">
+                                    <option>Cho phép tải</option>
+                                    <option>Chỉ xem</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="button" class="btn btn-info">
+                                    <span class="glyphicon glyphicon-floppy-disk"></span> Lưu phân quyền
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hiển thị -->
+        <div class="tab-pane fade" id="viewer">
+            <div class="panel panel-success">
+                <div class="panel-heading"><strong><span class="glyphicon glyphicon-eye-open"></span> Hiển thị tài liệu trực tuyến</strong></div>
+                <div class="panel-body">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Nhập URL hoặc chọn file để xem...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-success"><span class="glyphicon glyphicon-search"></span> Xem trước</button>
+                        </span>
+                    </div>
+                    <hr />
+                    <div class="well text-center" style="background:#f9f9f9; height:250px;">
+                        <em>Khu vực hiển thị tài liệu (PDF, hình ảnh, video,...)</em>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Giải nén -->
+        <div class="tab-pane fade" id="extract">
+            <div class="panel panel-warning">
+                <div class="panel-heading"><strong><span class="glyphicon glyphicon-compressed"></span> Giải nén, Chia tệp & Tạo mục lục</strong></div>
+                <div class="panel-body">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label>Chọn file nén: </label>
+                            <input type="file" class="form-control" style="margin-left:10px;">
+                        </div>
+                        <div class="form-group" style="margin-left:15px;">
+                            <label>Tùy chọn: </label>
+                            <select class="form-control">
+                                <option>Giải nén toàn bộ</option>
+                                <option>Tạo mục lục tự động</option>
+                                <option>Chia nhỏ file</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-warning" style="margin-left:15px;">
+                            <span class="glyphicon glyphicon-cog"></span> Thực hiện
+                        </button>
+                    </form>
+                    <hr />
+                    <div class="alert alert-info">Kết quả thao tác sẽ hiển thị tại đây...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quản lý tệp -->
+        <div class="tab-pane fade" id="file">
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong><span class="glyphicon glyphicon-folder-close"></span> Quản lý Tệp & Thư mục</strong></div>
+                <div class="panel-body">
+                    <div class="form-inline" style="margin-bottom:10px;">
+                        <input type="text" class="form-control" placeholder="Tìm kiếm tệp..." style="width:40%;">
+                        <button class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Thêm thư mục</button>
+                        <button class="btn btn-primary"><span class="glyphicon glyphicon-open"></span> Tải file</button>
+                        <button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Xóa</button>
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <strong>📁 Dự án</strong>
+                            <ul>
+                                <li>📄 report.pdf</li>
+                                <li>📄 design.png</li>
+                            </ul>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>📁 Media</strong>
+                            <ul>
+                                <li>🎞 intro.mp4</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Media -->
+        <div class="tab-pane fade" id="media">
+            <div class="panel panel-danger">
+                <div class="panel-heading"><strong><span class="glyphicon glyphicon-film"></span> Mô tả nội dung Media</strong></div>
+                <div class="panel-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Tên file media</label>
+                            <div class="col-sm-5"><input type="text" class="form-control" placeholder="Nhập tên file..."></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Mô tả</label>
+                            <div class="col-sm-8"><textarea class="form-control" rows="3"></textarea></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Tags</label>
+                            <div class="col-sm-5"><input type="text" class="form-control" placeholder="vd: training, video, hướng dẫn"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button class="btn btn-danger"><span class="glyphicon glyphicon-save"></span> Lưu mô tả</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Báo cáo -->
+        <div class="tab-pane fade" id="report">
+            <div class="panel panel-success">
+                <div class="panel-heading"><strong><span class="glyphicon glyphicon-stats"></span> Quản lý đặt mua & Báo cáo</strong></div>
+                <div class="panel-body">
+                    <div class="input-group" style="width:50%;">
+                        <input type="text" class="form-control" placeholder="Nhập mã đơn hoặc tên tài liệu...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-success"><span class="glyphicon glyphicon-search"></span> Tra cứu</button>
+                        </span>
+                    </div>
+                    <hr />
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Mã đơn</th>
+                                <th>Tài liệu</th>
+                                <th>Trạng thái</th>
+                                <th>Ngày giao</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>DH001</td><td>Report2025.pdf</td><td><span class="label label-success">Đã giao</span></td><td>27/10/2025</td></tr>
+                            <tr><td>DH002</td><td>Media_Tutorial.mp4</td><td><span class="label label-warning">Đang xử lý</span></td><td>-</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+
+    <script src="~/js/taileiudientu.js"></script>
+}
+</body>

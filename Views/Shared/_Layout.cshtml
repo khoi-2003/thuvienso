@@ -1,0 +1,244 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - Thư viện số</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="~/css/layout.css" asp-append-version="true" />
+
+
+    <meta http-equiv="Cache-Control" content="max-age=86400, public">
+</head>
+<body>
+    <div class="sidebar">
+        <ul class="nav nav-pills nav-stacked">
+            <li class="toggle-btn text-center" style="height:47px; margin-bottom:7px">
+                <a href="javascript:void(0);" id="toggleSidebar">
+                    <i class="glyphicon glyphicon-menu-hamburger"></i>
+                </a>
+            </li>
+            <li><a href="/"><i class="glyphicon glyphicon-home"></i> <span>Trang Chủ</span></a></li>
+            <li><a href="/admin/index"><i class="glyphicon glyphicon-list-alt"></i> <span>Quản trị hệ thống</span></a></li>
+
+            <li class="dropdown-submenu">
+                <a href="javascript:void(0);" class="submenu-toggle">
+                    <i class="glyphicon glyphicon-search"></i>
+                    <span>Tra cứu</span>
+                    <i class="glyphicon glyphicon-chevron-down pull-right small-arrow"></i>
+                </a>
+                <ul class="nav submenu">
+                    <li>
+                        <a href="/lookup/index">
+                            <i class="glyphicon glyphicon-list-alt"></i>
+                            <span>Tra cứu chính</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/lookup/collection">
+                            <i class="glyphicon glyphicon-th-large"></i>
+                            <span>Bộ sưu tập</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="/Acquisitions/index">
+                    <i class="glyphicon glyphicon-plus-sign"></i>
+                    <span>Bổ sung</span>
+                </a>
+            </li>
+
+            <li class="dropdown-submenu">
+                <a href="javascript:void(0);" class="submenu-toggle">
+                    <i class="glyphicon glyphicon-book"></i>
+                    <span>Biên mục</span>
+                    <i class="glyphicon glyphicon-chevron-down pull-right small-arrow"></i>
+                </a>
+                <ul class="nav submenu">
+                    <li>
+                        <a href="/Cataloging/index">
+                            <i class="glyphicon glyphicon-list-alt"></i>
+                            <span>Biên mục chính</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Cataloging/Dictionary">
+                            <i class="glyphicon glyphicon-education"></i>
+                            <span>Từ điển</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="/Reader/Index">
+                    <i class="glyphicon glyphicon-user"></i>
+                    <span>Quản lý bạn đọc</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/TaiLieuDienTu/QuanLy">
+                    <i class="glyphicon glyphicon-file"></i>
+                    <span>Quản lý tài liệu điện tử</span>
+                </a>
+            </li>
+
+            <li class="dropdown-submenu">
+                <a href="javascript:void(0);" class="submenu-toggle">
+                    <i class="glyphicon glyphicon-retweet"></i>
+                    <span>Mượn trả & Giữ chỗ</span>
+                    <i class="glyphicon glyphicon-chevron-down pull-right small-arrow"></i>
+                </a>
+                <ul class="nav submenu">
+                    <li>
+                        <a href="/MuonTra/MuonTra">
+                            <i class="glyphicon glyphicon-retweet"></i>
+                            <span>Mượn trả</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/MuonTra/GiuCho">
+                            <i class="glyphicon glyphicon-education"></i>
+                            <span>Giữ chỗ</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="/AnPham/AnPham">
+                    <i class="glyphicon glyphicon-bookmark"></i>
+                    <span>Ấn phẩm định kỳ / Nhiều kỳ</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/Notification/Index">
+                    <i class="glyphicon glyphicon-bullhorn"></i>
+                    <span>Thông Báo & Nhắc Việc</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- ===== Navbar main ===== -->
+            <div class="navbar-desktop">
+                <a class="navbar-brand" href="/" style="display: flex; align-items: center;">
+                    <img src="~/image/logo.png" alt="Logo"
+                         style="height:50px; width:auto; padding-right:8px; object-fit:contain;">
+                    <span style="font-size:20px; font-weight:700; color:#1e3a8a;">THƯ VIỆN SỐ</span>
+                </a>
+
+                <!-- Notification + Auth/User -->
+                <div class="navbar-right-group">
+                    <!-- Notification -->
+                    <div class="navbar-text notification" style="position:relative;">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:white;">
+                            <i class="glyphicon glyphicon-bell notification-icon"></i>
+                            <span class="badge notification-badge">3</span>
+                        </a>
+                        <ul class="dropdown-menu notification-menu" style="width:280px;">
+                            <li class="dropdown-header text-center"><strong>Thông báo mới</strong></li>
+                            <li class="divider"></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-ok text-success"></i> Giao dịch thành công</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-info-sign text-info"></i> Bản cập nhật hệ thống</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-remove text-danger"></i> Yêu cầu bị từ chối</a></li>
+                            <li class="divider"></li>
+                            <li class="text-center"><a href="#"><strong>Xem tất cả</strong></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <!-- Search mobile/desktop -->
+                        <form class="navbar-form" role="search">
+                            <div class="form-group" style="display:flex; align-items:center; width:100%;">
+                                <input type="text" class="form-control" placeholder="Tìm kiếm..." style="flex:1;">
+                                <button type="submit" class="btn btn-default" style="margin-left:5px;">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Auth desktop -->
+                        <ul id="auth-section" class="nav navbar-nav navbar-right" style="margin:0; display:flex; gap:8px; align-items:center;">
+                            <li>
+                                <a href="/authenticator/login" class="btn btn-info btn-sm">
+                                    <i class="glyphicon glyphicon-log-in"></i> ĐĂNG NHẬP
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/authenticator/register" class="btn btn-success btn-outline btn-sm">
+                                    <i class="glyphicon glyphicon-user"></i> ĐĂNG KÝ
+                                </a>
+                            </li>
+                        </ul>
+                     </div>
+
+                    <!-- 👤 User desktop -->
+                    <ul id="user-section" class="nav navbar-nav navbar-right" style="margin:0;">
+                        <li class="dropdown user-dropdown">
+                            <a href="#" class="dropdown-toggle user-toggle" data-toggle="dropdown">
+                                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="avatar" class="user-avatar">
+                                <span id="username">Người dùng</span>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right user-menu">
+                                <li><a href="#"><i class="glyphicon glyphicon-user"></i> Trang cá nhân</a></li>
+                                <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Cài đặt</a></li>
+                                <li class="divider"></li>
+                                <li class="logout-link"><a href="#" id="logoutBtn"><i class="glyphicon glyphicon-log-out"></i> Đăng xuất</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <!-- Toggle responsive (mobile) -->
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </nav>
+
+
+
+    <!-- Nội dung chính -->
+    <div class=" body-content" style="width:100%">
+        @RenderBody()
+        <hr />
+    </div>
+
+    <footer class="navbar navbar-default navbar-static-bottom">
+        <div class="container">
+            <p class="navbar-text">
+                &copy; 2025 <strong>Nhóm 1 design</strong> |
+                <a asp-area="" asp-controller="Home" asp-action="Privacy" class="navbar-link">
+                    Chính sách bảo mật
+                </a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- JS cuối trang -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="~/js/layout.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

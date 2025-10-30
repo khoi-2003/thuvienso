@@ -1,0 +1,2142 @@
+﻿/* ================================
+📘 SERIALS PAGE STYLE
+Chỉ áp dụng trong .serials-page
+================================ */
+.serials-page {
+    font-family: "Segoe UI", sans-serif;
+    padding: 20px;
+    background-color: #f9fafc;
+    color: #222;
+}
+
+    /* ===== Tiêu đề chính ===== */
+    .serials-page h1 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #1e3a8a;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+/* ===== Thanh Tab ===== */
+.tab-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 25px;
+}
+
+.tab-link {
+    padding: 8px 14px;
+    border: 1px solid #d0d7e2;
+    border-radius: 6px;
+    background: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+    .tab-link:hover {
+        background: #e8efff;
+        border-color: #a4b5ff;
+    }
+
+    .tab-link.active {
+        background: #1e40af;
+        color: #fff;
+        border-color: #1e40af;
+    }
+
+/* ===== Khu vực nội dung tab ===== */
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+    .tab-content.active {
+        display: block;
+    }
+
+/* ===== Dashboard thống kê nhanh ===== */
+.dashboard {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    flex: 1;
+    min-width: 180px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    text-align: center;
+    padding: 15px;
+}
+
+    .stat-card h3 {
+        font-size: 1.8rem;
+        color: #1d4ed8;
+        margin-bottom: 5px;
+    }
+
+    .stat-card p {
+        color: #555;
+        font-size: 14px;
+    }
+
+/* ===== Thẻ nội dung ===== */
+.serials-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+    .serials-card h2 {
+        font-size: 1.3rem;
+        color: #1e3a8a;
+        margin-bottom: 10px;
+    }
+
+.card-desc {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+/* ===== Danh sách nổi bật ===== */
+.highlight-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+    .highlight-list li {
+        display: flex;
+        justify-content: space-between;
+        background: #f8fafc;
+        padding: 8px 12px;
+        border-radius: 6px;
+        margin-bottom: 6px;
+    }
+
+.highlight-title {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.highlight-count {
+    color: #2563eb;
+    font-weight: 500;
+}
+
+/* ===== Form đăng ký ===== */
+#serialForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+    #serialForm input,
+    #serialForm select,
+    #serialForm textarea {
+        padding: 8px 10px;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        font-size: 14px;
+        width: 100%;
+        transition: 0.2s;
+    }
+
+        #serialForm input:focus,
+        #serialForm select:focus,
+        #serialForm textarea:focus {
+            border-color: #3b82f6;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(59,130,246,0.15);
+        }
+
+    #serialForm textarea {
+        resize: vertical;
+        min-height: 70px;
+    }
+
+/* ===== Tìm kiếm + Bảng ===== */
+.search-bar {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    margin-bottom: 12px;
+}
+
+#serialTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+    #serialTable thead {
+        background: #e5e7eb;
+        color: #1f2937;
+    }
+
+    #serialTable th,
+    #serialTable td {
+        padding: 10px;
+        border-bottom: 1px solid #e2e8f0;
+        text-align: left;
+    }
+
+    #serialTable tr:hover {
+        background: #f9fafb;
+    }
+
+/* =========================
+   🎨 NÚT THÊM & LƯU
+   ========================= */
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Nút Thêm */
+.btn-add {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+    .btn-add:hover {
+        background-color: #2980b9;
+        transform: translateY(-2px);
+    }
+
+/* Nút Lưu */
+.btn-save {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+    .btn-save:hover {
+        background-color: #27ae60;
+        transform: translateY(-2px);
+    }
+
+/* ===== Toast ===== */
+.toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #16a34a;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-size: 14px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    opacity: 0;
+    transition: opacity 0.4s, transform 0.4s;
+    transform: translateY(20px);
+    z-index: 9999;
+}
+
+    .toast.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+/* ===== Hiệu ứng ===== */
+.fade-in {
+    animation: fadeIn 0.4s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================
+   🎨 GIAO DIỆN QUẢN LÝ PHỤ TRƯƠNG
+   ========================= */
+#phutruong {
+    padding: 25px;
+    background: #f9fafc;
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    animation: fadeIn 0.4s ease;
+}
+
+    #phutruong h2 {
+        font-size: 1.6rem;
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+/* === Form === */
+.archive-form {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+}
+
+    .form-row label {
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: #444;
+    }
+
+    .form-row input,
+    .form-row textarea,
+    .form-row select {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        transition: 0.2s;
+    }
+
+        .form-row input:focus,
+        .form-row textarea:focus,
+        .form-row select:focus {
+            outline: none;
+            border-color: #2196f3;
+            box-shadow: 0 0 4px #2196f3;
+        }
+
+/* === Nút hành động === */
+.form-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+
+
+/* === Toolbar === */
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    gap: 10px;
+}
+
+    .toolbar input,
+    .toolbar select {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 0.9rem;
+    }
+
+/* === Bảng danh sách === */
+.archive-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+    .archive-table th,
+    .archive-table td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+    }
+
+    .archive-table th {
+        background: #f1f1f1;
+        font-weight: 600;
+        color: #333;
+    }
+
+.status.success {
+    color: #4caf50;
+    font-weight: 600;
+}
+
+.status.pending {
+    color: #ff9800;
+    font-weight: 600;
+}
+
+/* === Thống kê === */
+.stats {
+    margin-top: 20px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    display: flex;
+    justify-content: space-around;
+}
+
+/* === Toast === */
+.toast {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: #333;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 0.3s;
+}
+
+    .toast.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+/* === Modal === */
+.modal {
+    display: none; /* Ẩn mặc định */
+    position: fixed;
+    inset: 0; /* Thay cho top/right/bottom/left: 0 */
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 999;
+    backdrop-filter: blur(2px);
+    justify-content: center;
+    align-items: flex-start;
+    overflow-y: auto;
+}
+
+    .modal.show {
+        display: flex; /* Khi bật modal thì hiện lên */
+        animation: fadeIn 0.3s ease;
+    }
+
+.modal-content {
+    background: #fff;
+    border-radius: 14px;
+    padding: 22px 24px;
+    width: 420px;
+    max-width: 90%;
+    margin: 100px auto;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    animation: zoomIn 0.25s ease;
+}
+
+    .modal-content h3 {
+        text-align: center;
+        font-size: 1.2rem;
+        color: #222;
+        margin-bottom: 15px;
+    }
+
+    .modal-content input,
+    .modal-content textarea,
+    .modal-content select {
+        width: 100%;
+        margin-top: 6px;
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        transition: 0.2s;
+    }
+
+        .modal-content input:focus,
+        .modal-content textarea:focus,
+        .modal-content select:focus {
+            border-color: #2196f3;
+            box-shadow: 0 0 4px rgba(33, 150, 243, 0.5);
+            outline: none;
+        }
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+    .modal-buttons .btn {
+        padding: 8px 14px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.2s;
+        font-weight: 500;
+    }
+
+    .modal-buttons .btn-save {
+        background: #2196f3;
+        color: #fff;
+    }
+
+    .modal-buttons .btn-danger {
+        background: #f44336;
+        color: #fff;
+    }
+
+    .modal-buttons .btn:hover {
+        transform: translateY(-1px);
+    }
+
+/* Hiệu ứng hiện modal */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ==============================
+   📄 QUẢN LÝ BÀI TRÍCH
+   ============================== */
+
+/* Vùng tổng thể */
+#baitrich {
+    padding: 20px;
+    animation: fadeIn 0.4s ease;
+}
+
+    /* Tiêu đề */
+    #baitrich h2 {
+        color: #1e293b;
+        margin-bottom: 15px;
+        font-size: 1.4rem;
+        text-align:center;
+    }
+
+    /* --- FORM --- */
+    #baitrich .archive-form {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+    }
+
+    #baitrich .form-row {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 14px;
+    }
+
+    #baitrich label {
+        font-weight: 600;
+        color: #374151;
+        margin-bottom: 6px;
+    }
+
+    #baitrich input,
+    #baitrich select,
+    #baitrich textarea {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        transition: all 0.2s ease;
+    }
+
+        #baitrich input:focus,
+        #baitrich select:focus,
+        #baitrich textarea:focus {
+            outline: none;
+            border-color: #2196f3;
+            box-shadow: 0 0 4px rgba(33,150,243,0.3);
+        }
+
+    #baitrich textarea {
+        min-height: 80px;
+        resize: vertical;
+    }
+
+    /* --- Form hành động --- */
+    #baitrich .form-actions {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    /* --- Bộ lọc & tìm kiếm --- */
+    #baitrich .toolbar {
+        display: flex;
+        justify-content: flex-start;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+        #baitrich .toolbar input {
+            flex: 1;
+            border-radius: 8px;
+        }
+
+    /* --- Bảng danh sách --- */
+    #baitrich .archive-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+        #baitrich .archive-table th,
+        #baitrich .archive-table td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+        }
+
+        #baitrich .archive-table th {
+            background: #f1f5f9;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        #baitrich .archive-table tr:hover {
+            background: #f9fafb;
+        }
+
+        #baitrich .archive-table .empty {
+            text-align: center;
+            color: #888;
+            font-style: italic;
+        }
+
+    /* --- Kế thừa dữ liệu --- */
+    #baitrich .archive-card {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 16px 20px;
+        margin-top: 20px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+        #baitrich .archive-card h3 {
+            margin-bottom: 8px;
+            color: #1e40af;
+        }
+
+        #baitrich .archive-card p {
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+    /* --- Thống kê --- */
+    #baitrich .stats {
+        background: #f9fafb;
+        border-radius: 12px;
+        padding: 12px 20px;
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-around;
+        box-shadow: inset 0 0 4px rgba(0,0,0,0.05);
+    }
+
+        #baitrich .stats p {
+            color: #374151;
+            font-weight: 500;
+        }
+
+    /* --- Toast --- */
+    #baitrich .toast {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: #2196f3;
+        color: white;
+        padding: 10px 16px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 999;
+    }
+
+        #baitrich .toast.show {
+            opacity: 1;
+        }
+
+    /* --- Pagination --- */
+    #baitrich .pagination {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 15px;
+    }
+
+    /* --- Modal --- */
+    #baitrich .modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.45);
+        backdrop-filter: blur(2px);
+        justify-content: center;
+        align-items: flex-start;
+        z-index: 999;
+        animation: fadeIn 0.3s ease;
+    }
+
+        #baitrich .modal.show {
+            display: flex;
+        }
+
+    #baitrich .modal-content {
+        background: #fff;
+        border-radius: 14px;
+        padding: 22px 24px;
+        width: 420px;
+        max-width: 90%;
+        margin: 100px auto;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        animation: zoomIn 0.25s ease;
+    }
+
+        #baitrich .modal-content h3 {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #1e293b;
+        }
+
+        #baitrich .modal-content input,
+        #baitrich .modal-content select,
+        #baitrich .modal-content textarea {
+            width: 100%;
+            margin-top: 6px;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: 0.2s;
+        }
+
+            #baitrich .modal-content input:focus,
+            #baitrich .modal-content select:focus,
+            #baitrich .modal-content textarea:focus {
+                border-color: #2196f3;
+                box-shadow: 0 0 4px rgba(33,150,243,0.4);
+                outline: none;
+            }
+
+    #baitrich .modal-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+/* --- Hiệu ứng chung --- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ==========================
+   📅 LỊCH PHÁT HÀNH
+========================== */
+
+#lichphathanh {
+    margin-left: 20px; /* ✅ Cách layout bên trái 20px */
+    margin-top: 15px;
+    animation: fadeIn 0.3s ease;
+}
+
+    /* --- Tiêu đề --- */
+    #lichphathanh h2 {
+        color: #333;
+        margin-bottom: 15px;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+/* --- Bọc bảng --- */
+.schedule-container {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Bảng chính --- */
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+}
+
+    .schedule-table th {
+        background: #f4f6f9;
+        color: #333;
+        text-align: left;
+        padding: 10px;
+        font-weight: 600;
+        border-bottom: 2px solid #ddd;
+    }
+
+    .schedule-table td {
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+        vertical-align: middle;
+    }
+
+    .schedule-table tr:hover {
+        background: #f9fbfd;
+        transition: 0.2s;
+    }
+
+/* ==========================
+   🧩 NÚT THAO TÁC
+========================== */
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.btn-add,
+.btn-save {
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn-add {
+    background: #0078d7;
+    color: #fff;
+}
+
+    .btn-add:hover {
+        background: #005fa3;
+    }
+
+.btn-save {
+    background: #28a745;
+    color: #fff;
+}
+
+    .btn-save:hover {
+        background: #1f8736;
+    }
+
+/* ==========================
+   🪟 MODAL CHUNG
+========================== */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    animation: fadeIn 0.2s ease;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    width: 420px;
+    margin: auto;
+    margin-top: 80px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    animation: zoomIn 0.3s ease;
+}
+
+    .modal-content h2,
+    .modal-content h3 {
+        text-align: center;
+        margin-bottom: 15px;
+        color: #333;
+    }
+
+.close {
+    float: right;
+    font-size: 22px;
+    font-weight: bold;
+    color: #888;
+    cursor: pointer;
+}
+
+    .close:hover {
+        color: #000;
+    }
+
+/* --- Form trong modal --- */
+.special-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #444;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    outline: none;
+}
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+        border-color: #0078d7;
+    }
+
+/* --- Nút trong modal --- */
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.btn-cancel {
+    background: #d9534f;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+    .btn-cancel:hover {
+        background: #b52b27;
+    }
+
+/* ==========================
+   🔔 TOAST
+========================== */
+#toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #323232;
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 6px;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+    #toast.show {
+        opacity: 1;
+    }
+
+/* ==========================
+   💫 Hiệu ứng
+========================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+/* ==============================
+   📘 QUẢN LÝ HOLDINGS
+============================== */
+
+#holding {
+    animation: fadeIn 0.3s ease;
+    margin-left: 20px;
+    margin-top: 15px;
+}
+
+/* --- Bố cục phần nội dung --- */
+.serials-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* --- Thẻ card --- */
+.serials-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.3s ease;
+}
+
+    .serials-card h2 {
+        margin-bottom: 15px;
+        color: #333;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+/* --- Form --- */
+#holdingForm {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+    #holdingForm label {
+        font-weight: 600;
+        color: #444;
+        margin-bottom: 4px;
+    }
+
+    #holdingForm input,
+    #holdingForm select {
+        padding: 8px 10px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        outline: none;
+    }
+
+        #holdingForm input:focus,
+        #holdingForm select:focus {
+            border-color: #0078d7;
+            box-shadow: 0 0 0 2px rgba(0,120,215,0.2);
+        }
+
+/* --- Nút thao tác --- */
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+    .buttons button {
+        border: none;
+        border-radius: 8px;
+        padding: 8px 16px;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 500;
+        transition: 0.25s;
+    }
+
+        .buttons button:first-child {
+            background: #0078d7;
+            color: #fff;
+        }
+
+            .buttons button:first-child:hover {
+                background: #005fa3;
+            }
+
+        .buttons button:last-child {
+            background: #28a745;
+            color: #fff;
+        }
+
+            .buttons button:last-child:hover {
+                background: #1f8736;
+            }
+
+/* --- Bảng holdings --- */
+#holdingsTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+    #holdingsTable th {
+        background: #f4f6f9;
+        color: #333;
+        text-align: left;
+        padding: 10px;
+        border-bottom: 2px solid #ddd;
+        font-weight: 600;
+    }
+
+    #holdingsTable td {
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+        vertical-align: middle;
+    }
+
+    #holdingsTable tr:hover {
+        background: #f9fbfd;
+        transition: 0.2s;
+    }
+
+    #holdingsTable td.empty {
+        text-align: center;
+        color: #888;
+        font-style: italic;
+    }
+
+/* --- Coverage list --- */
+.coverage-list {
+    list-style: disc;
+    padding-left: 20px;
+    color: #444;
+}
+
+    .coverage-list li {
+        margin: 5px 0;
+    }
+
+
+/* ================================
+   📦 QUY TRÌNH ĐÓNG TẬP ẤN PHẨM
+   ================================ */
+#dongtap {
+    padding: 20px 25px;
+    animation: fadeIn 0.4s ease;
+}
+
+/* ========== Thanh tiến trình ========== */
+.progress-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 25px 0 30px;
+    position: relative;
+}
+
+.progress-step {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    border-radius: 12px;
+    background: #e9ecef;
+    color: #444;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin: 0 5px;
+    cursor: default;
+    user-select: none;
+}
+
+    .progress-step.active {
+        background: #007bff;
+        color: #fff;
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+        transform: scale(1.05);
+    }
+
+/* ========== Các bước form ========== */
+.step {
+    display: none;
+    background: #fff;
+    padding: 25px;
+    border-radius: 14px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+    .step.active {
+        display: block;
+        animation: fadeInUp 0.4s ease;
+    }
+
+.serials-card h2 {
+    color: #2b2b2b;
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+}
+
+/* ========== Form ========== */
+#bindingForm label {
+    display: block;
+    font-weight: 600;
+    margin-top: 12px;
+    color: #333;
+}
+
+#bindingForm input,
+#bindingForm textarea {
+    width: 100%;
+    margin-top: 5px;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: border 0.3s;
+}
+
+    #bindingForm input:focus,
+    #bindingForm textarea:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+
+/* ========== Khung xác nhận thông tin ========== */
+.confirm-box {
+    background: #f8f9fa;
+    border: 1px dashed #bbb;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* ========== Bảng danh sách đóng tập ========== */
+#bindingTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 0.95rem;
+}
+
+    #bindingTable th {
+        background: #007bff;
+        color: white;
+        text-align: left;
+        padding: 10px;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    #bindingTable td {
+        padding: 10px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    #bindingTable tr:nth-child(even) {
+        background: #f8f9fa;
+    }
+
+    #bindingTable .empty {
+        text-align: center;
+        color: #777;
+    }
+
+/* ========== Toast thông báo ========== */
+#toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #333;
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 8px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+    z-index: 9999;
+    font-weight: 500;
+}
+
+    #toast.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+/* ========== Hiệu ứng ========== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ================================
+   🔹 LUÂN CHUYỂN ẤN PHẨM
+   ================================ */
+#luanchuyen {
+    padding: 20px;
+    animation: fadeIn 0.3s ease;
+}
+
+    #luanchuyen h2 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: #1e293b;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    /* ===== FORM ===== */
+    #luanchuyen .transfer-form {
+        background: #fff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        margin-bottom: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    #luanchuyen .form-row {
+        flex: 1 1 45%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #luanchuyen label {
+        font-weight: 600;
+        color: #374151;
+        margin-bottom: 5px;
+    }
+
+    #luanchuyen input,
+    #luanchuyen select,
+    #luanchuyen textarea {
+        padding: 8px 10px;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        background: #f8fafc;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        #luanchuyen input:focus,
+        #luanchuyen select:focus,
+        #luanchuyen textarea:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+            outline: none;
+        }
+
+    #luanchuyen .form-actions {
+        flex-basis: 100%;
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+        margin-top: 10px;
+    }
+
+    /* ===== TOOLBAR ===== */
+    #luanchuyen .toolbar {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        background: #f9fafb;
+        padding: 10px 15px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        border: 1px solid #e2e8f0;
+    }
+
+        #luanchuyen .toolbar input,
+        #luanchuyen .toolbar select {
+            flex: 1;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #d1d5db;
+            background: #fff;
+        }
+
+    /* ===== TABLE ===== */
+    #luanchuyen .transfer-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+        #luanchuyen .transfer-table th,
+        #luanchuyen .transfer-table td {
+            border: 1px solid #e2e8f0;
+            padding: 10px 12px;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        #luanchuyen .transfer-table th {
+            background: #f1f5f9;
+            color: #1e293b;
+            font-weight: 700;
+        }
+
+        #luanchuyen .transfer-table td {
+            color: #334155;
+        }
+
+        #luanchuyen .transfer-table tr:nth-child(even) {
+            background: #f9fafb;
+        }
+
+        #luanchuyen .transfer-table .empty {
+            text-align: center;
+            color: #94a3b8;
+            padding: 15px;
+        }
+
+    /* ===== STATS ===== */
+    #luanchuyen .stats {
+        margin-top: 20px;
+        background: #f8fafc;
+        padding: 12px 15px;
+        border-radius: 10px;
+        border: 1px solid #e2e8f0;
+        display: flex;
+        gap: 30px;
+        justify-content: flex-start;
+        font-size: 0.95rem;
+        color: #475569;
+    }
+
+        #luanchuyen .stats b {
+            color: #0f172a;
+        }
+
+    /* ===== TOAST ===== */
+    #luanchuyen .toast {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: #2563eb;
+        color: #fff;
+        padding: 12px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.4s ease;
+        z-index: 999;
+    }
+
+        #luanchuyen .toast.show {
+            opacity: 1;
+            transform: translateY(-10px);
+            pointer-events: auto;
+        }
+
+/* ===== ANIMATION ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* ===== FORM ACTION BUTTONS ===== */
+#luanchuyen .form-actions {
+    flex-basis: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+    #luanchuyen .form-actions button {
+        padding: 8px 14px;
+        font-size: 0.95rem;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        font-weight: 600;
+    }
+
+        /* Nút thêm */
+        #luanchuyen .form-actions button:nth-child(1) {
+            background-color: #22c55e;
+            color: #fff;
+        }
+
+            #luanchuyen .form-actions button:nth-child(1):hover {
+                background-color: #16a34a;
+                transform: translateY(-2px);
+            }
+
+        /* Nút reset */
+        #luanchuyen .form-actions button:nth-child(2) {
+            background-color: #e2e8f0;
+            color: #1e293b;
+        }
+
+            #luanchuyen .form-actions button:nth-child(2):hover {
+                background-color: #cbd5e1;
+                transform: translateY(-2px);
+            }
+
+        /* Nút xóa tất cả */
+        #luanchuyen .form-actions button:nth-child(3) {
+            background-color: #ef4444;
+            color: #fff;
+        }
+
+            #luanchuyen .form-actions button:nth-child(3):hover {
+                background-color: #dc2626;
+                transform: translateY(-2px);
+            }
+#luanchuyen .btn-remove {
+    background-color: #ef4444;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.25s ease;
+}
+
+    #luanchuyen .btn-remove:hover {
+        background-color: #dc2626;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    #luanchuyen .btn-remove:active {
+        transform: scale(0.95);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+
+/* ============================= */
+/* 📦 QUẢN LÝ THUÊ BAO ĐỊNH KỲ */
+/* ============================= */
+
+#thuebao {
+    padding: 25px;
+    animation: fadeIn 0.4s ease;
+}
+
+    /* === Tiêu đề === */
+    #thuebao h2 {
+        text-align: center;
+        font-size: 1.6rem;
+        color: #1e3a8a;
+        margin-bottom: 20px;
+    }
+
+    /* === FORM === */
+    #thuebao .sub-form {
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 20px;
+        max-width: 600px;
+        margin: 0 auto;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    #thuebao .form-row {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+    }
+
+        #thuebao .form-row label {
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #374151;
+        }
+
+        #thuebao .form-row input,
+        #thuebao .form-row select {
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+            outline: none;
+            font-size: 0.95rem;
+            transition: all 0.25s ease;
+        }
+
+            #thuebao .form-row input:focus,
+            #thuebao .form-row select:focus {
+                border-color: #2563eb;
+                box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+            }
+
+    /* === Nút hành động === */
+    #thuebao .form-actions {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+        #thuebao .form-actions button {
+            padding: 8px 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            color: white;
+        }
+
+            #thuebao .form-actions button:nth-child(1) {
+                background-color: #2563eb; /* Thêm */
+            }
+
+            #thuebao .form-actions button:nth-child(2) {
+                background-color: #9ca3af; /* Xóa nhập */
+            }
+
+            #thuebao .form-actions button:nth-child(3) {
+                background-color: #ef4444; /* Xóa tất cả */
+            }
+
+            #thuebao .form-actions button:hover {
+                transform: translateY(-2px);
+                opacity: 0.9;
+            }
+
+    /* === Thanh công cụ === */
+    #thuebao .toolbar {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin: 20px 0;
+    }
+
+        #thuebao .toolbar input,
+        #thuebao .toolbar select {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+            min-width: 220px;
+            font-size: 0.95rem;
+        }
+
+    /* === BẢNG === */
+    #thuebao .sub-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+        #thuebao .sub-table th {
+            background-color: #2563eb;
+            color: white;
+            padding: 10px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        #thuebao .sub-table td {
+            padding: 10px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        #thuebao .sub-table tr:hover {
+            background-color: #f3f4f6;
+        }
+
+        #thuebao .sub-table .empty {
+            text-align: center;
+            color: #6b7280;
+            padding: 15px;
+        }
+
+    /* === Nút xóa trong bảng === */
+    #thuebao .btn-remove {
+        background-color: #ef4444;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 5px 10px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: all 0.25s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    }
+
+        #thuebao .btn-remove:hover {
+            background-color: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        #thuebao .btn-remove:active {
+            transform: scale(0.95);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+    /* === Thống kê === */
+    #thuebao .stats {
+        margin-top: 20px;
+        text-align: center;
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        padding: 12px;
+        border-radius: 10px;
+        font-size: 0.95rem;
+    }
+
+        #thuebao .stats p {
+            margin: 6px 0;
+        }
+
+    /* === Toast === */
+    #thuebao .toast {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: #2563eb;
+        color: white;
+        padding: 10px 16px;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.4s ease;
+        z-index: 200;
+    }
+
+        #thuebao .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+/* === Hiệu ứng fade === */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* ============================= */
+/* 📚 QUẢN LÝ LƯU TRỮ ẤN PHẨM */
+/* ============================= */
+
+#luutru {
+    padding: 25px;
+    animation: fadeIn 0.4s ease;
+}
+
+    /* === Tiêu đề chính === */
+    #luutru h2 {
+        text-align: center;
+        font-size: 1.6rem;
+        color: #1e3a8a;
+        margin-bottom: 20px;
+    }
+
+    /* === FORM THÊM MỚI === */
+    #luutru .archive-form {
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 20px;
+        max-width: 600px;
+        margin: 0 auto;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    #luutru .form-row {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+    }
+
+        #luutru .form-row label {
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #374151;
+        }
+
+        #luutru .form-row input,
+        #luutru .form-row select {
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+            outline: none;
+            font-size: 0.95rem;
+            transition: all 0.25s ease;
+        }
+
+            #luutru .form-row input:focus,
+            #luutru .form-row select:focus {
+                border-color: #2563eb;
+                box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+            }
+
+    /* === NÚT FORM === */
+    #luutru .form-actions {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+        #luutru .form-actions button {
+            padding: 8px 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            color: white;
+        }
+
+            #luutru .form-actions button:nth-child(1) {
+                background-color: #2563eb; /* Thêm */
+            }
+
+            #luutru .form-actions button:nth-child(2) {
+                background-color: #9ca3af; /* Xóa nhập */
+            }
+
+            #luutru .form-actions button:nth-child(3) {
+                background-color: #ef4444; /* Xóa tất cả */
+            }
+
+            #luutru .form-actions button:hover {
+                transform: translateY(-2px);
+                opacity: 0.9;
+            }
+
+    /* === THANH CÔNG CỤ (TÌM + LỌC) === */
+    #luutru .toolbar {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin: 20px 0;
+    }
+
+        #luutru .toolbar input,
+        #luutru .toolbar select {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+            min-width: 220px;
+            font-size: 0.95rem;
+        }
+
+    /* === BẢNG DỮ LIỆU === */
+    #luutru .archive-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+        #luutru .archive-table th {
+            background-color: #2563eb;
+            color: white;
+            padding: 10px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        #luutru .archive-table td {
+            padding: 10px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        #luutru .archive-table tr:hover {
+            background-color: #f3f4f6;
+        }
+
+        #luutru .archive-table .empty {
+            text-align: center;
+            color: #6b7280;
+            padding: 15px;
+        }
+
+    /* === NÚT XÓA (🗑️) TRONG BẢNG === */
+    #luutru .btn-remove {
+        background-color: #ef4444;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 5px 10px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: all 0.25s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    }
+
+        #luutru .btn-remove:hover {
+            background-color: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        #luutru .btn-remove:active {
+            transform: scale(0.95);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+    /* === KHUNG THỐNG KÊ === */
+    #luutru .stats {
+        margin-top: 20px;
+        text-align: center;
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        padding: 12px;
+        border-radius: 10px;
+        font-size: 0.95rem;
+    }
+
+        #luutru .stats p {
+            margin: 6px 0;
+        }
+
+    /* === TOAST THÔNG BÁO === */
+    #luutru .toast {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: #2563eb;
+        color: white;
+        padding: 10px 16px;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.4s ease;
+        z-index: 200;
+    }
+
+        #luutru .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+/* === Hiệu ứng fade === */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* ============================================================
+   📊 BÁO CÁO ẤN PHẨM
+   ============================================================ */
+#baocao {
+    padding: 25px;
+    animation: fadeIn 0.3s ease;
+}
+
+    #baocao h2 {
+        color: #2c3e50;
+        margin-bottom: 10px;
+    }
+
+    #baocao p {
+        margin-bottom: 20px;
+        color: #555;
+    }
+
+    /* ==== Khung thẻ báo cáo ==== */
+    #baocao .report-card {
+        background: #fff;
+        border-radius: 14px;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        padding: 20px 25px;
+        margin-bottom: 25px;
+        transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+        #baocao .report-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+        }
+
+    /* ==== Form báo cáo ==== */
+    #baocao .report-form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        align-items: flex-end;
+    }
+
+    #baocao .form-row {
+        flex: 1 1 220px;
+        display: flex;
+        flex-direction: column;
+    }
+
+        #baocao .form-row label {
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 6px;
+        }
+
+    #baocao select {
+        padding: 8px 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        transition: border-color 0.25s ease;
+    }
+
+        #baocao select:focus {
+            border-color: #2563eb;
+            outline: none;
+        }
+
+    /* ==== Nút tạo báo cáo ==== */
+    #baocao .btn-add {
+        background-color: #2563eb;
+        color: #fff;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.95rem;
+        font-weight: 600;
+        transition: all 0.25s ease;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    }
+
+        #baocao .btn-add:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        #baocao .btn-add:active {
+            transform: scale(0.96);
+        }
+
+/* ==== Kết quả biểu đồ ==== */
+#reportContent {
+    text-align: center;
+    padding: 20px;
+    background: #f9fafb;
+    border-radius: 10px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.08);
+}
+
+/* ==== Hiệu ứng fade ==== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

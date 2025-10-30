@@ -1,0 +1,1068 @@
+﻿<script src="/js/anpham.js"></script>
+<script src="/js/baitrich.js"></script>
+<script src="/js/holding.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/phutruong.js"></script>
+<script src="/js/baocao.js"></script>
+<script src="/js/dongtap.js"></script>
+<script src="/js/lichph.js"></script>
+<script src="/js/luutru.js"></script>
+<script src="/js/luanchuyen.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="serials-page">
+    <link rel="stylesheet" href="~/css/serial.css" />
+
+    <!-- 🟦 TIÊU ĐỀ CHÍNH -->
+    <h1>📚 Ấn Phẩm Định Kỳ / Nhiều Kỳ (Serials)</h1>
+
+    <!-- 🟦 THANH TAB ĐIỀU HƯỚNG -->
+    <div class="tab-nav">
+        <button class="tab-link active" onclick="openTab(event, 'trangchinh')">Trang chính</button>
+        <button class="tab-link" onclick="openTab(event, 'phutruong')">Phụ trương</button>
+        <button class="tab-link" onclick="openTab(event, 'baitrich')">Bài trích</button>
+        <button class="tab-link" onclick="openTab(event, 'lichphathanh')">Lịch phát hành</button>
+        <button class="tab-link" onclick="openTab(event, 'holding')">Holdings</button>
+        <button class="tab-link" onclick="openTab(event, 'dongtap')">Đóng tập</button>
+        <button class="tab-link" onclick="openTab(event, 'luanchuyen')">Luân chuyển</button>
+        <button class="tab-link" onclick="openTab(event, 'thuebao')">Thuê bao</button>
+        <button class="tab-link" onclick="openTab(event, 'luutru')">Lưu trữ</button>
+        <button class="tab-link" onclick="openTab(event, 'baocao')">Báo cáo</button>
+    </div>
+
+    <!-- 🟩 TAB CHÍNH -->
+    <div id="trangchinh" class="tab-content active">
+
+        <!-- THỐNG KÊ NHANH -->
+        <div class="dashboard">
+            <div class="stat-card">
+                <h3 id="total-count">0</h3>
+                <p>Tổng số ấn phẩm</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="published-count">0</h3>
+                <p>Đã phát hành</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="pending-count">0</h3>
+                <p>Đang chờ</p>
+            </div>
+        </div>
+
+        <!-- 🔹 Ấn phẩm nổi bật -->
+        <div class="serials-card fade-in">
+            <h2>⭐ Ấn phẩm nổi bật</h2>
+            <p class="card-desc">Các ấn phẩm được phát hành nhiều nhất hoặc nhận được sự quan tâm cao.</p>
+            <ol class="highlight-list">
+                <li>
+                    <div class="highlight-title">Tạp chí Khoa học</div>
+                    <span class="highlight-count">12 kỳ</span>
+                </li>
+                <li>
+                    <div class="highlight-title">Bản tin Công nghệ</div>
+                    <span class="highlight-count">9 kỳ</span>
+                </li>
+                <li>
+                    <div class="highlight-title">Tạp chí Giáo dục</div>
+                    <span class="highlight-count">7 kỳ</span>
+                </li>
+            </ol>
+        </div>
+            <section class="serials-section">
+                <h2>📅 Lịch phát hành sắp tới</h2>
+                <div class="serials-card fade-in">
+                    <p>Tháng 10/2025 – Tạp chí Khoa học (05/10)</p>
+                    <p>Tháng 11/2025 – Bản tin IT (10/11)</p>
+                </div>
+            </section>
+
+        <section class="serials-content">
+
+            <!-- Form đăng ký -->
+            <div class="serials-card">
+                <h2>➕ Đăng ký ấn phẩm mới</h2>
+                <form id="serialForm">
+                    <input type="text" id="title" placeholder="Tên ấn phẩm..." />
+                    <input type="text" id="issue" placeholder="Kỳ phát hành..." />
+                    <select id="type">
+                        <option value="Báo">Báo</option>
+                        <option value="Tạp chí">Tạp chí</option>
+                        <option value="Bản tin">Bản tin</option>
+                    </select>
+                    <input type="date" id="releaseDate" />
+                    <select id="status">
+                        <option value="Đang chờ">Đang chờ</option>
+                        <option value="Đã phát hành">Đã phát hành</option>
+                    </select>
+                    <textarea id="note" placeholder="Ghi chú thêm..."></textarea>
+                    <div class="buttons">
+                        <button type="button" class="btn-add" id="btnAdd">Thêm</button>
+                        <button type="button" class="btn-save">Lưu</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Danh sách -->
+            <div class="serials-card">
+                <h2>📋 Danh sách ấn phẩm</h2>
+                <input type="text" class="search-bar" id="searchInput" placeholder="🔍 Tìm kiếm theo tên ấn phẩm..." />
+                <table id="serialTable">
+                    <thead>
+                        <tr>
+                            <th>Tên ấn phẩm</th>
+                            <th>Kỳ phát hành</th>
+                            <th>Loại</th>
+                            <th>Ngày phát hành</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+        </section>
+
+        <!-- Toast thông báo -->
+        <div class="toast" id="toast">Thêm thành công!</div>
+    </div>
+</div>  
+
+    <!-- 🟪 CÁC SUB-TAB KHÁC -->
+<!-- ============================= -->
+<!-- 🔹 TAB: PHỤ TRƯƠNG -->
+<!-- ============================= -->
+<div id="phutruong" class="tab-content">
+    <h2>📰 Quản lý Phụ trương</h2>
+
+    <!-- 🔹 Form thêm phụ trương -->
+    <form id="supplementForm" class="archive-form">
+        <div class="form-row">
+            <label>Tên phụ trương *</label>
+            <input type="text" id="supplementName" placeholder="Nhập tên phụ trương..." />
+        </div>
+
+        <div class="form-row">
+            <label>Kỳ phát hành *</label>
+            <input type="text" id="supplementIssue" placeholder="VD: 10/2025" />
+        </div>
+
+        <div class="form-row">
+            <label>Nội dung chính</label>
+            <textarea id="supplementContent" placeholder="Nội dung chính..."></textarea>
+        </div>
+
+        <div class="form-row">
+            <label>Trạng thái</label>
+            <select id="supplementStatus">
+                <option value="Đã phát hành">✅ Đã phát hành</option>
+                <option value="Chưa phát hành">⏳ Chưa phát hành</option>
+            </select>
+        </div>
+
+        <div class="form-actions">
+            <button type="button" class="btn btn-add">➕ Thêm phụ trương</button>
+            <button type="reset" class="btn btn-save">🧹 Làm mới</button>
+            <button type="button" id="clearSupBtn" class="btn btn-danger">🗑️ Xóa tất cả</button>
+        </div>
+    </form>
+
+    <hr />
+
+    <!-- 🔹 Bộ lọc -->
+    <div class="toolbar">
+        <input type="text" id="searchInput" placeholder="🔍 Tìm theo tên phụ trương..." />
+        <select id="filterSelect">
+            <option value="">Tất cả trạng thái</option>
+            <option value="Đã phát hành">Đã phát hành</option>
+            <option value="Chưa phát hành">Chưa phát hành</option>
+        </select>
+    </div>
+
+    <!-- 🔹 Bảng danh sách -->
+    <table id="supplementTable" class="archive-table">
+        <thead>
+            <tr>
+                <th>Tên phụ trương</th>
+                <th>Kỳ phát hành</th>
+                <th>Nội dung chính</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Phụ trương Công nghệ</td>
+                <td>09/2025</td>
+                <td>Tổng hợp xu hướng AI</td>
+                <td><span class="status success">Đã phát hành</span></td>
+                <td>
+                    <button class="btn btn-info btn-edit">✏️</button>
+                    <button class="btn btn-danger btn-delete">🗑️</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- 🔹 Thống kê -->
+    <div class="stats">
+        <p>Tổng phụ trương: <b id="supTotal">1</b></p>
+        <p>Đã phát hành: <b id="supPublished">1</b></p>
+        <p>Chưa phát hành: <b id="supUnpublished">0</b></p>
+    </div>
+
+    <!-- 🔹 Toast -->
+    <div id="supToast" class="toast"></div>
+
+    <!-- 🪟 MODAL SỬA -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <h3>✏️ Chỉnh sửa phụ trương</h3>
+            <input type="text" id="editName" placeholder="Tên phụ trương..." />
+            <input type="text" id="editIssue" placeholder="Kỳ phát hành..." />
+            <textarea id="editContent" placeholder="Nội dung chính..."></textarea>
+            <select id="editStatus">
+                <option value="Đã phát hành">Đã phát hành</option>
+                <option value="Chưa phát hành">Chưa phát hành</option>
+            </select>
+
+            <div class="modal-buttons">
+                <button class="btn btn-save" id="saveEdit">Lưu</button>
+                <button class="btn btn-danger" id="cancelEdit">Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ============================= -->
+<!-- 🔹 TAB: BÀI TRÍCH -->
+<!-- ============================= -->
+<div id="baitrich" class="tab-content">
+    <h2>📄 Quản lý Bài Trích</h2>
+
+    <!-- 🔹 Form thêm bài trích -->
+    <form id="baitrichForm" class="archive-form">
+        <div class="form-row">
+            <label>Ấn phẩm gốc *</label>
+            <select id="anpham" required>
+                <option value="">📚 Chọn ấn phẩm gốc...</option>
+                <optgroup label="Tạp chí Khoa học">
+                    <option>Tạp chí Khoa học - Kỳ 9/2025</option>
+                    <option>Tạp chí Khoa học - Kỳ 10/2025</option>
+                </optgroup>
+                <optgroup label="Bản tin Công nghệ Thông tin">
+                    <option>Bản tin IT - 10/2025</option>
+                    <option>Bản tin IT - 11/2025</option>
+                </optgroup>
+            </select>
+        </div>
+
+        <div class="form-row">
+            <label>Tên bài trích *</label>
+            <input type="text" id="tenbaiviet" placeholder="Nhập tên bài trích..." required />
+        </div>
+
+        <div class="form-row">
+            <label>Tác giả</label>
+            <input type="text" id="tacgia" placeholder="Tác giả..." />
+        </div>
+
+        <div class="form-row">
+            <label>Tóm tắt nội dung</label>
+            <textarea id="tomtat" placeholder="Tóm tắt nội dung..."></textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="button" id="btnAdd" class="btn btn-add">➕ Thêm bài trích</button>
+            <button type="button" id="btnClearAll" class="btn btn-danger">🗑️ Xóa tất cả</button>
+        </div>
+    </form>
+
+    <hr />
+
+    <!-- 🔹 Bộ lọc -->
+    <div class="toolbar">
+        <input type="text"
+               id="searchInput"
+               placeholder="🔍 Tìm theo tên hoặc tác giả..." />
+    </div>
+
+    <!-- 🔹 Bảng danh sách -->
+    <table id="baitrichTable" class="archive-table">
+        <thead>
+            <tr>
+                <th>Ấn phẩm</th>
+                <th>Tên bài trích</th>
+                <th>Tác giả</th>
+                <th>Tóm tắt</th>
+                <th>Ngày thêm</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody id="dsBaiViet">
+            <tr>
+                <td colspan="6" class="empty">Chưa có bài trích nào được thêm.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div id="pagination" class="pagination"></div>
+
+    <!-- 🔹 Kế thừa dữ liệu -->
+    <div class="archive-card">
+        <h3>🔗 Kế thừa dữ liệu ấn phẩm</h3>
+        <p>Cho phép tự động lấy thông tin ấn phẩm gốc từ tab khác để giảm thao tác nhập.</p>
+        <button id="btnKeThua" class="btn btn-info">📘 Kế thừa từ ấn phẩm</button>
+    </div>
+
+    <!-- 🔹 Thống kê -->
+    <div class="stats">
+        <p>Tổng bài trích: <b id="btTotal">0</b></p>
+        <p>Có tác giả: <b id="btWithAuthor">0</b></p>
+        <p>Không ghi tác giả: <b id="btNoAuthor">0</b></p>
+    </div>
+
+    <!-- 🔹 Toast -->
+    <div id="btToast" class="toast"></div>
+
+    <!-- 🔹 Modal chỉnh sửa -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <h3>✏️ Sửa bài trích</h3>
+            <select id="editAnpham"></select>
+            <input type="text" id="editTen" placeholder="Tên bài trích..." />
+            <input type="text" id="editTacgia" placeholder="Tác giả..." />
+            <textarea id="editTomtat" placeholder="Tóm tắt nội dung..."></textarea>
+
+            <div class="modal-buttons">
+                <button id="btnSaveEdit">💾 Lưu</button>
+                <button id="btnCancelEdit">❌ Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <div id="lichphathanh" class="tab-content">
+        <h2>Lịch phát hành</h2>
+        <div class="schedule-container">
+            <table class="schedule-table" id="scheduleTable">
+                <thead>
+                    <tr>
+                        <th>Ấn phẩm</th>
+                        <th>Số phát hành</th>
+                        <th>Ngày phát hành</th>
+                        <th>Trạng thái</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody id="scheduleBody"></tbody>
+            </table>
+        </div>
+
+        <!-- ================= NÚT THAO TÁC ================= -->
+        <div class="buttons">
+            <button class="btn-add" onclick="openCreateModal()">+ Đăng ký số mới</button>
+            <button class="btn-save" onclick="clearAllSchedules()">🗑 Xóa toàn bộ</button>
+            <button class="btn-add" onclick="openSpecialModal()">📌 Đóng tập & Gán đăng ký cá biệt</button>
+            <button class="btn-add" onclick="openDigitalModal()">📄 Đăng ký báo điện tử</button>
+            <button class="btn-add" onclick="openStatsModal()">📈 Xem thống kê</button>
+            <button class="btn-add" onclick="openForecastModal()">📅 Mẫu dự báo phát hành</button>
+        </div>
+    </div>
+    <!-- ================= MODAL ĐĂNG KÝ SỐ MỚI ================= -->
+    <div id="createModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCreateModal()">&times;</span>
+            <h2>🆕 Đăng ký số phát hành mới</h2>
+
+            <form id="createForm" class="special-form">
+                <div class="form-group">
+                    <label>Tên ấn phẩm:</label>
+                    <input type="text" id="createPublication" placeholder="Nhập tên ấn phẩm..." required />
+                </div>
+                <div class="form-group">
+                    <label>Số phát hành:</label>
+                    <input type="text" id="createIssue" placeholder="VD: Số 123" required />
+                </div>
+                <div class="form-group">
+                    <label>Ngày phát hành:</label>
+                    <input type="date" id="createDate" required />
+                </div>
+                <div class="form-group">
+                    <label>Chủ đề:</label>
+                    <select id="createTopic">
+                        <option value="Chính trị">Chính trị</option>
+                        <option value="Kinh tế">Kinh tế</option>
+                        <option value="Văn hóa">Văn hóa</option>
+                        <option value="Thể thao">Thể thao</option>
+                        <option value="Giáo dục">Giáo dục</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Trạng thái:</label>
+                    <select id="createStatus">
+                        <option value="pending">Đang chuẩn bị</option>
+                        <option value="published">Đã phát hành</option>
+                        <option value="hold">Tạm hoãn</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-save">💾 Lưu số phát hành</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ================= MODAL ĐÓNG TẬP + GÁN CÁ BIỆT ================= -->
+    <div id="specialModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeSpecialModal()">&times;</span>
+            <h2>📌 Đóng tập & Gán đăng ký cá biệt</h2>
+
+            <form id="specialForm" class="special-form">
+                <div class="form-group">
+                    <label>Chọn ấn phẩm:</label>
+                    <select id="specialPublication" required></select>
+                </div>
+                <div class="form-group">
+                    <label>Mã đăng ký cá biệt:</label>
+                    <input type="text" id="specialCode" placeholder="Nhập mã đăng ký..." required />
+                </div>
+                <div class="form-group">
+                    <label>Ghi chú:</label>
+                    <textarea id="specialNote" placeholder="Nhập ghi chú"></textarea>
+                </div>
+                <button type="submit" class="btn-save">💾 Lưu đăng ký</button>
+            </form>
+
+            <h3>Danh sách đăng ký cá biệt</h3>
+            <table class="schedule-table" id="specialTable">
+                <thead>
+                    <tr>
+                        <th>Ấn phẩm</th>
+                        <th>Mã đăng ký</th>
+                        <th>Ghi chú</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ================= MODAL BÁO ĐIỆN TỬ ================= -->
+    <div id="digitalModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeDigitalModal()">&times;</span>
+            <h2>📄 Đăng ký số báo điện tử</h2>
+
+            <form id="digitalForm" class="special-form">
+                <div class="form-group">
+                    <label>Ấn phẩm:</label>
+                    <input type="text" id="digitalPub" placeholder="Tên ấn phẩm..." required />
+                </div>
+                <div class="form-group">
+                    <label>Ngày phát hành:</label>
+                    <input type="date" id="digitalDate" required />
+                </div>
+                <div class="form-group">
+                    <label>Tệp PDF:</label>
+                    <input type="file" id="digitalFile" accept=".pdf" />
+                </div>
+                <div class="form-group">
+                    <label>Mục lục:</label>
+                    <textarea id="digitalIndex" placeholder="Nhập mục lục, mỗi dòng 1 mục..."></textarea>
+                </div>
+                <button type="submit" class="btn-save">💾 Lưu báo điện tử</button>
+            </form>
+
+            <h3>Danh sách báo điện tử</h3>
+            <table class="schedule-table" id="digitalTable">
+                <thead>
+                    <tr>
+                        <th>Ấn phẩm</th>
+                        <th>Ngày</th>
+                        <th>File</th>
+                        <th>Mục lục</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ================= MODAL THỐNG KÊ ================= -->
+    <div id="statsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeStatsModal()">&times;</span>
+            <h2>📊 Thống kê bổ sung</h2>
+            <div class="stats-filters">
+                <label>Chọn thời gian:</label>
+                <input type="date" id="statsFrom" /> đến
+                <input type="date" id="statsTo" />
+
+                <label>Chủ đề:</label>
+                <select id="statsTopic">
+                    <option value="">Tất cả</option>
+                    <option value="Chính trị">Chính trị</option>
+                    <option value="Kinh tế">Kinh tế</option>
+                    <option value="Văn hóa">Văn hóa</option>
+                    <option value="Thể thao">Thể thao</option>
+                </select>
+
+                <button onclick="applyStats()">Xem thống kê</button>
+            </div>
+            <table class="schedule-table" id="statsTable">
+                <thead>
+                    <tr>
+                        <th>Ấn phẩm</th>
+                        <th>Ngày phát hành</th>
+                        <th>Chủ đề</th>
+                        <th>Số phát hành</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ================= MODAL DỰ BÁO ================= -->
+    <div id="forecastModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeForecastModal()">&times;</span>
+            <h2>📅 Mẫu dự báo phát hành</h2>
+
+            <form id="forecastForm" class="special-form">
+                <div class="form-group">
+                    <label>Ấn phẩm:</label>
+                    <select id="forecastPublication" required></select>
+                </div>
+                <div class="form-group">
+                    <label>Ngày dự báo:</label>
+                    <input type="date" id="forecastDate" required />
+                </div>
+                <div class="form-group">
+                    <label>Số phát hành dự kiến:</label>
+                    <input type="number" id="forecastNumber" placeholder="Nhập số lượng..." required />
+                </div>
+                <button type="submit" class="btn-save">💾 Lưu dự báo</button>
+            </form>
+
+            <h3>Danh sách dự báo phát hành</h3>
+            <table class="schedule-table" id="forecastTable">
+                <thead>
+                    <tr>
+                        <th>Ấn phẩm</th>
+                        <th>Ngày dự báo</th>
+                        <th>Số phát hành dự kiến</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <!-- ================= MODAL SỬA ================= -->
+        <div id="editModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeEditModal()">&times;</span>
+                <h2>✏️ Chỉnh sửa thông tin ấn phẩm</h2>
+
+                <div class="form-group">
+                    <label>Tên ấn phẩm:</label>
+                    <input type="text" id="editPublication" />
+                </div>
+                <div class="form-group">
+                    <label>Số phát hành:</label>
+                    <input type="text" id="editIssue" />
+                </div>
+                <div class="form-group">
+                    <label>Ngày phát hành:</label>
+                    <input type="date" id="editDate" />
+                </div>
+                <div class="form-group">
+                    <label>Trạng thái:</label>
+                    <select id="editStatus">
+                        <option value="pending">Đang chuẩn bị</option>
+                        <option value="published">Đã phát hành</option>
+                        <option value="hold">Tạm hoãn</option>
+                    </select>
+                </div>
+
+                <div class="modal-buttons">
+                    <button class="btn-save" onclick="saveEdit()">💾 Lưu</button>
+                    <button class="btn-cancel" onclick="closeEditModal()">❌ Hủy</button>
+                </div>
+            </div>
+    </div>
+
+    <!-- ================= TOAST ================= -->
+    <div id="toast"></div>
+    </div>
+
+    <!-- 🟧 SUB-TAB HOLDING (thay bằng phần bạn gửi) -->
+    <div id="holding" class="tab-content">
+        <section class="serials-content">
+            <div class="serials-card fade-in">
+                <h2>🆕 Đăng ký Holdings mới</h2>
+                <form id="holdingForm">
+                    <label>Tên ấn phẩm</label>
+                    <input type="text" id="title" placeholder="Nhập tên ấn phẩm..." required />
+
+                    <label>Kỳ bắt đầu</label>
+                    <input type="text" id="startIssue" placeholder="Ví dụ: Số 1/2020" />
+
+                    <label>Kỳ kết thúc</label>
+                    <input type="text" id="endIssue" placeholder="Ví dụ: Số 12/2025" />
+
+                    <label>Tình trạng</label>
+                    <select id="status">
+                        <option value="success">Đầy đủ</option>
+                        <option value="pending">Thiếu số</option>
+                        <option value="processing">Đang bổ sung</option>
+                    </select>
+
+                    <div class="buttons">
+                    <button type="button" onclick="addHolding()">➕ Thêm</button>
+                    <button type="reset">🔄 Làm mới</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- 📋 Danh sách holdings -->
+            <div class="serials-card fade-in">
+                <h2>📋 Danh sách Holdings</h2>
+                <table id="holdingsTable">
+                    <thead>
+                        <tr>
+                            <th>Tên ấn phẩm</th>
+                            <th>Kỳ bắt đầu</th>
+                            <th>Kỳ kết thúc</th>
+                            <th>Tình trạng</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="5" class="empty">Chưa có dữ liệu...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 📊 Coverage -->
+            <div class="serials-card fade-in">
+                <h2>📊 Coverage (Phạm vi lưu trữ)</h2>
+                <ul id="coverageList" class="coverage-list">
+                    <li style="list-style:none">Chưa có dữ liệu...</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <!-- 🪟 MODAL CHỈNH SỬA -->
+    <div id="editModal" class="modal">
+        <div class="modal-content fade-in">
+            <h3>✏️ Chỉnh sửa Holdings</h3>
+            <label>Tên ấn phẩm</label>
+            <input type="text" id="editTitle" />
+
+            <label>Kỳ bắt đầu</label>
+            <input type="text" id="editStart" />
+
+            <label>Kỳ kết thúc</label>
+            <input type="text" id="editEnd" />
+
+            <label>Tình trạng</label>
+            <select id="editStatus">
+                <option value="success">Đầy đủ</option>
+                <option value="pending">Thiếu số</option>
+                <option value="processing">Đang bổ sung</option>
+            </select>
+
+            <div class="modal-buttons">
+                <button class="btn btn-save" onclick="saveEdit()">💾 Lưu</button>
+                <button class="btn btn-delete" onclick="closeModal()">✖ Hủy</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🔹 QUY TRÌNH ĐÓNG TẬP -->
+
+    <div id="dongtap" class="tab-content">
+        <h2>📦 Quy trình Đóng Tập Ấn Phẩm</h2>
+
+        <!-- 🔹 Thanh tiến trình -->
+        <div class="progress-container">
+            <div class="progress-step active" id="stepIndicator1">1️⃣ Thông tin ấn phẩm</div>
+            <div class="progress-step" id="stepIndicator2">2️⃣ Xác nhận dữ liệu</div>
+            <div class="progress-step" id="stepIndicator3">3️⃣ Hoàn tất đóng tập</div>
+        </div>
+
+        <!-- 🔹 Bước 1: Nhập thông tin -->
+        <div class="serials-card step active" id="step1">
+            <h2>📖 Nhập thông tin ấn phẩm</h2>
+            <form id="bindingForm">
+                <label>Tên ấn phẩm</label>
+                <input type="text" id="title" required placeholder="Nhập tên ấn phẩm..." />
+
+                <label>Số bắt đầu</label>
+                <input type="text" id="startIssue" placeholder="VD: Số 1" />
+
+                <label>Số kết thúc</label>
+                <input type="text" id="endIssue" placeholder="VD: Số 12" />
+
+                <label>Ghi chú</label>
+                <textarea id="notes" placeholder="Ghi chú thêm (nếu có)..."></textarea>
+
+                <div class="buttons">
+                    <button type="button" class="btn-add" onclick="nextStep(2)">➡️ Tiếp tục</button>
+                    <button type="reset" class="btn-save">🔄 Làm mới</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- 🔹 Bước 2: Xác nhận thông tin -->
+        <div class="serials-card step" id="step2">
+            <h2>✅ Xác nhận thông tin</h2>
+            <div class="confirm-box" id="confirmBox"></div>
+            <div class="buttons">
+                <button class="btn-warning" onclick="nextStep(1)">⬅️ Quay lại</button>
+                <button class="btn-save" onclick="saveBinding()">📦 Hoàn tất</button>
+            </div>
+        </div>
+
+        <!-- 🔹 Bước 3: Hoàn tất -->
+        <div class="serials-card step" id="step3">
+            <h2>🎉 Đóng tập thành công!</h2>
+            <p>Ấn phẩm của bạn đã được ghi nhận vào danh sách.</p>
+            <div class="buttons">
+                <button class="btn-add" onclick="resetProcess()">➕ Tạo mới</button>
+            </div>
+        </div>
+
+        <!-- 🔹 Danh sách các tập đã đóng -->
+        <div class="serials-card">
+            <h2>📚 Danh sách các tập đã đóng</h2>
+            <table id="bindingTable">
+                <thead>
+                    <tr>
+                        <th>Tên ấn phẩm</th>
+                        <th>Số bắt đầu</th>
+                        <th>Số kết thúc</th>
+                        <th>Ghi chú</th>
+                        <th>Ngày đóng</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <div id="toast"></div>
+    </div>
+
+    <!-- ============================= -->
+    <!-- 🔹 TAB: LUÂN CHUYỂN -->
+    <!-- ============================= -->
+    <div id="luanchuyen" class="tab-content">
+        <h2>🔄 Quản lý Luân chuyển Ấn phẩm</h2>
+
+        <!-- 🔹 Form thêm luân chuyển -->
+        <form id="transferForm" class="transfer-form">
+            <div class="form-row">
+                <label>Ấn phẩm *</label>
+                <input type="text" name="Title" placeholder="Tên ấn phẩm cần luân chuyển..." required />
+            </div>
+            <div class="form-row">
+                <label>Thư viện / Bộ phận gửi *</label>
+                <input type="text" name="From" placeholder="Ví dụ: Thư viện Trung tâm" required />
+            </div>
+            <div class="form-row">
+                <label>Thư viện / Bộ phận nhận *</label>
+                <input type="text" name="To" placeholder="Ví dụ: Thư viện Khoa CNTT" required />
+            </div>
+            <div class="form-row">
+                <label>Ngày luân chuyển</label>
+                <input type="date" name="Date" />
+            </div>
+            <div class="form-row">
+                <label>Tình trạng</label>
+                <select name="Status">
+                    <option value="Đang chuyển">Đang chuyển</option>
+                    <option value="Đã nhận">Đã nhận</option>
+                    <option value="Bị trễ">Bị trễ</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label>Ghi chú</label>
+                <input type="text" name="Notes" placeholder="Ghi chú thêm..." />
+            </div>
+            <div class="form-actions">
+                <button type="button" onclick="addTransfer()">➕ Thêm luân chuyển</button>
+                <button type="reset">🧹 Xóa nhập</button>
+                <button type="button" onclick="clearAllTransfers()">🗑️ Xóa tất cả</button>
+            </div>
+        </form>
+
+        <hr>
+
+        <!-- 🔹 Bộ lọc tìm kiếm -->
+        <div class="toolbar">
+            <input type="text" id="transferSearch" onkeyup="filterTransfers()" placeholder="🔍 Tìm theo tên ấn phẩm..." />
+            <select id="statusFilter" onchange="filterTransfers()">
+                <option value="">Tất cả trạng thái</option>
+                <option value="Đang chuyển">Đang chuyển</option>
+                <option value="Đã nhận">Đã nhận</option>
+                <option value="Bị trễ">Bị trễ</option>
+            </select>
+        </div>
+
+        <!-- 🔹 Bảng danh sách luân chuyển -->
+        <table id="transferTable" class="transfer-table">
+            <thead>
+                <tr>
+                    <th>Ấn phẩm</th>
+                    <th>Bộ phận gửi</th>
+                    <th>Bộ phận nhận</th>
+                    <th>Ngày luân chuyển</th>
+                    <th>Tình trạng</th>
+                    <th>Ghi chú</th>
+                    <th>Ngày thêm</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td colspan="8" class="empty">Chưa có dữ liệu luân chuyển nào.</td></tr>
+            </tbody>
+        </table>
+
+        <!-- 🔹 Thống kê -->
+        <div class="stats">
+            <p>Tổng lượt luân chuyển: <b id="transTotal">0</b></p>
+            <p>Đã nhận: <b id="transReceived">0</b></p>
+            <p>Đang chuyển / Bị trễ: <b id="transPending">0</b></p>
+        </div>
+
+        <!-- 🔹 Toast -->
+        <div id="transToast" class="toast"></div>
+    </div>
+
+    <!-- ============================= -->
+    <!-- 🔹 TAB: THUÊ BAO ĐỊNH KỲ -->
+    <!-- ============================= -->
+    <div id="thuebao" class="tab-content">
+        <h2>📦 Quản lý Thuê bao định kỳ</h2>
+
+        <!-- 🔹 Form thêm thuê bao -->
+        <form id="subForm" class="sub-form">
+            <div class="form-row">
+                <label>Nhà cung cấp</label>
+                <input type="text" name="Provider" placeholder="Nhập tên nhà cung cấp..." />
+            </div>
+            <div class="form-row">
+                <label>Tên ấn phẩm *</label>
+                <input type="text" name="Title" placeholder="Nhập tên ấn phẩm..." required />
+            </div>
+            <div class="form-row">
+                <label>Ngày bắt đầu</label>
+                <input type="date" name="StartDate" />
+            </div>
+            <div class="form-row">
+                <label>Ngày kết thúc</label>
+                <input type="date" name="EndDate" />
+            </div>
+            <div class="form-row">
+                <label>Giấy phép</label>
+                <input type="text" name="License" placeholder="Mã giấy phép..." />
+            </div>
+            <div class="form-row">
+                <label>Ghi chú</label>
+                <input type="text" name="Notes" placeholder="Ghi chú thêm..." />
+            </div>
+            <div class="form-actions">
+                <button type="button" onclick="addSub()">➕ Thêm thuê bao</button>
+                <button type="reset">🧹 Xóa nhập</button>
+                <button type="button" onclick="clearAll()">🗑️ Xóa tất cả</button>
+            </div>
+        </form>
+
+        <hr>
+
+        <!-- 🔹 Thanh công cụ -->
+        <div class="toolbar">
+            <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="🔍 Tìm kiếm theo tên ấn phẩm..." />
+            <select id="filterSelect" onchange="filterTable()">
+                <option value="">Tất cả trạng thái</option>
+                <option value="Hiệu lực">Hiệu lực</option>
+                <option value="Sắp hết hạn">Sắp hết hạn</option>
+                <option value="Hết hạn">Hết hạn</option>
+            </select>
+        </div>
+
+        <!-- 🔹 Bảng thuê bao -->
+        <table id="subTable" class="sub-table">
+            <thead>
+                <tr>
+                    <th>Nhà cung cấp</th>
+                    <th>Tên ấn phẩm</th>
+                    <th>Bắt đầu</th>
+                    <th>Kết thúc</th>
+                    <th>Giấy phép</th>
+                    <th>Trạng thái</th>
+                    <th>Ghi chú</th>
+                    <th>Ngày thêm</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td colspan="9" class="empty">Chưa có dữ liệu thuê bao nào.</td></tr>
+            </tbody>
+        </table>
+
+        <!-- 🔹 Thống kê -->
+        <div class="stats">
+            <p>Tổng thuê bao: <b id="countTotal">0</b></p>
+            <p>Hiệu lực: <b id="countActive">0</b></p>
+            <p>Hết hạn / Sắp hết hạn: <b id="countExpired">0</b></p>
+        </div>
+
+        <!-- 🔹 Toast thông báo -->
+        <div id="toast" class="toast"></div>
+    </div>
+    <!-- ============================= -->
+    <!-- 🔹 TAB: LƯU TRỮ -->
+    <!-- ============================= -->
+    <div id="luutru" class="tab-content">
+        <h2>📚 Quản lý Lưu trữ Ấn phẩm</h2>
+
+        <!-- 🔹 Form thêm ấn phẩm lưu trữ -->
+        <form id="archiveForm" class="archive-form">
+            <div class="form-row">
+                <label>Tên ấn phẩm *</label>
+                <input type="text" name="Title" placeholder="Nhập tên ấn phẩm..." required />
+            </div>
+            <div class="form-row">
+                <label>Số hiệu / Ký hiệu</label>
+                <input type="text" name="Code" placeholder="Mã lưu trữ hoặc số hiệu..." />
+            </div>
+            <div class="form-row">
+                <label>Năm xuất bản</label>
+                <input type="number" name="Year" placeholder="VD: 2020" />
+            </div>
+            <div class="form-row">
+                <label>Vị trí lưu</label>
+                <input type="text" name="Location" placeholder="Ngăn / giá / kho..." />
+            </div>
+            <div class="form-row">
+                <label>Tình trạng</label>
+                <select name="Status">
+                    <option value="Còn tốt">Còn tốt</option>
+                    <option value="Hư hỏng nhẹ">Hư hỏng nhẹ</option>
+                    <option value="Hư hỏng nặng">Hư hỏng nặng</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label>Ghi chú</label>
+                <input type="text" name="Notes" placeholder="Ghi chú thêm..." />
+            </div>
+            <div class="form-actions">
+                <button type="button" onclick="addArchive()">➕ Thêm lưu trữ</button>
+                <button type="reset">🧹 Xóa nhập</button>
+                <button type="button" onclick="clearAllArchives()">🗑️ Xóa tất cả</button>
+            </div>
+        </form>
+
+        <hr>
+
+        <!-- 🔹 Bộ lọc -->
+        <div class="toolbar">
+            <input type="text" id="archiveSearch" onkeyup="filterArchives()" placeholder="🔍 Tìm theo tên ấn phẩm..." />
+            <select id="archiveFilter" onchange="filterArchives()">
+                <option value="">Tất cả tình trạng</option>
+                <option value="Còn tốt">Còn tốt</option>
+                <option value="Hư hỏng nhẹ">Hư hỏng nhẹ</option>
+                <option value="Hư hỏng nặng">Hư hỏng nặng</option>
+            </select>
+        </div>
+
+        <!-- 🔹 Bảng danh sách -->
+        <table id="archiveTable" class="archive-table">
+            <thead>
+                <tr>
+                    <th>Tên ấn phẩm</th>
+                    <th>Số hiệu</th>
+                    <th>Năm XB</th>
+                    <th>Vị trí lưu</th>
+                    <th>Tình trạng</th>
+                    <th>Ghi chú</th>
+                    <th>Ngày lưu</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td colspan="8" class="empty">Chưa có dữ liệu lưu trữ nào.</td></tr>
+            </tbody>
+        </table>
+
+        <!-- 🔹 Thống kê -->
+        <div class="stats">
+            <p>Tổng ấn phẩm: <b id="archiveTotal">0</b></p>
+            <p>Còn tốt: <b id="archiveGood">0</b></p>
+            <p>Hư hỏng (nhẹ/nặng): <b id="archiveBad">0</b></p>
+        </div>
+
+        <!-- 🔹 Toast -->
+        <div id="archiveToast" class="toast"></div>
+    </div>
+
+    <!-- ============================= -->
+    <!-- 🔹 TAB: BÁO CÁO -->
+    <!-- ============================= -->
+    <div id="baocao" class="tab-content">
+        <h2>📊 Quản lý Báo cáo Ấn phẩm</h2>
+        <p style="color:#666;">Tổng hợp và hiển thị báo cáo theo nhiều tiêu chí khác nhau.</p>
+
+        <!-- 🔹 Khung chọn loại báo cáo -->
+        <div class="report-card fade-in">
+            <form id="reportForm" class="report-form">
+                <div class="form-row">
+                    <label>📑 Loại báo cáo</label>
+                    <select id="reportType">
+                        <option value="binding">Báo cáo đóng tập</option>
+                        <option value="subscription">Báo cáo thuê bao</option>
+                        <option value="circulation">Báo cáo luân chuyển</option>
+                        <option value="archive">Báo cáo lưu trữ</option>
+                        <option value="error">Báo cáo lỗi tiếp nhận</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <label>📈 Loại biểu đồ</label>
+                    <select id="chartType">
+                        <option value="bar">Cột (Bar)</option>
+                        <option value="line">Đường (Line)</option>
+                        <option value="pie">Tròn (Pie)</option>
+                        <option value="doughnut">Vòng (Doughnut)</option>
+                        <option value="radar">Radar</option>
+                    </select>
+                </div>
+
+                <div class="form-row full">
+                    <button type="button" id="generateReport" class="btn-add">📋 Tạo báo cáo</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- 🔹 Khung kết quả -->
+        <div class="report-card">
+            <h3>📑 Kết quả báo cáo</h3>
+            <div id="reportContent" style="margin-top:20px;">
+                <canvas id="reportChart" width="400" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+
+
+
+
+

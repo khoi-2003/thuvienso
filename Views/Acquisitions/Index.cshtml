@@ -1,0 +1,1399 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Đơn đặt mua / Hợp đồng</title>
+    <link rel="stylesheet" href="/css/acquisitions.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="container-fluid modern-dashboard">
+        <header class="page-header">
+            <h2><i class="fa-solid fa-circle-plus"></i> Bổ sung</h2>
+        </header>
+        <!-- Tabs chính -->
+        <ul class="nav nav-tabs ">
+            <li class="active"><a href="#orders" data-toggle="tab">Đơn đặt mua / Hợp đồng</a></li>
+            <li><a href="#funds" data-toggle="tab">Quản lý Quỹ bổ sung</a></li>
+            <li><a href="#acquisition" data-toggle="tab">Bổ sung - tác nghiệp</a></li>
+            <li><a href="#warehouse" data-toggle="tab">Quản lý Kho</a></li>
+            <li><a href="#receiving" data-toggle="tab">Tiếp nhận/Kiểm nhận</a></li>
+            <li><a href="#supplier" data-toggle="tab">Nhà cung cấp</a></li>
+        </ul>
+
+        <div class="tab-content card-body">
+
+            <!-- TAB ĐƠN ĐẶT MUA / HỢP ĐỒNG -->
+            <div class="tab-pane fade in active" id="orders">
+
+                <!-- Sub-tab -->
+                <ul class="nav nav-tabs ">
+                    <li class="active"><a href="#lap_giahan_huy" data-toggle="tab">Lập đơn</a></li>
+                    <li><a href="#chiphi" data-toggle="tab">Khai báo chi phí</a></li>
+                    <li><a href="#doichieu" data-toggle="tab">Đối chiếu</a></li>
+                    <li><a href="#nhacungcap" data-toggle="tab">Quản lý Nhà cung cấp</a></li>
+                </ul>
+
+                <div class="tab-content" style="margin-top:20px;">
+                    <!-- Lập / Gia hạn / Huỷ -->
+                    <div class="tab-pane fade in active" id="lap_giahan_huy">
+
+                        <!-- Action bar: Tìm kiếm + Lập mới -->
+                        <div class="row modern-action-bar">
+                            <div class="col-sm-6">
+                                <input type="text" id="searchInput" class="form-control modern-input" placeholder="🔍 Tìm kiếm Mã / Nhà cung cấp / Sản phẩm">
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                <button class="btn btn-gradient" id="showCreateModal">Lập mới</button>
+                            </div>
+                        </div>
+
+                        <!-- Bảng hợp đồng -->
+                        <div class="card modern-table-card">
+                            <table class="table modern-table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Mã</th>
+                                        <th>Nhà cung cấp</th>
+                                        <th>Sản phẩm</th>
+                                        <th>Số lượng</th>
+                                        <th>Ngày đặt</th>
+                                        <th>Ngày hết hạn</th>
+                                        <th>Trạng thái</th>
+                                        <th>Ghi chú</th>
+                                        <th>Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="contractTableBody"></tbody>
+                            </table>
+                        </div>
+
+                        <!-- Phân trang -->
+                        <nav>
+                            <ul class="pagination" id="pagination"></ul>
+                        </nav>
+                    </div>
+
+                    <!-- Các sub-tab khác -->
+                    <!-- Sub-tab Chi phí -->
+                    <div class="tab-pane fade" id="chiphi">
+
+                        <!-- Action bar: tìm kiếm + thêm chi phí -->
+                        <div class="row modern-action-bar align-items-center">
+                            <div class="col-md-6 mb-2">
+                                <input type="text" id="searchSummaryInput" class="form-control modern-input" placeholder="🔍 Tìm kiếm theo Mã hợp đồng">
+                            </div>
+                            <div class="col-md-6 text-right mb-2">
+                                <button class="btn btn-gradient" id="showAddCostModal">Thêm chi phí</button>
+                            </div>
+                        </div>
+
+                        <!-- Biểu đồ chi phí -->
+                        <div class="modern-table-card">
+                            <h5 class="card-title">📊 Biểu đồ chi phí</h5>
+                            <canvas id="costChart" height="150"></canvas>
+                        </div>
+
+                        <!-- Bảng tổng hợp chi phí -->
+                        <div class="modern-table-card mt-3">
+                            <h5 class="card-title">💰 Bảng tổng hợp chi phí</h5>
+                            <table class="table modern-table table-striped table-hover">
+                                <thead class="thead-gradient-info">
+                                    <tr>
+                                        <th>Mã hợp đồng</th>
+                                        <th>Tổng chi phí dự kiến</th>
+                                        <th>Tổng chi phí thực tế</th>
+                                        <th>Chênh lệch</th>
+                                        <th>Số lần phát sinh</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="summaryTableBody"></tbody>
+                            </table>
+                            <nav>
+                                <ul class="pagination" id="summaryPagination"></ul>
+                            </nav>
+                        </div>
+
+                        <!-- Bảng chi tiết chi phí -->
+                        <div class="modern-table-card mt-3">
+                            <h5 class="card-title">📝 Chi tiết chi phí</h5>
+                            <div class="row modern-action-bar align-items-center mb-2">
+                                <div class="col-md-6">
+                                    <input type="text" id="searchCostInput" class="form-control modern-input" placeholder="🔍 Tìm kiếm theo Mã hợp đồng">
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <button class="btn btn-gradient" id="showAddCostModal2">Thêm chi tiết</button>
+                                </div>
+                            </div>
+                            <table class="table modern-table table-hover table-striped">
+                                <thead class="thead-gradient-success">
+                                    <tr>
+                                        <th>Mã hợp đồng</th>
+                                        <th>Ngày phát sinh</th>
+                                        <th>Loại chi phí</th>
+                                        <th>Số tiền dự kiến</th>
+                                        <th>Số tiền thực tế</th>
+                                        <th>Ghi chú</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="costTableBody"></tbody>
+                            </table>
+                            <nav>
+                                <ul class="pagination" id="costPagination"></ul>
+                            </nav>
+                        </div>
+
+                    </div>
+
+                    <!-- Sub-tab Đối chiếu -->
+                    <div class="tab-pane fade" id="doichieu">
+
+                        <!-- Action bar tìm kiếm -->
+                        <div class="row modern-action-bar mb-2">
+                            <div class="col-md-6">
+                                <input type="text" id="searchReconcileInput" class="form-control modern-input" placeholder="🔍 Tìm kiếm theo Mã hợp đồng">
+                            </div>
+                        </div>
+
+                        <!-- Bảng đối chiếu -->
+                        <div class="modern-table-card">
+                            <table class="table modern-table table-hover table-striped">
+                                <thead class="thead-gradient-warning">
+                                    <tr>
+                                        <th>Mã hợp đồng</th>
+                                        <th>Sản phẩm</th>
+                                        <th>Ngày dự kiến nhận</th>
+                                        <th>Ngày thực nhận</th>
+                                        <th>Số lượng đặt</th>
+                                        <th>Số lượng thực nhận</th>
+                                        <th>Ghi chú</th>
+                                        <th>Trạng thái khiếu nại</th>
+                                        <th>Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="reconcileTableBody"></tbody>
+                            </table>
+                            <nav>
+                                <ul class="pagination" id="reconcilePagination"></ul>
+                            </nav>
+                        </div>
+
+                    </div>
+
+
+                    <!-- QUẢN LÝ NHÀ CUNG CẤP -->
+                    <div class="tab-pane fade" id="nhacungcap">
+
+                        <!-- Action bar: Tìm kiếm + Thêm mới -->
+                        <div class="row modern-action-bar">
+                            <div class="col-md-6 mb-2">
+                                <input type="text" id="searchSupplier" class="form-control modern-input" placeholder="🔍 Tìm kiếm theo tên hoặc mã...">
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <button class="btn btn-gradient" id="btnAddSupplier">
+                                    <span class="glyphicon glyphicon-plus"></span> Thêm mới
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Bảng danh bạ nhà cung cấp -->
+                        <div class="modern-table-card">
+                            <table class="table table-striped modern-table">
+                                <thead class="bg-info text-white">
+                                    <tr>
+                                        <th class="wrap-text" title="Mã nhà cung cấp">Mã NCC</th>
+                                        <th class="wrap-text" title="Tên nhà cung cấp">Tên nhà cung cấp</th>
+                                        <th class="wrap-text" title="Địa chỉ">Địa chỉ</th>
+                                        <th class="wrap-text" title="Điện thoại">Điện thoại</th>
+                                        <th class="wrap-text" title="Email">Email</th>
+                                        <th class="wrap-text" title="Ghi chú">Ghi chú</th>
+                                        <th class="wrap-text" title="Hành động">Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="supplierTableBody"></tbody>
+                            </table>
+
+                            <!-- Phân trang -->
+                            <nav>
+                                <ul class="pagination" id="supplierPagination"></ul>
+                            </nav>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+            <!-- TAB QUẢN LÝ QUỸ BỔ SUNG -->
+            <div class="tab-pane fade" id="funds">
+
+                <!-- Sub-tabs (mặc định bootstrap) -->
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#create_fund" data-toggle="tab">Tạo & Ghi nhận quỹ</a></li>
+                    <li><a href="#balance_report" data-toggle="tab">Báo cáo cân đối thu/chi</a></li>
+                    <li><a href="#share_cost" data-toggle="tab">Chia sẻ chi phí</a></li>
+                    <li><a href="#transactions" data-toggle="tab">Giao dịch & Báo cáo bổ sung</a></li>
+                    <li><a href="#multi_currency" data-toggle="tab">Đa tiền tệ & Tỷ giá</a></li>
+                </ul>
+
+                <div class="tab-content" style="margin-top:20px;">
+
+                    <!-- 1️⃣ TẠO & GHI NHẬN QUỸ -->
+                    <div class="tab-pane fade in active" id="create_fund">
+                        <div class="modern-action-bar mb-3">
+                            <button class="btn btn-gradient-modern" data-toggle="modal" data-target="#addFundModal">
+                                <span class="glyphicon glyphicon-plus"></span> Thêm Quỹ Mới
+                            </button>
+                        </div>
+
+                        <div class="modern-table-card">
+                            <div class="table-responsive">
+                                <table class="table modern-table table-hover">
+                                    <thead class="thead-gradient-info">
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>Mã Quỹ</th>
+                                            <th>Tên Quỹ</th>
+                                            <th>Loại Quỹ</th>
+                                            <th>Số Dư Ban Đầu (VNĐ)</th>
+                                            <th>Ngày Tạo</th>
+                                            <th>Ghi Chú</th>
+                                            <th>Hành động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="fundTableBody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2️⃣ BÁO CÁO CÂN ĐỐI THU/CHI -->
+                    <div class="tab-pane fade" id="balance_report">
+                        <div class="row modern-action-bar mb-3">
+                            <div class="col-sm-4">
+                                <label>Từ ngày:</label>
+                                <input type="date" id="fromDate" class="form-control modern-input">
+                            </div>
+                            <div class="col-sm-4">
+                                <label>Đến ngày:</label>
+                                <input type="date" id="toDate" class="form-control modern-input">
+                            </div>
+                            <div class="col-sm-4">
+                                <label>&nbsp;</label>
+                                <button class="btn btn-gradient-modern btn-block" id="btnFilterReport">Lọc báo cáo</button>
+                            </div>
+                        </div>
+
+                        <div class="modern-table-card mb-3">
+                            <canvas id="fundBalanceChart" height="150"></canvas>
+                        </div>
+
+                        <div class="modern-table-card">
+                            <table class="table modern-table table-hover table-striped">
+                                <thead class="thead-gradient-success">
+                                    <tr>
+                                        <th>Tên Quỹ</th>
+                                        <th>Tổng Thu</th>
+                                        <th>Tổng Chi</th>
+                                        <th>Cân Đối</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="balanceTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 3️⃣ CHIA SẺ CHI PHÍ -->
+                    <div class="tab-pane fade" id="share_cost">
+                        <div class="modern-table-card mb-3">
+                            <form id="shareForm" class="form-inline modern-action-bar">
+                                <div class="form-group">
+                                    <label>Chọn Quỹ nguồn:</label>
+                                    <select id="fundSource" class="form-control modern-input">
+                                        <option>Quỹ Mua Sách 2025</option>
+                                        <option>Quỹ Tài trợ ABC</option>
+                                    </select>
+                                </div>
+                                <div class="form-group ml-2">
+                                    <label>Chọn Quỹ nhận:</label>
+                                    <select id="fundTarget" class="form-control modern-input">
+                                        <option>Quỹ Bổ sung giáo trình</option>
+                                        <option>Quỹ Tài trợ XYZ</option>
+                                    </select>
+                                </div>
+                                <div class="form-group ml-2">
+                                    <label>Tỷ lệ chia (%):</label>
+                                    <input type="number" id="sharePercent" class="form-control modern-input" placeholder="Nhập %" min="1" max="100">
+                                </div>
+                                <button type="submit" class="btn btn-gradient-modern ml-2">Thực hiện</button>
+                            </form>
+                        </div>
+
+                        <div class="modern-table-card">
+                            <table class="table modern-table table-hover table-striped">
+                                <thead class="thead-gradient-warning">
+                                    <tr>
+                                        <th>Quỹ nguồn</th>
+                                        <th>Quỹ nhận</th>
+                                        <th>Tỷ lệ (%)</th>
+                                        <th>Ngày chia</th>
+                                        <th>Ghi chú</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="shareTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 4️⃣ GIAO DỊCH & BÁO CÁO BỔ SUNG -->
+                    <div class="tab-pane fade" id="transactions">
+                        <div class="row modern-action-bar mb-3">
+                            <div class="col-sm-6">
+                                <button class="btn btn-gradient-modern" data-toggle="modal" data-target="#addTransactionModal">
+                                    <span class="glyphicon glyphicon-plus"></span> Thêm giao dịch
+                                </button>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" id="searchTransaction" class="form-control modern-input" placeholder="🔍 Tìm theo tên quỹ hoặc mã giao dịch">
+                            </div>
+                        </div>
+
+                        <div class="modern-table-card">
+                            <table class="table modern-table table-hover table-striped">
+                                <thead class="thead-gradient-info">
+                                    <tr>
+                                        <th>Mã GD</th>
+                                        <th>Tên Quỹ</th>
+                                        <th>Ngày</th>
+                                        <th>Loại</th>
+                                        <th>Số tiền</th>
+                                        <th>Ghi chú</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="transactionTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 5️⃣ ĐA TIỀN TỆ & TỶ GIÁ -->
+                    <div class="tab-pane fade" id="multi_currency">
+                        <div class="modern-table-card">
+                            <div class="table-responsive">
+                                <table class="table modern-table table-hover table-striped">
+                                    <thead class="thead-gradient-info">
+                                        <tr>
+                                            <th>Mã tiền</th>
+                                            <th>Tên tiền tệ</th>
+                                            <th>Tỷ giá hạch toán</th>
+                                            <th>Tỷ giá thực tế</th>
+                                            <th>Ngày cập nhật</th>
+                                            <th>Ghi chú</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="currencyTableBody">
+                                        <tr>
+                                            <td>VND</td>
+                                            <td>Việt Nam Đồng</td>
+                                            <td>1</td>
+                                            <td>1</td>
+                                            <td>2025-10-20</td>
+                                            <td>Tiền cơ sở</td>
+                                        </tr>
+                                        <tr>
+                                            <td>USD</td>
+                                            <td>Đô la Mỹ</td>
+                                            <td>24,000</td>
+                                            <td>24,500</td>
+                                            <td>2025-10-20</td>
+                                            <td>Tỷ giá cập nhật ngân hàng</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- TAB BỔ SUNG - TÁC NGHIỆP -->
+            <div class="tab-pane fade" id="acquisition">
+                <!-- Sub-tabs -->
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#quick_catalog" data-toggle="tab">Biên mục sơ lược</a></li>
+                    <li><a href="#check_duplicate" data-toggle="tab">Kiểm tra trùng</a></li>
+                    <li><a href="#generate_id" data-toggle="tab">Sinh đăng ký / Số định danh</a></li>
+                    <li><a href="#manage_source" data-toggle="tab">Nguồn bổ sung</a></li>
+                    <li><a href="#print_label" data-toggle="tab">In nhãn / Mã vạch</a></li>
+                    <li><a href="#report_only" data-toggle="tab">Báo cáo</a></li>
+                    <li><a href="#warehouse_only" data-toggle="tab">Kho dự trữ</a></li>
+                </ul>
+
+                <div class="tab-content" style="margin-top:20px;">
+
+                    <!-- 1️⃣ Biên mục sơ lược -->
+                    <div class="tab-pane fade in active" id="quick_catalog">
+                        <form class="form-inline" style="margin-bottom:10px;">
+                            <input type="text" class="form-control" placeholder="Tên tài liệu" style="margin-right:5px;">
+                            <input type="text" class="form-control" placeholder="Tác giả" style="margin-right:5px;">
+                            <input type="text" class="form-control" placeholder="Mã xếp giá" style="margin-right:5px;">
+                            <button class="btn btn-primary">Kế thừa dữ liệu</button>
+                        </form>
+
+                        <div class="modern-table-card">
+                            <div class="table-responsive">
+                                <table class="table modern-table table-hover" id="quickCatalogTable">
+                                    <thead class="thead-gradient-info">
+                                        <tr>
+                                            <th>Tên tài liệu</th>
+                                            <th>Tác giả</th>
+                                            <th>Mã xếp giá</th>
+                                            <th>Vị trí kệ</th>
+                                            <th>Ngôn ngữ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- 2️⃣ Kiểm tra trùng -->
+                    <div class="tab-pane fade" id="check_duplicate">
+                        <div class="row" style="margin-bottom:10px;">
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" placeholder="Nhập ISBN / Tên tài liệu" id="duplicateInput">
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                <button class="btn btn-warning" id="checkDuplicateBtn">Kiểm tra</button>
+                            </div>
+                        </div>
+                        <div class="modern-table-card" id="duplicateResult" style="display:none;"></div> <!-- ẩn ban đầu -->
+                    </div>
+
+
+                    <!-- 3️⃣ Sinh đăng ký / Số định danh -->
+                    <div class="tab-pane fade" id="generate_id">
+                        <div class="row" style="margin-bottom:10px;">
+                            <div class="col-sm-4">
+                                <select class="form-control" id="lotSelect">
+                                    <!-- JS render option -->
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <button class="btn btn-success" id="generateRegBtn">Sinh đăng ký cá biệt</button>
+                            </div>
+                            <div class="col-sm-4">
+                                <button class="btn btn-info" id="generateInternalIdBtn">Tạo số định danh nội bộ</button>
+                            </div>
+                        </div>
+                        <div class="modern-table-card">
+                            <div class="table-responsive">
+                                <table class="table modern-table table-hover" id="generateIdTable">
+                                    <thead class="thead-gradient-success">
+                                        <tr>
+                                            <th>Mã</th>
+                                            <th>Tên tài liệu</th>
+                                            <th>Đăng ký cá biệt</th>
+                                            <th>Số định danh nội bộ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4️⃣ Quản lý nguồn bổ sung -->
+                    <div class="tab-pane fade" id="manage_source">
+                        <div class="row" style="margin-bottom:10px;">
+                            <div class="col-sm-4">
+                                <select class="form-control" id="sourceSelect">
+                                    <!-- JS render options: Mua / Tặng / Trao đổi -->
+                                </select>
+                            </div>
+                            <div class="col-sm-8 text-right">
+                                <button class="btn btn-primary" id="addSourceBtn">Thêm tài liệu</button>
+                            </div>
+                        </div>
+                        <div class="modern-table-card">
+                            <div class="table-responsive">
+                                <table class="table modern-table table-hover" id="manageSourceTable">
+                                    <thead class="thead-gradient-info">
+                                        <tr>
+                                            <th>Tên tài liệu</th>
+                                            <th>Nhà cung cấp</th>
+                                            <th>Số lượng</th>
+                                            <th>Ngày nhận</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5️⃣ In nhãn / Mã vạch -->
+                    <div class="tab-pane fade" id="print_label">
+                        <div class="row" style="margin-bottom:10px;">
+                            <div class="col-sm-12">
+                                <button class="btn btn-warning" id="printSpineBtn">In nhãn gáy</button>
+                                <button class="btn btn-success" id="printBarcodeBtn">In mã vạch</button>
+                            </div>
+                        </div>
+                        <div class="modern-table-card">
+                            <div class="table-responsive">
+                                <table class="table modern-table table-hover" id="printLabelTable">
+                                    <thead class="thead-gradient-warning">
+                                        <tr>
+                                            <th><input type="checkbox" id="selectAllPrint"></th>
+                                            <th>Tên tài liệu</th>
+                                            <th>Nhà cung cấp</th>
+                                            <th>Số lượng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6️⃣ Báo cáo -->
+                    <div class="tab-pane fade" id="report_only">
+                        <div class="form-inline" style="margin-bottom:10px;">
+                            <select id="filterMonth" class="form-control" style="margin-right:5px;">
+                                <option value="">-- Chọn tháng --</option>
+                                <option value="10/2025">10/2025</option>
+                                <option value="11/2025">11/2025</option>
+                            </select>
+                            <select id="filterLanguage" class="form-control" style="margin-right:5px;">
+                                <option value="">-- Chọn ngôn ngữ --</option>
+                                <option value="Tiếng Việt">Tiếng Việt</option>
+                                <option value="Tiếng Anh">Tiếng Anh</option>
+                            </select>
+                            <select id="filterTopic" class="form-control" style="margin-right:5px;">
+                                <option value="">-- Chọn chủ đề --</option>
+                                <option value="Khoa học">Khoa học</option>
+                                <option value="Văn học">Văn học</option>
+                            </select>
+                        </div>
+                        <div class="modern-table-card">
+                            <div class="table-responsive">
+                                <table class="table modern-table table-hover" id="reportTable">
+                                    <thead class="thead-gradient-primary">
+                                        <tr>
+                                            <th>Tháng</th>
+                                            <th>Ngôn ngữ</th>
+                                            <th>Chủ đề</th>
+                                            <th>Số lượng bổ sung</th>
+                                            <th>Đã kiểm tra</th>
+                                            <th>Đã bàn giao</th>
+                                            <th>Ghi chú</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 7️⃣ Kho dự trữ -->
+                    <div class="tab-pane fade" id="warehouse_only">
+                        <h4>Kho dự trữ</h4>
+                        <div class="row mb-2">
+                            <div class="col-md-3">
+                                <select id="warehouseFilter" class="form-control" style="margin-right:5px;">
+                                    <option value="">-- Lọc theo mục đích --</option>
+                                    <option value="Trao đổi">Trao đổi</option>
+                                    <option value="Bán">Bán</option>
+                                    <option value="Quảng bá">Quảng bá</option>
+                                    <option value="Tài chính">Tài chính</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-success" id="addWarehouseBtn">Thêm tài liệu</button>
+                            </div>
+                        </div>
+                        <div class="modern-table-card">
+                            <div class="table-responsive">
+                                <table class="table modern-table table-hover" id="warehouseTable">
+                                    <thead class="thead-gradient-success">
+                                        <tr>
+                                            <th>Tài liệu</th>
+                                            <th>Mục đích</th>
+                                            <th>Số lượng</th>
+                                            <th>Ghi chú</th>
+                                            <th>Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- TAB QUẢN LÝ KHO -->
+            <div class="tab-pane fade" id="warehouse">
+                <!-- Subtab navigation -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="active"><a href="#create-lock" role="tab" data-toggle="tab">Kho & Khóa/Mở</a></li>
+                    <li><a href="#report" role="tab" data-toggle="tab">Báo cáo tổng hợp</a></li>
+                    <li><a href="#inventory" role="tab" data-toggle="tab">Kiểm kê kho</a></li>
+                    <li><a href="#bulk-actions" role="tab" data-toggle="tab">Xử lý kho</a></li>
+                </ul>
+
+                <div class="tab-content" style="margin-top:15px;">
+                    <!-- 1. DANH SÁCH KHO -->
+                    <div class="tab-pane fade in active" id="create-lock">
+                        <!-- Thanh hành động -->
+                        <div class="modern-action-bar d-flex justify-content-between align-items-center mb-3">
+                            <div class="w-50">
+                                <input type="text" id="searchWarehouse" class="form-control modern-input" placeholder="🔍 Tìm kiếm theo mã hoặc tên kho...">
+                            </div>
+                            <div>
+                                <button class="btn btn-success modern-btn" data-toggle="modal" data-target="#warehouseModal">
+                                    <i class="glyphicon glyphicon-plus"></i> Tạo kho mới
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Bảng kho -->
+                        <div class="modern-table-card">
+                            <div class="table-responsive">
+                                <table class="table modern-table table-hover  align-middle">
+                                    <thead class="thead-gradient-primary">
+                                        <tr>
+                                            <th style="width: 100px;">Mã kho</th>
+                                            <th>Tên kho</th>
+                                            <th style="width: 120px;">Loại kho</th>
+                                            <th style="width: 100px;">Trạng thái</th>
+                                            <th>Ghi chú</th>
+                                            <th style="width: 240px;">Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="warehouse-list"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. BÁO CÁO TỔNG HỢP -->
+                    <div class="tab-pane fade" id="report">
+                        <div class="form-inline mb-3">
+                            <label>Kho:</label>
+                            <select class="form-control" id="report-warehouse"></select>
+                            <label>Từ:</label>
+                            <input type="date" class="form-control" id="report-from">
+                            <label>Đến:</label>
+                            <input type="date" class="form-control" id="report-to">
+                            <button class="btn btn-info" id="view-report">Xem báo cáo</button>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover modern-table">
+                                <thead class="thead-gradient-primary">
+                                    <tr>
+                                        <th>Hàng hóa</th>
+                                        <th>Tồn kho</th>
+                                        <th>Đang lưu thông</th>
+                                        <th>Hàng mất</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="report-list"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 3. KIỂM KÊ KHO -->
+                    <div class="tab-pane fade" id="inventory">
+                        <div class="form-inline mb-3">
+                            <input type="text" class="form-control" id="scan-barcode" placeholder="Nhập mã vạch">
+                            <button class="btn btn-success modern-btn" id="add-inventory">Thêm</button>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover modern-table">
+                                <thead class="thead-gradient-primary">
+                                    <tr>
+                                        <th>Mã vạch</th>
+                                        <th>Tên hàng</th>
+                                        <th>Số lượng hệ thống</th>
+                                        <th>Số lượng thực tế</th>
+                                        <th>Trạng thái</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="inventory-list"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 4. XỬ LÝ HÀNG LOẠT -->
+                    <div class="tab-pane fade" id="bulk-actions">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover  modern-table">
+                                <thead class="thead-gradient-primary">
+                                    <tr>
+                                        <th style="width:40px;"><input type="checkbox" id="bulk-check-all"></th>
+                                        <th>Mã hàng</th>
+                                        <th>Tên hàng</th>
+                                        <th>Trạng thái</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bulk-list"></tbody>
+                            </table>
+                        </div>
+
+                        <div class="text-right mt-2">
+                            <button class="btn btn-warning modern-btn" id="mark-lost">
+                                <i class="glyphicon glyphicon-remove"></i> Đánh dấu mất
+                            </button>
+                            <button class="btn btn-success modern-btn" id="restore">
+                                <i class="glyphicon glyphicon-refresh"></i> Khôi phục
+                            </button>
+                            <button class="btn btn-primary modern-btn" id="transfer">
+                                <i class="glyphicon glyphicon-transfer"></i> Chuyển kho
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB TIẾP NHẬN / KIỂM NHẬN -->
+            <div class="tab-pane fade" id="receiving">
+                <div class="panel panel-default modern-panel">
+                    <div class="panel-body">
+
+                        <!-- Sub-tabs -->
+                        <ul class="nav nav-tabs" id="receiveSubTabs">
+                            <li class="active"><a data-toggle="tab" href="#receive-create">Lập phiếu tiếp nhận</a></li>
+                            <li><a data-toggle="tab" href="#receive-log">Nhật ký tiếp nhận</a></li>
+                        </ul>
+
+                        <div class="tab-content" style="margin-top:20px;">
+                            <!-- 1. Lập phiếu tiếp nhận -->
+                            <div class="tab-pane fade in active" id="receive-create">
+                                <form id="receiveForm">
+                                    <div class="row">
+                                        <div class="col-md-4 form-group">
+                                            <label>Số phiếu</label>
+                                            <input type="text" id="receiveCode" class="form-control modern-input" placeholder="Tự động hoặc nhập tay">
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <label>Ngày tiếp nhận</label>
+                                            <input type="date" id="receiveDate" class="form-control modern-input">
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <label>Người lập</label>
+                                            <input type="text" id="receiveUser" class="form-control modern-input" placeholder="Nhập tên người lập">
+                                        </div>
+                                    </div>
+
+                                    <!-- Bảng tiếp nhận -->
+                                    <div class="modern-table-card">
+                                        <div class="table-responsive">
+                                            <table class="table modern-table table-bordered table-hover align-middle">
+                                                <thead class="thead-gradient-primary">
+                                                    <tr>
+                                                        <th style="width: 140px;">Mã tài liệu</th>
+                                                        <th>Tên tài liệu</th>
+                                                        <th class="text-center" style="width: 120px;">Số lượng đặt</th>
+                                                        <th class="text-center" style="width: 130px;">Số lượng nhận</th>
+                                                        <th class="text-center" style="width: 110px;">Chênh lệch</th>
+                                                        <th>Ghi chú</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="receive-list">
+                                                    <!-- Dữ liệu render JS -->
+                                                </tbody>
+                                                <tfoot class="table-footer-highlight">
+                                                    <tr>
+                                                        <td colspan="3" class="text-right"><b>Tổng SL thực nhận:</b></td>
+                                                        <td id="totalReceived" class="text-center">15</td>
+                                                        <td id="totalDiff" class="text-center">0</td>
+                                                        <td></td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-right mt-3">
+                                        <button class="btn btn-success modern-btn" type="button" id="saveReceive">
+                                            <i class="glyphicon glyphicon-floppy-disk"></i> Lưu phiếu
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- 2. Nhật ký tiếp nhận -->
+                            <div class="tab-pane fade" id="receive-log">
+                                <div class="modern-table-card">
+                                    <div class="table-responsive">
+                                        <table class="table modern-table table-hover">
+                                            <thead class="thead-gradient-primary">
+                                                <tr>
+                                                    <th style="width: 120px;">Ngày</th>
+                                                    <th style="width: 130px;">Số phiếu</th>
+                                                    <th>Người lập</th>
+                                                    <th style="width: 150px;">Số lượng nhận</th>
+                                                    <th style="width: 120px;">Chênh lệch</th>
+                                                    <th>Ghi chú</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="receive-log-body">
+                                                <!-- Dữ liệu render JS -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB HĐ NHÀ CUNG CẤP -->
+            <div class="tab-pane fade" id="supplier">
+                <div class="panel panel-default modern-panel">
+                    <div class="panel-body">
+                        <!-- Sub-tabs -->
+                        <ul class="nav nav-tabs" id="supplierSubTabs">
+                            <li class="active"><a data-toggle="tab" href="#supplier-invoices">Quản lý hóa đơn</a></li>
+                            <li><a data-toggle="tab" href="#supplier-reconcile">Đối soát công nợ</a></li>
+                        </ul>
+
+                        <div class="tab-content" style="margin-top:20px;">
+                            <!-- Quản lý hóa đơn -->
+                            <div id="supplier-invoices" class="tab-pane fade in active">
+                                <div class="modern-table-card">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <input type="text" class="form-control w-50 modern-input" id="searchInvoice"
+                                               placeholder="🔍 Tìm kiếm theo mã hoặc nhà cung cấp...">
+                                        <button class="btn btn-success modern-btn" id="addInvoiceBtn">
+                                            <i class="glyphicon glyphicon-plus"></i> Tạo hóa đơn mới
+                                        </button>
+                                    </div>
+
+                                    <div class="table-responsive">
+                                        <table class="table modern-table  table-hover align-middle">
+                                            <thead class="thead-gradient-primary">
+                                                <tr>
+                                                    <th>Mã hóa đơn</th>
+                                                    <th>Nhà cung cấp</th>
+                                                    <th>Ngày lập</th>
+                                                    <th>Liên kết hợp đồng</th>
+                                                    <th>Trạng thái</th>
+                                                    <th>Hành động</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="invoices-body"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Đối soát công nợ -->
+                            <div id="supplier-reconcile" class="tab-pane fade">
+                                <div class="modern-table-card">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <select id="filterSupplier" class="form-control w-50 modern-input">
+                                            <option value="">-- Chọn nhà cung cấp --</option>
+                                        </select>
+                                        <button class="btn btn-primary modern-btn" id="refreshReconcile">
+                                            <i class="glyphicon glyphicon-refresh"></i> Cập nhật dữ liệu
+                                        </button>
+                                    </div>
+
+                                    <div class="table-responsive">
+                                        <table class="table modern-table  table-hover align-middle">
+                                            <thead class="thead-gradient-primary">
+                                                <tr>
+                                                    <th>Nhà cung cấp</th>
+                                                    <th>Công nợ đầu kỳ</th>
+                                                    <th>Công nợ phát sinh</th>
+                                                    <th>Công nợ thanh toán</th>
+                                                    <th>Công nợ cuối kỳ</th>
+                                                    <th>Hạn thanh toán</th>
+                                                    <th>Trạng thái</th>
+                                                    <th>Nhắc hạn</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="reconcile-body"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+    <!-- MODALS -->
+    <!-- Modal tạo hóa đơn -->
+    <div class="modal fade" id="invoiceModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Tạo hóa đơn mới</h5>
+                </div>
+                <div class="modal-body">
+                    <input id="invCode" class="form-control mb-2" placeholder="Mã hóa đơn">
+                    <input id="invSupplier" class="form-control mb-2" placeholder="Nhà cung cấp">
+                    <input id="invContract" class="form-control mb-2" placeholder="Liên kết hợp đồng">
+                    <input id="invDate" type="date" class="form-control mb-2">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button class="btn btn-success" id="saveInvoice">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Khiếu nại -->
+    <div id="complaintModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header bg-danger">
+                    <h4 class="modal-title">Khiếu nại hợp đồng</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Lý do khiếu nại:</label>
+                        <input type="text" id="complaintReason" class="form-control" placeholder="Nhập lý do khiếu nại...">
+                    </div>
+                    <div class="form-group">
+                        <label>Ghi chú thêm (nếu có):</label>
+                        <input type="text" id="complaintNote" class="form-control" placeholder="Ghi chú...">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="confirmComplaint" class="btn btn-danger">Gửi khiếu nại</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Tạo / Sửa kho -->
+    <div id="warehouseModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="warehouseModalLabel">
+        <div class="modal-dialog" role="document">
+            <form id="warehouseForm" class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h4 class="modal-title" id="warehouseModalLabel">Tạo / Sửa kho</h4>
+                </div>
+
+                <div class="modal-body">
+                    <!-- input ẩn để lưu chỉ số khi sửa -->
+                    <input type="hidden" id="editing-index" value="">
+
+                    <div class="form-group">
+                        <label for="wh-code">Mã kho</label>
+                        <input type="text" class="form-control" id="wh-code" placeholder="Ví dụ: K001" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="wh-name">Tên kho</label>
+                        <input type="text" class="form-control" id="wh-name" placeholder="Nhập tên kho" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="wh-type">Loại kho</label>
+                        <select class="form-control" id="wh-type" required>
+                            <option value="Chính">Chính</option>
+                            <option value="Phụ">Phụ</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="wh-status">Trạng thái</label>
+                        <select class="form-control" id="wh-status" required>
+                            <option value="Mở">Mở</option>
+                            <option value="Khóa">Khóa</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="wh-note">Ghi chú (tuỳ chọn)</label>
+                        <input type="text" class="form-control" id="wh-note" placeholder="Ghi chú ngắn">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" id="save-warehouse" class="btn btn-primary">Lưu / Cập nhật</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- MODAL: Đăng ký cá biệt phục vụ lưu thông -->
+    <div class="modal fade" id="individualModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalWarehouseName">Đăng ký cá biệt phục vụ lưu thông</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="individualForm">
+                        <div class="form-group">
+                            <label>Tên kho</label>
+                            <input type="text" id="individualWarehouse" class="form-control" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Mã tài liệu / mã vạch</label>
+                            <input type="text" id="individualCode" class="form-control" placeholder="Nhập mã tài liệu hoặc quét mã vạch">
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày đăng ký</label>
+                            <input type="date" id="individualDate" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Ghi chú</label>
+                            <textarea id="individualNote" class="form-control" rows="2"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal">Đóng</button>
+                    <button class="btn btn-primary" id="saveIndividualBtn">Lưu đăng ký</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: Chuyển kho -->
+    <div class="modal fade" id="transferModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Chuyển kho</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="transferForm">
+                        <div class="form-group">
+                            <label>Kho đích</label>
+                            <select class="form-control" id="transferToWarehouse">
+                                <option value="">-- Chọn kho đích --</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Ghi chú</label>
+                            <textarea class="form-control" id="transferNote" rows="2" placeholder="Nhập ghi chú nếu có"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal">Đóng</button>
+                    <button class="btn btn-primary" id="confirmTransfer">Xác nhận chuyển</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Thêm Quỹ -->
+    <div id="addFundModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary" style="color:white;">
+                    <h4 class="modal-title">Thêm Quỹ Mới</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="addFundForm">
+                        <div class="form-group"><label>Tên Quỹ</label><input type="text" class="form-control" id="fundName" required></div>
+                        <div class="form-group">
+                            <label>Loại Quỹ</label>
+                            <select id="fundType" class="form-control">
+                                <option>Trực tiếp</option>
+                                <option>Gián tiếp</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>Số Dư Ban Đầu (VNĐ)</label><input type="number" id="fundAmount" class="form-control" required></div>
+                        <div class="form-group"><label>Ngày Tạo</label><input type="date" id="fundDate" class="form-control"></div>
+                        <div class="form-group"><label>Ghi chú</label><textarea id="fundNote" class="form-control" rows="2"></textarea></div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" form="addFundForm" class="btn btn-success">Lưu</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Thêm / Sửa Nhà cung cấp -->
+    <div id="supplierModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header bg-info">
+                    <h4 class="modal-title" id="supplierModalTitle">Thêm Nhà cung cấp</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Mã NCC</label>
+                        <input type="text" id="supplierCode" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Tên Nhà cung cấp</label>
+                        <input type="text" id="supplierName" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Địa chỉ</label>
+                        <input type="text" id="supplierAddress" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Điện thoại</label>
+                        <input type="text" id="supplierPhone" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="supplierEmail" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Ghi chú</label>
+                        <input type="text" id="supplierNote" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="saveSupplierBtn" class="btn btn-success">💾 Lưu</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Thêm Giao dịch -->
+    <div id="addTransactionModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-success" style="color:white;">
+                    <h4 class="modal-title">Thêm Giao dịch mới</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="addTransactionForm">
+                        <div class="form-group"><label>Tên Quỹ</label><input type="text" id="transactionFund" class="form-control"></div>
+                        <div class="form-group">
+                            <label>Loại Giao dịch</label>
+                            <select id="transactionType" class="form-control">
+                                <option>Thu</option>
+                                <option>Chi</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>Số tiền</label><input type="number" id="transactionAmount" class="form-control"></div>
+                        <div class="form-group"><label>Ngày</label><input type="date" id="transactionDate" class="form-control"></div>
+                        <div class="form-group"><label>Ghi chú</label><textarea id="transactionNote" class="form-control" rows="2"></textarea></div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" form="addTransactionForm" class="btn btn-success">Lưu</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal thêm / sửa tài liệu -->
+    <div class="modal fade" id="warehouseModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="warehouseForm" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thêm / Sửa tài liệu</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-2">
+                        <label>Tên tài liệu</label>
+                        <input type="text" class="form-control" id="warehouseName" required>
+                    </div>
+                    <div class="mb-2">
+                        <label>Mục đích</label>
+                        <select class="form-control" id="warehouseStatus" required>
+                            <option value="Trao đổi">Trao đổi</option>
+                            <option value="Bán">Bán</option>
+                            <option value="Quảng bá">Quảng bá</option>
+                            <option value="Tài chính">Tài chính</option>
+                        </select>
+                    </div>
+                    <div class="mb-2">
+                        <label>Số lượng</label>
+                        <input type="number" class="form-control" id="warehouseQuantity" min="1" required>
+                    </div>
+                    <div class="mb-2">
+                        <label>Ghi chú</label>
+                        <input type="text" class="form-control" id="warehouseNote">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" id="warehouseIndex">
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Modal Thêm tài liệu -->
+    <div class="modal fade" id="addSourceModal" tabindex="-1" role="dialog" aria-labelledby="addSourceModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary" style="color:white;">
+                    <h4 class="modal-title" id="addSourceModalLabel">Thêm tài liệu</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="addSourceForm">
+                        <div class="form-group">
+                            <label>Tên tài liệu</label>
+                            <input type="text" class="form-control" id="sourceName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Nhà cung cấp</label>
+                            <input type="text" class="form-control" id="sourceProvider" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Số lượng</label>
+                            <input type="number" class="form-control" id="sourceQuantity" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày nhận</label>
+                            <input type="date" class="form-control" id="sourceReceivedDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Loại nguồn</label>
+                            <select class="form-control" id="sourceType">
+                                <option>Mua</option>
+                                <option>Tặng</option>
+                                <option>Trao đổi</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="saveSourceBtn">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lập mới -->
+    <div id="createModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header bg-primary"><h4 class="modal-title">Lập hợp đồng mới</h4></div>
+                <div class="modal-body">
+                    <div class="form-group"><label>Nhà cung cấp</label><input type="text" id="newSupplier" class="form-control"></div>
+                    <div class="form-group"><label>Sản phẩm / Tài liệu</label><input type="text" id="newProduct" class="form-control"></div>
+                    <div class="form-group"><label>Số lượng</label><input type="number" id="newQty" class="form-control"></div>
+                    <div class="form-group"><label>Ngày đặt</label><input type="date" id="newDate" class="form-control"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="createBtnModal" class="btn btn-success">💾 Lập mới</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sửa -->
+    <div id="editModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header bg-warning"><h4 class="modal-title">Sửa hợp đồng</h4></div>
+                <div class="modal-body">
+                    <div class="form-group"><label>Sản phẩm / Tài liệu</label><input type="text" id="editProduct" class="form-control"></div>
+                    <div class="form-group"><label>Số lượng</label><input type="number" id="editQty" class="form-control"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="confirmEdit" class="btn btn-warning">Lưu</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gia hạn -->
+    <div id="extendModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header bg-info"><h4 class="modal-title">Gia hạn hợp đồng</h4></div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Chọn loại:</label>
+                        <select id="extendType" class="form-control">
+                            <option value="month">Tháng</option>
+                            <option value="quarter">Quý</option>
+                            <option value="year">Năm</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Số lượng:</label>
+                        <input type="number" id="extendNumber" class="form-control" placeholder="Nhập số lượng">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="confirmExtend" class="btn btn-info">Xác nhận</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Huỷ -->
+    <div id="cancelModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header bg-danger"><h4 class="modal-title">Huỷ hợp đồng</h4></div>
+                <div class="modal-body">
+                    <label>Lý do huỷ:</label>
+                    <input type="text" id="cancelReason" class="form-control" placeholder="Nhập lý do huỷ...">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="confirmCancel" class="btn btn-danger">Xác nhận</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="addCostModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header bg-primary"><h4 class="modal-title">Thêm / Sửa chi phí</h4></div>
+                <div class="modal-body">
+                    <div class="form-group"><label>Mã hợp đồng</label><input type="text" id="costContractCode" class="form-control"></div>
+                    <div class="form-group"><label>Ngày phát sinh</label><input type="date" id="costDate" class="form-control"></div>
+                    <div class="form-group">
+                        <label>Loại chi phí</label>
+                        <select id="costType" class="form-control">
+                            <option value="Dự kiến">Dự kiến</option>
+                            <option value="Thực tế">Thực tế</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label>Số tiền dự kiến</label><input type="number" id="costPlanned" class="form-control"></div>
+                    <div class="form-group"><label>Số tiền thực tế</label><input type="number" id="costActual" class="form-control"></div>
+                    <div class="form-group"><label>Ghi chú</label><input type="text" id="costNote" class="form-control"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="createCostBtn" class="btn btn-success">💾 Lưu</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/js/acquistions.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</body>
+</html>

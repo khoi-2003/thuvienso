@@ -1,0 +1,215 @@
+﻿/* ================================
+   📘 QUẢN LÝ GIỮ CHỖ — giucho.css
+   (Không đụng vào navbar, layout, footer, sidebar, button)
+================================ */
+
+/* Toàn khung */
+.reserve-container {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px 30px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    max-width: 1100px;
+    margin: 0 auto;
+    animation: fadeIn 0.4s ease;
+}
+
+    /* Tiêu đề chính */
+    .reserve-container h2 {
+        font-size: 22px;
+        color: #004aad;
+        font-weight: 700;
+        margin-bottom: 18px;
+        border-left: 5px solid #007bff;
+        padding-left: 10px;
+    }
+
+/* Mỗi phần trong form */
+.form-section {
+    background: #f9fbff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-bottom: 25px;
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.02);
+}
+
+    .form-section h3 {
+        color: #0056d6;
+        font-size: 17px;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+/* Input và Select */
+.input-box {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 15px;
+    border: 1.5px solid #d3e3ff;
+    border-radius: 8px;
+    outline: none;
+    transition: all 0.25s ease;
+}
+
+    .input-box:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+    }
+
+/* ===== Bảng ===== */
+.reader-table,
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+    .reader-table thead,
+    .table thead {
+        background: #f0f4ff;
+        color: #004aad;
+    }
+
+    .reader-table th,
+    .reader-table td,
+    .table th,
+    .table td {
+        border: 1px solid #e2e8f0;
+        text-align: center;
+        padding: 10px 8px;
+    }
+
+    .reader-table tbody tr:nth-child(even),
+    .table tbody tr:nth-child(even) {
+        background: #fafcff;
+    }
+
+    .reader-table tbody tr:hover,
+    .table tbody tr:hover {
+        background: #eef5ff;
+        transition: 0.25s;
+    }
+
+/* ===== Phân trang ===== */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 14px;
+    gap: 8px;
+}
+
+    .pagination-container button {
+        background: #ffffff;
+        border: 1.8px solid #007bff;
+        color: #007bff;
+        padding: 5px 12px;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.25s ease;
+    }
+
+        .pagination-container button:hover:not(:disabled) {
+            background: #007bff;
+            color: #fff;
+            transform: translateY(-1px);
+        }
+
+        .pagination-container button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: #f8f8f8;
+            border-color: #ccc;
+            color: #aaa;
+        }
+
+    .pagination-container span {
+        font-size: 15px;
+        color: #333;
+        font-weight: 600;
+        background: #f0f4ff;
+        padding: 5px 12px;
+        border-radius: 6px;
+        border: 1px solid #d3e3ff;
+        min-width: 110px;
+        text-align: center;
+    }
+
+/* ===== Footer Section ===== */
+.footer-section {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+/* ===== Hiệu ứng mượt ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* ====== Button Group trong trang Giữ Chỗ ====== */
+.button-group {
+    display: flex;
+    justify-content: center; /* căn giữa theo chiều ngang */
+    align-items: center;
+    margin-top: 16px;
+    margin-bottom: 10px;
+    gap: 10px; /* khoảng cách giữa các nút (nếu có thêm nút sau này) */
+    padding: 8px 0;
+}
+
+    /* Nếu sau này có nhiều nút, sắp xếp hàng ngang gọn gàng */
+    .button-group button {
+        min-width: 140px;
+        font-size: 15px;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: all 0.25s ease;
+    }
+
+        /* Hiệu ứng hover nhẹ — KHÔNG đổi màu gốc của .btn-save */
+        .button-group button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        }
+/* ====== Footer Section trong trang Giữ Chỗ ====== */
+.footer-section {
+    display: flex;
+    justify-content: flex-end; /* căn nút về bên phải */
+    align-items: center;
+    gap: 12px; /* khoảng cách giữa các nút */
+    padding: 15px 10px;
+    border-top: 1px solid #e5e9f2;
+    margin-top: 20px;
+    background-color: #fafbff;
+    border-radius: 0 0 10px 10px;
+}
+
+    /* Tinh chỉnh nhẹ cho các nút trong footer */
+    .footer-section button {
+        min-width: 130px;
+        font-size: 14.5px;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: all 0.25s ease;
+    }
+
+        /* Hiệu ứng hover nhẹ, không đổi màu gốc */
+        .footer-section button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        }

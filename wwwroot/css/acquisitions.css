@@ -1,0 +1,423 @@
+﻿.page-header h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1e3a8a;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.container-fluid {
+    padding-left:30px;
+    padding-right:30px;
+}
+
+/* ----- Tabs chính ----- */
+.nav-tabs {
+    border-bottom: 2px solid #ddd;
+}
+
+.nav-tabs > li > a {
+    font-weight: 600;
+    font-size: 15px;
+    color: #666;
+    border: none !important;
+    border-radius: 6px 6px 0 0;
+    transition: all 0.25s ease;
+    padding: 10px 18px;
+}
+
+.nav-tabs > li > a:hover {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover {
+    background: linear-gradient(90deg,#007bff,#0056b3);
+    color: #fff !important;
+    border: none !important;
+}
+
+/* ----- Sub-tabs ----- */
+.sub-tabs {
+    margin-top: 10px;
+}
+
+.sub-tabs > li > a {
+    padding: 8px 15px;
+    font-size: 14px;
+}
+
+.sub-tabs > li.active > a {
+    background: #007bff;
+    color: #fff !important;
+}
+
+/* ----- Card body ----- */
+.card-body {
+    background: #fff;
+    border-radius: 0 0 6px 6px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* ----- Table ----- */
+.table th, .table td {
+    vertical-align: middle !important;
+}
+
+/* ----- Status badge ----- */
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.badge-pending {
+    background: #ffc107;
+    color: #000;
+}
+
+.badge-complete {
+    background: #28a745;
+    color: #fff;
+}
+
+.badge-processing {
+    background: #17a2b8;
+    color: #fff;
+}
+
+/* ----- Pagination ----- */
+.pagination {
+    display: flex;
+    justify-content: center; /* căn giữa */
+    margin-top: 15px;
+    margin-bottom: 0;
+}
+
+/* ----- Modern tabs style ----- */
+.modern-tabs {
+    margin-bottom: 20px;
+    border-bottom: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.modern-tabs li {
+    margin-right: 10px;
+}
+
+.modern-tabs li a {
+    border-radius: 25px 25px 0 0;
+    background: #f0f4f8;
+    color: #333;
+    padding: 10px 18px;
+    transition: all 0.3s;
+    font-weight: 500;
+}
+
+.modern-tabs li.active a {
+    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    font-weight: bold;
+}
+
+.modern-tabs li a:hover {
+    background: #d0e6ff;
+    color: #000;
+}
+
+/* ----- Optional: modern card / table ----- */
+.table-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.stat-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.stat-card h5 {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.stat-card h3 {
+    font-size: 22px;
+    color: #222;
+}
+
+/* ----- Action bar ----- */
+.modern-action-bar {
+    margin-bottom: 20px;
+}
+
+/* ----- Input ----- */
+.modern-input {
+    border-radius: 25px;
+    padding-left: 12px;
+    height: 42px;
+    border: 1px solid #ccc;
+    transition: all 0.3s;
+}
+
+    .modern-input:focus {
+        border-color: #2575fc;
+        box-shadow: 0 0 6px rgba(37, 117, 252, 0.3);
+    }
+
+/* ----- Button ----- */
+.btn-gradient {
+    background: linear-gradient(90deg,#6a11cb,#2575fc);
+    border: none;
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+    .btn-gradient:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+    }
+
+/* ----- Card cho bảng ----- */
+.modern-table-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+}
+
+/* ----- Bảng ----- */
+.modern-table thead {
+    background: linear-gradient(90deg,#6a11cb,#2575fc);
+    color: #fff;
+    font-weight: 600;
+}
+
+.modern-table tbody tr:hover {
+    background: #f0f8ff;
+}
+
+/* ----- Badge trạng thái ----- */
+.status-badge {
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 13px;
+}
+
+.badge-processing {
+    background: #17a2b8;
+    color: #fff;
+}
+
+.badge-pending {
+    background: #ffc107;
+    color: #000;
+}
+
+.badge-complete {
+    background: #28a745;
+    color: #fff;
+}
+
+.modern-tabs {
+    margin-bottom: 20px;
+    border-bottom: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+    .modern-tabs li {
+        margin-right: 10px;
+    }
+
+        .modern-tabs li a {
+            border-radius: 25px 25px 0 0;
+            background: #f0f4f8;
+            color: #333;
+            padding: 10px 18px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .modern-tabs li.active a {
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            font-weight: bold;
+        }
+
+        .modern-tabs li a:hover {
+            background: #d0e6ff;
+            color: #000;
+        }
+
+/* ----- Modern Action Bar ----- */
+.modern-action-bar {
+    margin-bottom: 20px;
+}
+
+/* Inputs */
+.modern-input {
+    border-radius: 25px;
+    padding-left: 12px;
+    height: 42px;
+    border: 1px solid #ccc;
+    transition: all 0.3s;
+}
+
+    .modern-input:focus {
+        border-color: #2575fc;
+        box-shadow: 0 0 6px rgba(37,117,252,0.3);
+    }
+
+/* Buttons gradient */
+.btn-gradient-modern {
+    background: linear-gradient(90deg,#6a11cb,#2575fc);
+    border: none;
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+    .btn-gradient-modern:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+    }
+
+/* Modern Table Card */
+.modern-table-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+}
+
+/* Table style */
+.modern-table thead {
+    background: linear-gradient(90deg,#6a11cb,#2575fc);
+    color: #fff;
+    font-weight: 600;
+}
+
+.modern-table tbody tr:hover {
+    background: #f0f8ff;
+}
+
+/* ==== Sửa gần nhất từ chỗ này ==== */
+.modern-panel {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    padding: 15px;
+}
+
+.modern-input {
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+
+.modern-btn {
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.modern-table-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-top: 10px;
+}
+
+.modern-table th {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.modern-table td {
+    vertical-align: middle;
+}
+
+.thead-gradient-primary {
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    color: white;
+}
+
+.table-footer-highlight {
+    background-color: #f0f4ff;
+    font-weight: bold;
+}
+
+/* ====== FIX LỆCH CỘT TRONG BẢNG (GIỮ NGUYÊN MÀU HEADER) ====== */
+.modern-table {
+    width: 100%;
+    border-collapse: collapse !important;
+    table-layout: fixed; /* đảm bảo các cột có kích thước đều nhau */
+}
+
+    .modern-table th,
+    .modern-table td {
+        text-align: center;
+        vertical-align: middle !important;
+        padding: 10px 8px !important;
+        word-wrap: break-word;
+    }
+
+    /* Giữ header gọn gàng nhưng KHÔNG đổi màu */
+    .modern-table thead th {
+        height: 45px;
+        font-weight: 600;
+        border-bottom: none;
+    }
+
+    /* Giới hạn độ rộng của cột hành động */
+    .modern-table th:last-child,
+    .modern-table td:last-child {
+        width: 100px; /* nút hành động */
+    }
+
+    /* Cột trạng thái */
+    .modern-table th.status-col,
+    .modern-table td.status-col {
+        width: 120px;
+    }
+
+    /* Nút icon nhỏ, căn giữa */
+    .modern-table button.btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 8px;
+        border-radius: 6px;
+    }
+
+    /* Icon trong nút */
+    .modern-table button i {
+        font-size: 14px;
+    }
+
+    /* Badge trạng thái căn giữa và cố định độ rộng */
+    .modern-table .status-badge {
+        display: inline-block;
+        min-width: 70px;
+        text-align: center;
+    }

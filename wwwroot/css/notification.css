@@ -1,0 +1,125 @@
+﻿/* ---------- Google Fonts ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body {
+    color: #333;
+    padding: 20px;
+}
+
+/* Header */
+.header-title {
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.header-sub {
+    color: #6b7280;
+    margin-top: -4px;
+    margin-bottom: 12px;
+}
+
+/* Panels */
+.panel {
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    margin-bottom: 15px;
+}
+
+.panel-default {
+    border-color: #e6e9ef;
+}
+
+.panel-info {
+    border-color: #5bc0de;
+}
+
+.panel-warning {
+    border-color: #f0ad4e;
+}
+
+.panel-success {
+    border-color: #5cb85c;
+}
+
+/* Small cards */
+.small-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid #e6e9ef;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    transition: all 0.2s ease;
+}
+
+    .small-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .small-card .val {
+        font-weight: 700;
+        font-size: 20px;
+    }
+
+    .small-card .lbl {
+        color: #6b7280;
+        font-size: 13px;
+    }
+
+/* Table */
+.table > tbody > tr:hover {
+    background-color: #f1f7ff;
+}
+
+.table thead tr {
+    background: #337ab7;
+    color: #fff;
+}
+
+/* Pagination */
+.pagination > li > a, .pagination > li > span {
+    color: #337ab7;
+}
+
+    .pagination > li > a:hover {
+        background-color: #e7f1ff;
+    }
+
+.pagination > li.active > a {
+    background-color: #337ab7;
+    color: #fff;
+}
+
+/* Toast */
+#toast-area {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 9999;
+    width: 320px;
+}
+
+/* Responsive */
+@media (max-width:767px) {
+    .pull-right-md {
+        text-align: left;
+        margin-top: 8px;
+    }
+
+    .form-inline .form-control {
+        width: 100%;
+        margin-bottom: 6px;
+    }
+
+    .btn-group {
+        width: 100%;
+    }
+
+        .btn-group button {
+            width: 48%;
+            margin-bottom: 6px;
+        }
+}
+
+

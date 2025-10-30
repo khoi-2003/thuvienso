@@ -1,0 +1,180 @@
+﻿
+/* Tiêu đề trang */
+#digital-assets .page-header {
+    background: none;
+    color: #1e3a8a;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 8px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+/* Tabs điều hướng */
+/* ----- Tabs chính (#assetTabs) ----- */
+#assetTabs {
+    border-bottom: 2px solid #ddd;
+}
+
+    /* Mặc định các tab */
+    #assetTabs > li > a {
+        font-weight: 600;
+        font-size: 15px;
+        color: #666;
+        border: none !important;
+        border-radius: 6px 6px 0 0;
+        transition: all 0.25s ease;
+        padding: 10px 18px;
+    }
+
+        /* Hover (khi rê chuột) */
+        #assetTabs > li > a:hover {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+    /* Tab đang active */
+    #assetTabs > li.active > a,
+    #assetTabs > li.active > a:focus,
+    #assetTabs > li.active > a:hover {
+        background: linear-gradient(90deg, #007bff, #0056b3);
+        color: #fff !important;
+        border: none !important;
+    }
+
+/* Panel (khung nội dung) */
+.panel {
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    border: none;
+    overflow: hidden;
+}
+
+.panel-heading {
+    background: linear-gradient(90deg, #6a11cb, #2575fc) !important;
+    color: white !important;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 12px 20px;
+}
+
+.panel-body {
+    background: #fff;
+    padding: 20px 25px;
+}
+
+/* Form và input */
+.form-control {
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    transition: border-color 0.2s ease;
+}
+
+    .form-control:focus {
+        border-color: #007BFF;
+        box-shadow: 0 0 5px rgba(0,123,255,0.3);
+    }
+
+/* Nút bấm */
+.btn {
+    border-radius: 20px;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background-color: #007BFF;
+    border-color: #007BFF;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+.btn-info {
+    background-color: #17a2b8;
+}
+
+    .btn-info:hover {
+        background-color: #107285;
+    }
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn-warning:hover {
+    background-color: #d39e00;
+}
+
+.btn-danger:hover {
+    background-color: #b21f2d;
+}
+
+.btn-default:hover {
+    background-color: #e9ecef;
+}
+
+/* Khối hiển thị tài liệu */
+#viewer .well {
+    border: 2px dashed #007BFF;
+    border-radius: 10px;
+    padding: 40px;
+    font-size: 16px;
+    color: #555;
+}
+
+/* Bảng dữ liệu */
+.table {
+    background: white;
+}
+
+    .table thead {
+        background: #007BFF;
+        color: white;
+        text-align: center;
+    }
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #f8f9fa;
+}
+
+/* List file */
+.list-group-item {
+    border-left: 4px solid #007BFF;
+    margin-bottom: 5px;
+    border-radius: 6px;
+}
+
+    /* Hiệu ứng hover cho danh sách */
+    .list-group-item:hover {
+        background-color: #f0f8ff;
+    }
+
+/* Form inline spacing */
+.form-inline .form-group {
+    margin-right: 15px;
+}
+
+/* Thông báo */
+.alert-info {
+    background-color: #e3f2fd;
+    color: #0056b3;
+    border-left: 4px solid #007BFF;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .form-horizontal .control-label {
+        text-align: left;
+    }
+
+    .form-inline {
+        display: block;
+    }
+
+        .form-inline .form-group {
+            display: block;
+            margin-bottom: 10px;
+        }
+}

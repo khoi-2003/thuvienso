@@ -1,0 +1,645 @@
+﻿body, html {
+    height: 100%;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #fcfcfc;
+    padding-bottom: 60px;
+    display: flex;
+    font-size: 16px;
+    flex-direction: column;
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f0f0f0; /* sáng hơn */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #999, #555);
+    border-radius: 10px;
+    border: 2px solid #f0f0f0;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(180deg, #777, #333);
+    }
+
+/* ===== Sidebar ===== */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 220px;
+    background-color: #f8f9fa; /* trắng xám nhẹ */
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    transition: width 0.3s ease, left 0.3s ease, opacity 0.3s ease;
+    z-index: 2000;
+}
+
+    .sidebar.collapsed {
+        width: 60px;
+    }
+
+    .sidebar .nav > li > a {
+        color: #333; /* chữ đen */
+        display: block;
+        padding: 12px 20px;
+        font-size: 15px;
+        border-left: 4px solid transparent;
+        transition: background-color 0.2s, color 0.2s;
+    }
+
+        .sidebar .nav > li > a:hover {
+            background-color: #e9ecef; /* xám nhạt hover */
+            color: #000;
+            border-left: 4px solid #007bff;
+        }
+
+        .sidebar .nav > li.active > a,
+        .sidebar .nav > li > a:focus,
+        .sidebar .nav > li > a:active {
+            background-color: #dee2e6 !important;
+            color: #000 !important;
+            border-left: 4px solid #007bff;
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+    .sidebar.collapsed .nav > li > a {
+        text-align: center;
+        padding: 10px 5px;
+    }
+
+        .sidebar.collapsed .nav > li > a span {
+            display: none;
+        }
+
+/* ===== Toggle Sidebar ===== */
+#toggleSidebar {
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    color: #555;
+    font-size: 18px;
+    text-align: left;
+    cursor: pointer;
+}
+
+    #toggleSidebar:hover,
+    #toggleSidebar:focus,
+    #toggleSidebar:active {
+        background: none !important;
+        color: #000 !important;
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
+
+
+/* ===== Submenu trong sidebar ===== */
+.sidebar .submenu {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    list-style: none;
+    padding-left: 15px;
+    background-color: #fdfdfd;
+    border-left: 2px solid #007bff;
+    transition: max-height 0.35s ease, opacity 0.3s ease;
+}
+
+    /* Các item bên trong submenu */
+    .sidebar .submenu li a {
+        font-size: 14px;
+        padding: 8px 15px;
+        color: #444;
+        border-left: 4px solid transparent;
+        display: block;
+    }
+
+        .sidebar .submenu li a:hover {
+            background-color: #e9ecef;
+            border-left: 4px solid #007bff;
+            color: #000;
+        }
+
+/* Khi submenu mở (hiện ra mượt) */
+.sidebar .dropdown-submenu.open > .submenu {
+    max-height: 500px; /* đủ lớn để chứa các item bên trong */
+    opacity: 1;
+}
+
+/* Mũi tên nhỏ */
+.small-arrow {
+    font-size: 10px;
+    transition: transform 0.3s ease;
+}
+
+.dropdown-submenu.open .small-arrow {
+    transform: rotate(180deg);
+}
+
+
+
+/* ===== Content & Navbar ===== */
+.body-content {
+    padding-left: 220px;
+    padding-top: 50px;
+    transition: margin-left 0.3s ease, width 0.3s ease;
+}
+
+    .body-content.collapsed {
+        padding-left: 60px;
+    }
+
+.navbar-fixed-top,
+.navbar-static-bottom {
+    transition: margin-left 0.3s ease, width 0.3s ease;
+}
+
+.navbar-fixed-top {
+    padding-left: 220px;
+}
+
+.navbar-static-bottom {
+    padding-left: 220px;
+}
+
+.sidebar.collapsed ~ .navbar-fixed-top {
+    padding-left: 60px;
+}
+
+.sidebar.collapsed ~ .navbar-static-bottom {
+    padding-left: 60px;
+}
+
+/* ===== Footer ===== */
+footer.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+    background-color: #f8f9fa;
+    color: #555;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #ddd;
+}
+
+    footer.navbar a {
+        color: #555;
+    }
+
+        footer.navbar a:hover {
+            color: #000;
+            text-decoration: none;
+        }
+
+/* ===== Navbar (Bootstrap 3 tuỳ chỉnh) ===== */
+.navbar-default {
+    background-color: #ffffff; /* nền trắng */
+    border-color: #ddd;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+    .navbar-default .navbar-brand {
+        color: #000;
+    }
+
+    .navbar-default .navbar-nav > li > a {
+        color: #555;
+        transition: color 0.2s;
+    }
+
+        .navbar-default .navbar-nav > li > a:hover {
+            color: #000;
+        }
+
+/* ===== Navbar Layout ===== */
+.navbar > .container-fluid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-desktop {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.navbar-header {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-desktop .navbar-form {
+    display: flex !important;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    margin: 0 15px !important;
+}
+
+.navbar-form .form-control, .navbar-form .btn {
+    height: 34px;
+}
+
+.navbar-desktop > div:last-child {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    gap: 15px;
+}
+
+/* ===== Notification ===== */
+.notification-icon {
+    font-size: 22px;
+    color: #555;
+    transition: color 0.3s;
+    position: relative;
+}
+
+    .notification-icon:hover {
+        color: #000;
+    }
+
+.notification-badge {
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    background-color: #007bff;
+    color: white;
+    font-size: 13px;
+    padding: 2px 5px;
+    border-radius: 50%;
+}
+
+.notification-menu {
+    width: 280px;
+    max-height: 300px;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 6px;
+    padding: 0;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+}
+
+    .notification-menu li a {
+        padding: 10px 15px;
+        font-size: 13px;
+        color: #333;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+        .notification-menu li a:hover {
+            background-color: #f2f2f2;
+            color: #000;
+        }
+
+    .notification-menu .dropdown-header {
+        background-color: #f0f0f0;
+        color: #000;
+        font-size: 14px;
+        padding: 10px;
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+    }
+
+    .notification-menu .divider {
+        margin: 0;
+    }
+
+/* ===== Dropdown User ===== */
+.navbar .dropdown-menu {
+    margin-top: 10px !important;
+    position: absolute !important;
+    top: 100%;
+    right: 0;
+    left: auto;
+    background-color: #ffffff !important;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+    .navbar .dropdown-menu > li > a {
+        color: #333 !important;
+        padding: 8px 15px;
+    }
+
+        .navbar .dropdown-menu > li > a:hover {
+            background-color: #f0f0f0 !important;
+            color: #000 !important;
+        }
+
+/* ===== Animation ===== */
+@keyframes shake {
+    0%,100% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(-15deg);
+    }
+
+    50% {
+        transform: rotate(15deg);
+    }
+
+    75% {
+        transform: rotate(-10deg);
+    }
+}
+
+.shake {
+    animation: shake 0.7s ease;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 992px) {
+    .sidebar {
+        width: 60px;
+    }
+
+        .sidebar .nav > li > a {
+            text-align: left;
+            font-size: 13px;
+        }
+
+            .sidebar .nav > li > a span {
+                display: none;
+            }
+
+    .body-content {
+        padding-left: 60px;
+    }
+
+    .navbar-fixed-top {
+        padding-left: 60px;
+    }
+
+    .navbar-static-bottom {
+        padding-left: 60px;
+    }
+
+    .sidebar.expanded {
+        width: 160px !important;
+    }
+
+        .sidebar.expanded .nav > li > a span {
+            display: inline;
+        }
+
+    .body-content.expanded {
+        padding-left: 160px !important;
+    }
+
+    .sidebar.expanded ~ .navbar-fixed-top,
+    .sidebar.expanded ~ .navbar-static-bottom {
+        padding-left: 160px;
+    }
+}
+
+@media (max-width: 767px) {
+    .navbar-collapse {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #fff;
+        border-top: 1px solid #ddd;
+        padding-left: 60px;
+        padding-top:10px;
+        z-index: 999;
+    }
+
+        .navbar-collapse .navbar-form {
+            margin: 5px 0;
+            justify-content: flex-start;
+        }
+
+    .navbar-desktop {
+        flex-wrap: nowrap;
+    }
+
+    /* Khi sidebar bình thường */
+    .sidebar ~ .navbar-fixed-top .navbar-collapse {
+        padding-left: 60px; /* nếu muốn sát logo, giữ 0 */
+    }
+
+    /* Khi sidebar collapsed */
+    .sidebar.collapsed ~ .navbar-fixed-top .navbar-collapse {
+        padding-left: 160px; /* vẫn giữ 0, chỉ navbar padding-left thay đổi */
+    }
+
+    /* Khi sidebar expanded (responsive) */
+    .sidebar.expanded ~ .navbar-fixed-top .navbar-collapse {
+        padding-left: 160px;
+    }
+}
+
+/* Chỉ áp dụng cho màn hình lớn hơn 768px */
+@media (min-width: 768px) {
+    #navbarCollapse {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+        #navbarCollapse .navbar-form {
+            margin: 0;
+            flex: 1;
+            max-width: 500px;
+        }
+
+            #navbarCollapse .navbar-form .form-group {
+                display: flex;
+                align-items: center;
+                width: 100%;
+            }
+
+    #auth-section {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+        #auth-section li a {
+            padding: 10px 12px;
+        }
+}
+
+a, button {
+    transition: all 0.3s ease;
+}
+
+.sidebar .nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:hover {
+    box-shadow: inset 4px 0 0 #007bff;
+}
+
+
+/* 🔹 Tạo kiểu outline dùng chuẩn Bootstrap 3 */
+.btn-outline {
+    background-color: transparent !important;
+    color: inherit !important;
+    font-weight: 700 !important;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    box-shadow: none !important;
+}
+
+    /* Hiệu ứng hover (giữ tông Bootstrap gốc) */
+    .btn-outline:hover {
+        color: #fff !important;
+    }
+
+/* Giữ đúng màu theo Bootstrap 3 */
+.btn-info {
+    background-color: #0056b1 !important;
+    font-weight: 700 !important;
+    border-radius: 20px;
+    color: #fff !important;
+}
+
+    .btn-info:hover {
+        color: #fff !important;
+        background-color: #247cd8 !important;
+    }
+
+.btn-success.btn-outline {
+    color: #5cb85c;
+}
+
+    .btn-success.btn-outline:hover {
+        background-color: #5cb85c !important;
+    }
+
+/* Nút nhỏ gọn */
+.btn-sm {
+    padding: 5px 10px;
+    font-size: 13px;
+}
+
+/* 🔹 Nút người dùng */
+.user-toggle {
+    display: flex !important;
+    align-items: center;
+    padding: 6px 14px !important;
+    border-radius: 30px;
+    background: #ffffff;
+    color: #333 !important;
+    font-weight: 500;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+}
+
+    .user-toggle:hover,
+    .user-toggle:focus {
+        background: #f7f7f7;
+        color: #111 !important;
+        text-decoration: none;
+        box-shadow: 0 0 6px rgba(0,0,0,0.15);
+    }
+
+/* 🔹 Ảnh avatar */
+.user-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 8px;
+    border: 2px solid #ddd;
+}
+
+/* 🔹 Dropdown menu */
+.user-menu {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    min-width: 180px;
+    font-size: 14px;
+    padding: 5px 0;
+    background-color: #fff;
+}
+
+    .user-menu > li > a {
+        padding: 8px 15px;
+        color: #333 !important;
+        transition: background 0.25s ease, color 0.25s ease;
+    }
+
+        .user-menu > li > a:hover {
+            background-color: #f0f0f0 !important;
+            color: #000 !important;
+        }
+
+/* 🔴 Đăng xuất nổi bật đỏ – ép ưu tiên */
+.logout-link {
+    background-color: #fc9393 !important;
+}
+
+/* Nếu có icon trong dropdown – căn chỉnh gọn */
+.user-menu i {
+    margin-right: 6px;
+}
+
+
+/* ===== Khi màn hình ≤ 992px ===== */
+@media (max-width: 992px) {
+    .navbar-brand img {
+        height: 45px !important; /* nhỏ hơn desktop */
+    }
+
+    .navbar-brand span {
+        font-size: 18px !important; /* chữ nhỏ hơn */
+    }
+}
+
+/* ===== Khi màn hình ≤ 768px ===== */
+@media (max-width: 768px) {
+    .navbar-brand img {
+        height: 40px !important; /* nhỏ nhất */
+    }
+
+    .navbar-brand span {
+        font-size: 15px !important; /* chữ nhỏ nhất */
+    }
+}
+
+/* ===== Khi màn hình ≤ 576px (nếu muốn thêm) ===== */
+@media (max-width: 576px) {
+    .navbar-brand img {
+        height: 30px !important;
+    }
+
+    .navbar-brand span {
+        font-size: 13px !important;
+    }
+}
+
+.page-header h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1e3a8a;
+    display: flex;
+    padding-left:20px;
+    align-items: center;
+    gap: 10px;
+}

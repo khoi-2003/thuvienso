@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>📚 Quản lý Biên mục</title>
+    <link rel="stylesheet" href="/css/catalog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="catalog-container" style="padding:25px 30px;">
+        <header class="page-header">
+            <h2><i class="fa-solid fa-layer-group"></i> Quản lý biên mục</h2>
+        </header>
+
+        <!-- THỐNG KÊ -->
+        <section class="summary-grid">
+            <div class="summary-card blue">
+                <i class="fa fa-book"></i>
+                <div>
+                    <h3 id="totalCatalogs">0</h3>
+                    <p>Tổng biên mục</p>
+                </div>
+            </div>
+            <div class="summary-card green">
+                <i class="fa fa-user"></i>
+                <div>
+                    <h3 id="totalAuthors">0</h3>
+                    <p>Tổng tác giả</p>
+                </div>
+            </div>
+            <div class="summary-card cyan">
+                <i class="fa fa-eye"></i>
+                <div>
+                    <h3 id="visibleBooks">0</h3>
+                    <p>Sách hiển thị</p>
+                </div>
+            </div>
+            <div class="summary-card gray">
+                <i class="fa fa-eye-slash"></i>
+                <div>
+                    <h3 id="hiddenBooks">0</h3>
+                    <p>Sách bị ẩn</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- THANH CÔNG CỤ -->
+        <section class="toolbar">
+            <input type="text" id="searchBox" placeholder="🔍 Tìm kiếm nhanh..." onkeyup="filterTable()">
+            <div class="toolbar-right d-flex align-items-center gap-2">
+                <div class="btn-group">
+                    <button class="btn-main dropdown-toggle" data-toggle="dropdown" id="mainActionsBtn">⚙️ Thao tác</button>
+                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="mainActionsBtn">
+                        <li><a href="#" onclick="openAddModal()">➕ Thêm mới</a></li>
+                        <li><a href="#" id="exportExcelBtn">📤 Xuất Excel</a></li>
+                        <li><a href="#" id="exportWordBtn">📄 Xuất Word/HTML</a></li>
+                        <li><a href="#" id="exportLabelsBtn">🔖 Xuất phích</a></li>
+                        <li><a href="#" id="importExcelBtn">📥 Nhập Excel</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" id="deleteSelectedBtn" onclick="deleteSelected()" style="color:red;">🗑 Xóa</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- BẢNG -->
+        <div class="table-responsive modern-table">
+            <table class="table table-hover" id="catalogTable">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="selectAll" onclick="toggleSelectAll(this)"></th>
+                        <th>#</th>
+                        <th>ISBN</th>
+                        <th>Nhan đề</th>
+                        <th>Tác giả</th>
+                        <th>Xuất bản</th>
+                        <th>Mô tả</th>
+                        <th>Ghi chú</th>
+                        <th>Trạng thái</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="catalogBody">
+                    <!-- Dữ liệu sẽ được nạp từ catalog.js -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- PHÂN TRANG -->
+        <footer class="pagination-footer">
+            <div id="recordCount" class="text-muted"></div>
+            <ul class="pagination" id="pagination"></ul>
+        </footer>
+    </div>
+
+    <!-- MODAL THÊM/SỬA -->
+    <div class="modal fade" id="catalogModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form id="catalogForm" onsubmit="saveCatalog(event)">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="modalTitle">Thêm biên mục</h4>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="catalogId" />
+                        <div class="row">
+                            <div class="col-sm-4 form-group">
+                                <label>📘 ISBN (020)</label>
+                                <input type="text" id="isbn" class="form-control" placeholder="978-604-1234-567">
+                            </div>
+                            <div class="col-sm-4 form-group">
+                                <label>👤 Tác giả (100)</label>
+                                <input type="text" id="author" class="form-control" placeholder="Tên tác giả">
+                            </div>
+                            <div class="col-sm-4 form-group">
+                                <label>📖 Nhan đề (245)</label>
+                                <input type="text" id="title" class="form-control" required placeholder="Tên sách">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-4 form-group">
+                                <label>🏛 Nơi XB (260a)</label>
+                                <input type="text" id="publisher_place" class="form-control">
+                            </div>
+                            <div class="col-sm-4 form-group">
+                                <label>Nhà XB (260b)</label>
+                                <input type="text" id="publisher" class="form-control">
+                            </div>
+                            <div class="col-sm-4 form-group">
+                                <label>Năm XB (260c)</label>
+                                <input type="number" id="year" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-4 form-group">
+                                <label>📏 Mô tả (300)</label>
+                                <input type="text" id="physical_desc" class="form-control">
+                            </div>
+                            <div class="col-sm-4 form-group">
+                                <label>📝 Ghi chú (500)</label>
+                                <textarea id="note" class="form-control" rows="1"></textarea>
+                            </div>
+                            <div class="col-sm-4 form-group">
+                                <label>🔖 Trạng thái</label>
+                                <input type="text" id="status" class="form-control" placeholder="Hiện / Ẩn">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-4 form-group">
+                                <label>🌐 Ngôn ngữ (041)</label>
+                                <select id="languageSelect" class="form-control"></select>
+                            </div>
+                            <div class="col-sm-4 form-group">
+                                <label>📄 Loại hình tài liệu</label>
+                                <select id="doctypeSelect" class="form-control"></select>
+                            </div>
+                            <div class="col-sm-4 form-group">
+                                <label>📚 Chủ đề</label>
+                                <select id="subjectSelect" class="form-control"></select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">💾 Lưu</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="/js/catalog.js"></script>
+</body>
+</html>

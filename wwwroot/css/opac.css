@@ -1,0 +1,235 @@
+﻿/* ==== Reset cơ bản ==== */
+.row {
+    margin: 0;
+}
+
+/* ==== Tiêu đề chính ==== */
+/*.opac-page header h2 {
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    color: #fff;
+    padding: 14px 25px;
+    border-radius: 10px;
+    display: inline-block;
+    font-weight: 600;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+*/
+.opac-page .lead {
+    margin-top: 6px;
+    color: #555;
+}
+
+/* ==== Khu tìm kiếm ==== */
+.search-area {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eee;
+}
+
+    .search-area input.form-control {
+        border-radius: 8px 0 0 8px;
+        border: 1px solid #ccc;
+    }
+
+    .search-area .btn-primary {
+        border-radius: 20px;
+        background: linear-gradient(90deg, #6a11cb, #2575fc);
+        border: none;
+        transition: 0.3s;
+    }
+
+        .search-area .btn-primary:hover {
+            background: linear-gradient(90deg, #5b0db5, #1e63e0);
+        }
+
+/* ==== Bộ lọc ngang ==== */
+.filter-top {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
+    margin-top: 20px;
+}
+
+    .filter-top .panel-body {
+        padding: 14px;
+    }
+
+    .filter-top select,
+    .filter-top input {
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+
+    .filter-top button {
+        border-radius: 20px;
+        transition: 0.3s;
+    }
+
+    .filter-top #btn-apply {
+        background: linear-gradient(90deg, #6a11cb, #2575fc);
+        border: none;
+        color: #fff;
+    }
+
+        .filter-top #btn-apply:hover {
+            background: linear-gradient(90deg, #5b0db5, #1e63e0);
+        }
+
+/* ==== Thẻ kết quả ==== */
+.result-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+    .result-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+
+    .result-card .thumb {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 10px;
+    }
+
+    .result-card h4 {
+        font-weight: 600;
+        color: #333;
+    }
+
+    .result-card .meta {
+        color: #777;
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+
+    .result-card .actions button {
+        border-radius: 6px;
+    }
+
+/* ==== Modal chi tiết ==== */
+.modal-content {
+    border-radius: 10px;
+}
+
+.modal-header {
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    color: #fff;
+    border-radius: 10px 10px 0 0;
+}
+
+    .modal-header .close {
+        color: #fff;
+        opacity: 1;
+    }
+
+#detail-img {
+    border-radius: 10px;
+}
+
+/* ==== Pagination ==== */
+.pagination > li > a, .pagination > li > span {
+    border-radius: 6px;
+    margin: 0 2px;
+    border-color: #ddd;
+}
+
+.pagination > li.active > a {
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    border-color: transparent;
+}
+
+/* ==== View buttons ==== */
+.btn-group .btn {
+    border-radius: 20px;
+}
+
+    .btn-group .btn.active {
+        background: linear-gradient(90deg, #6a11cb, #2575fc);
+        color: #fff;
+        border: none;
+    }
+
+/* ==== Responsive ==== */
+@media (max-width:768px) {
+    .result-card {
+        flex-direction: column;
+    }
+
+    .search-area {
+        padding: 15px;
+    }
+}
+
+.result-card {
+    height: 380px; /* Chiều cao cố định */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+    .result-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    /* 🔹 Hình ảnh cố định */
+    .result-card img.thumb {
+        width: 100%;
+        height: 160px; /* ảnh cố định chiều cao */
+        object-fit: cover; /* giữ tỷ lệ, không méo */
+        border-radius: 10px 10px 0 0;
+    }
+
+    /* 🔹 Nội dung bên trong */
+    .result-card .card-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 15px;
+    }
+
+    /* 🔹 Tiêu đề - cắt nếu quá dài */
+    .result-card h4 {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 6px;
+        line-height: 1.3em;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* hiển thị tối đa 2 dòng */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* 🔹 Mô tả - cắt nếu dài */
+    .result-card p {
+        flex: 1;
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 10px;
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* hiển thị tối đa 3 dòng */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* 🔹 Nút căn dưới cùng */
+    .result-card .btn {
+        align-self: flex-start;
+    }

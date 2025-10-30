@@ -1,0 +1,177 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Đăng nhập - Thư viện số</title>
+
+    <!-- Bootstrap 3 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #2b5876, #4e4376);
+        }
+
+        .login-container {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* 🔹 Bên trái - ảnh động thư viện số */
+        .login-left {
+            flex: 1;
+            background: url('https://cdnl.iconscout.com/lottie/premium/thumb/online-library-animation-gif-download-3009896.gif') center center no-repeat;
+            background-size: cover;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @@keyframes float {
+            0%, 100%
+
+        {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+
+        }
+
+        /* 🔹 Bên phải - form đăng nhập */
+        .login-right {
+            flex: 1;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 50px;
+            text-align: center;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 420px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.25);
+            padding: 40px;
+            transition: all 0.4s ease;
+        }
+
+            .login-box:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 0 35px rgba(0,0,0,0.3);
+            }
+
+            .login-box h2 {
+                margin-bottom: 30px;
+                color: #333;
+                font-weight: 700;
+                font-size: 26px;
+            }
+
+        .form-control {
+            border-radius: 25px;
+            height: 45px;
+            padding-left: 20px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+            .form-control:focus {
+                border-color: #4e4376;
+                box-shadow: 0 0 5px rgba(78, 67, 118, 0.5);
+            }
+
+        .btn-login {
+            width: 100%;
+            border-radius: 25px;
+            background: linear-gradient(90deg, #4e4376, #2b5876);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 12px;
+            border: none;
+            transition: 0.3s;
+        }
+
+            .btn-login:hover {
+                background: linear-gradient(90deg, #5f4f91, #3d6992);
+            }
+
+        .login-links {
+            margin-top: 20px;
+        }
+
+            .login-links a {
+                color: #4e4376;
+                text-decoration: none;
+                font-weight: 500;
+            }
+
+                .login-links a:hover {
+                    text-decoration: underline;
+                }
+
+        @@media (max-width: 992px) {
+            .login-left
+
+        {
+            display: none;
+        }
+
+        .login-right {
+            flex: 1;
+            padding: 30px;
+        }
+
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <!-- 🔹 Bên trái -->
+        <div class="login-left"></div>
+
+        <!-- 🔹 Bên phải -->
+        <div class="login-right">
+            <div class="login-box">
+                <h2>Đăng nhập tài khoản</h2>
+                <form id="loginForm">
+                    <input id="username" type="text" class="form-control" placeholder="Tên đăng nhập" required>
+                    <input id="password" type="password" class="form-control" placeholder="Mật khẩu" required>
+                    <button type="submit" class="btn btn-login">Đăng nhập</button>
+                </form>
+                <div class="login-links">
+                    <p>Chưa có tài khoản? <a href="/Authenticator/Register">Đăng ký ngay</a></p>
+                    <p><a href="#">Quên mật khẩu?</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 🔹 Giả lập đăng nhập (frontend)
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            if (username) {
+                localStorage.setItem('loggedInUser', username);
+                window.location.href = '/'; // quay lại trang chính
+            }
+        });
+    </script>
+</body>
+</html>

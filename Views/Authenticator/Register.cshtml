@@ -1,0 +1,180 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Đăng ký - Thư viện số</title>
+
+    <!-- Bootstrap 3 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            background: linear-gradient(135deg, #2b5876, #4e4376);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .register-container {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* 🔹 Bên trái - ảnh minh họa */
+        .register-left {
+            flex: 1;
+            background: url('https://cdnl.iconscout.com/lottie/premium/thumb/online-library-animated-icon-gif-download-8403461.gif') center center no-repeat;
+            background-size: cover;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @@keyframes float {
+            0%, 100%
+
+        {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+
+        }
+
+        /* 🔹 Bên phải - form đăng ký */
+        .register-right {
+            flex: 1;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 50px;
+        }
+
+        .register-box {
+            width: 100%;
+            max-width: 420px;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.25);
+            padding: 40px;
+            text-align: center;
+            transition: 0.4s ease;
+        }
+
+            .register-box:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 0 40px rgba(0, 0, 0, 0.35);
+            }
+
+            .register-box h2 {
+                color: #333;
+                font-weight: 700;
+                margin-bottom: 30px;
+            }
+
+        .form-control {
+            border-radius: 25px;
+            height: 45px;
+            padding-left: 20px;
+            margin-bottom: 18px;
+            border: 1px solid #ccc;
+            transition: all 0.3s ease;
+        }
+
+            .form-control:focus {
+                border-color: #2b5876;
+                box-shadow: 0 0 5px rgba(43, 88, 118, 0.5);
+            }
+
+        .btn-register {
+            width: 100%;
+            border-radius: 25px;
+            background: linear-gradient(90deg, #2b5876, #4e4376);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 12px;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+            .btn-register:hover {
+                background: linear-gradient(90deg, #3c6d92, #5b4e91);
+                transform: scale(1.03);
+            }
+
+        .register-links {
+            margin-top: 15px;
+        }
+
+            .register-links a {
+                color: #2b5876;
+                text-decoration: none;
+                font-weight: 500;
+            }
+
+                .register-links a:hover {
+                    text-decoration: underline;
+                }
+
+        @@media (max-width: 992px) {
+            .register-left
+
+        {
+            display: none;
+        }
+
+        .register-right {
+            flex: 1;
+            padding: 30px;
+        }
+
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <!-- 🔹 Bên trái -->
+        <div class="register-left"></div>
+
+        <!-- 🔹 Bên phải -->
+        <div class="register-right">
+            <div class="register-box">
+                <h2>Tạo tài khoản mới</h2>
+                <form id="registerForm">
+                    <input id="fullname" type="text" class="form-control" placeholder="Họ và tên" required>
+                    <input id="email" type="email" class="form-control" placeholder="Email" required>
+                    <input id="username" type="text" class="form-control" placeholder="Tên đăng nhập" required>
+                    <input id="password" type="password" class="form-control" placeholder="Mật khẩu" required>
+                    <button type="submit" class="btn btn-register">Đăng ký</button>
+                </form>
+                <div class="register-links">
+                    <p>Đã có tài khoản? <a href="/Login">Đăng nhập ngay</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 🔹 Giả lập đăng ký tài khoản
+        document.getElementById('registerForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            if (username) {
+                localStorage.setItem('loggedInUser', username);
+                alert('Đăng ký thành công! Chào mừng ' + username + ' 🎉');
+                window.location.href = '/'; // quay lại trang chính
+            }
+        });
+    </script>
+
+</body>
+</html>

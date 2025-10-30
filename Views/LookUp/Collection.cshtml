@@ -1,0 +1,124 @@
+﻿
+<link rel="stylesheet" href="~/css/collection.css" asp-append-version="true" />
+<body>
+<!-- 🔖 Tiêu đề chính -->
+<div class="collections-header">
+    <header class="page-header">
+        <h2><i class="glyphicon glyphicon-folder-open"></i> Bộ sưu tập ấn phẩm</h2>
+    </header>
+</div>
+
+<!-- 🔍 Thanh lọc -->
+<div class="filter-bar row">
+    <div class="col-sm-2">
+        <select class="form-control">
+            <option>Tất cả chủ đề</option>
+            <option>Khoa học dữ liệu</option>
+            <option>Văn học Việt Nam</option>
+            <option>Kinh tế học</option>
+        </select>
+    </div>
+    <div class="col-sm-2">
+        <select class="form-control">
+            <option>Tất cả loại tài liệu</option>
+            <option>Sách</option>
+            <option>Báo – Tạp chí</option>
+            <option>Luận văn</option>
+        </select>
+    </div>
+    <div class="col-sm-4">
+        <input type="text" class="form-control" placeholder="Tìm theo tên bộ sưu tập...">
+    </div>
+    <div class="col-sm-2">
+        <button class="btn btn-primary btn-block"><i class="glyphicon glyphicon-search"></i> Lọc</button>
+        </div>
+    <div class="col-sm-2">
+        <button class="btn btn-success" data-toggle="modal" data-target="#createCollectionModal">
+            <i class="glyphicon glyphicon-plus"></i> Tạo bộ sưu tập mới
+        </button>
+    </div>
+</div>
+
+<!-- 🗂️ Danh sách bộ sưu tập -->
+<div class="row">
+    <!-- Bộ sưu tập 1 -->
+    <div class="col-sm-4">
+        <div class="collection-box">
+            <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=600" alt="Sách quý hiếm">
+            <div class="collection-info">
+                <h4>Sách quý hiếm</h4>
+                <p>Những ấn phẩm hiếm có, chỉ có tại Thư viện Quốc Gia. Bảo tồn và phục chế công phu.</p>
+                <button class="btn btn-primary btn-sm btn-collection"><i class="glyphicon glyphicon-eye-open"></i> Xem</button>
+                <button class="btn btn-default btn-sm btn-collection"><i class="glyphicon glyphicon-share"></i> Chia sẻ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bộ sưu tập 2 -->
+    <div class="col-sm-4">
+        <div class="collection-box">
+            <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=600" alt="Khoa học dữ liệu">
+            <div class="collection-info">
+                <h4>Khoa học dữ liệu</h4>
+                <p>Bộ sưu tập chuyên sâu về AI, Machine Learning, Big Data và phân tích dữ liệu.</p>
+                <button class="btn btn-primary btn-sm btn-collection"><i class="glyphicon glyphicon-eye-open"></i> Xem</button>
+                <button class="btn btn-default btn-sm btn-collection"><i class="glyphicon glyphicon-share"></i> Chia sẻ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bộ sưu tập 3 -->
+    <div class="col-sm-4">
+        <div class="collection-box">
+            <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=600" alt="Văn học Việt Nam">
+            <div class="collection-info">
+                <h4>Văn học Việt Nam</h4>
+                <p>Tuyển tập văn học cổ điển và hiện đại. Dành cho người yêu văn chương Việt.</p>
+                <button class="btn btn-primary btn-sm btn-collection"><i class="glyphicon glyphicon-eye-open"></i> Xem</button>
+                <button class="btn btn-default btn-sm btn-collection"><i class="glyphicon glyphicon-share"></i> Chia sẻ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 🆕 Modal Tạo Bộ Sưu Tập -->
+<div id="createCollectionModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><i class="glyphicon glyphicon-plus"></i> Tạo bộ sưu tập mới</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label>Tên bộ sưu tập</label>
+                        <input type="text" class="form-control" placeholder="Nhập tên bộ sưu tập...">
+                    </div>
+                    <div class="form-group">
+                        <label>Mô tả ngắn</label>
+                        <textarea class="form-control" rows="3" placeholder="Nhập mô tả..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Chủ đề</label>
+                        <select class="form-control">
+                            <option>Văn học</option>
+                            <option>Khoa học</option>
+                            <option>Kinh tế</option>
+                            <option>Lịch sử</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Tải ảnh bìa</label>
+                        <input type="file" class="form-control">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Tạo</button>
+                <button class="btn btn-default" data-dismiss="modal">Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>

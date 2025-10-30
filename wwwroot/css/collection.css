@@ -1,0 +1,66 @@
+﻿.row{
+    margin:0px;
+}
+
+body{
+    padding-left:30px;
+    padding-right:30px;
+}
+/* --- BỘ SƯU TẬP --- */
+.collections-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.collection-box {
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin-bottom: 25px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+    .collection-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .collection-box img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+    }
+
+.collection-info {
+    padding: 15px;
+}
+
+    .collection-info h4 {
+        margin-top: 0;
+        font-weight: bold;
+    }
+
+    .collection-info p {
+        min-height: 50px;
+        color: #555;
+    }
+
+.btn-collection {
+    margin-right: 5px;
+}
+
+/* --- MODAL --- */
+.modal-header {
+    background-color: #337ab7;
+    color: #fff;
+}
+
+/* --- LỌC --- */
+.filter-bar {
+    background: #fff;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}

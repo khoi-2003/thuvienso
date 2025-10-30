@@ -1,0 +1,391 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model IPagedList<ThuVienSo.Models.MuonTra>
+
+<script src="~/js/muontra.js"></script>
+
+<link rel="stylesheet" href="/css/muontra.css" />
+
+
+
+<!-- ================= TAB CHÍNH ================= -->
+<div class="tabs-wrapper">
+    <ul class="main-tabs">
+        <li class="active" data-tab="muontra-tab">📚 Mượn - Trả</li>
+        <li data-tab="chinh-sach-tab">⚖️ Chính Sách</li>
+        <li data-tab="lich-tab">📅 Lịch / Thẻ</li>
+    </ul>
+
+    <!-- ====== TAB 1: MƯỢN TRẢ ====== -->
+    <div id="muontra-tab" class="tab-content active">
+        <div class="muontra-container">
+            <h2>📚 Giao dịch Mượn - Trả</h2>
+
+            <!-- PHẦN 1: Thông tin bạn đọc -->
+            <div class="form-section">
+                <h3>Thông tin bạn đọc</h3>
+                <div class="reader-table-container" style="margin-top:15px;">
+                    <table class="reader-table">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Mã số</th>
+                                <th>Họ và tên</th>
+                                <th>Địa điểm</th>
+                                <th>SĐT</th>
+                                <th>Địa chỉ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="readerInfoTable"></tbody>
+                    </table>
+                    <div id="readerPagination" class="pagination" style="margin-top:10px; text-align:center;"></div>
+                    <div id="alertBox" class="alert-box"></div>
+                </div>
+            </div>
+
+            <!-- PHẦN 2: Thông tin sách -->
+            <div class="book-list-container" style="margin-top: 20px;">
+                <h4>📖 Danh sách sách trong kho</h4>
+                <table class="book-table">
+                    <thead>
+                        <tr>
+                            <th>Mã</th>
+                            <th>Tên sách</th>
+                            <th>Loại</th>
+                            <th>Kho</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="allBookTable"></tbody>
+                </table>
+                <div id="bookPagination" class="pagination" style="margin-top:10px; text-align:center;"></div>
+            </div>
+
+            <hr style="margin: 30px 0;">
+
+            <h4>📚 Danh sách mượn hiện tại</h4>
+            <table class="book-table">
+                <thead>
+                    <tr>
+                        <th>Mã sách</th>
+                        <th>Tên sách</th>
+                        <th>Loại</th>
+                        <th>Ngày mượn</th>
+                        <th>Ngày trả</th>
+                        <th>Trạng thái</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody id="bookList"></tbody>
+            </table>
+        </div>
+
+        <!-- PHẦN 3: Hành động -->
+        <div class="action-buttons text-center mt-3">
+            <button id="btnSave" class="btn btn-success">💾 Lưu giao dịch</button>
+            <button id="btnClear" class="btn btn-danger">🗑️ Hủy giao dịch</button>
+        </div>
+
+        <!-- Giao dịch đã lưu -->
+        <div class="saved-transactions-card" id="savedTransactionsContainer" style="margin-top:30px;">
+            <h3>💾 Giao dịch đã lưu (demo)</h3>
+            <div class="table-responsive">
+                <table id="savedTransactionsTable" class="table table-striped table-hover align-middle text-center">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Bạn đọc</th>
+                            <th>Số lượng sách</th>
+                            <th>Thời gian lưu</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="4" class="text-muted">Chưa có giao dịch nào</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- PHẦN 4: In / Bỏ qua phạt -->
+        <div class="footer-section-4">
+            <button class="btn-receipt" onclick="printReceipt()">🧾 In biên nhận</button>
+            <button class="btn-penalty" onclick="skipPenalty('admin')">🚫 Bỏ qua phạt</button>
+        </div>
+
+        <!-- ==================== DANH SÁCH MƯỢN TRẢ ==================== -->
+        <div class="muontra-card">
+            <h3>📘 Danh sách Mượn – Trả</h3>
+
+            <form asp-action="Index" method="get" class="muontra-search">
+                <input type="text" name="searchString" value="@ViewBag.SearchString"
+                       placeholder="🔍 Tìm theo bạn đọc hoặc tên sách..." class="form-control" />
+                <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+            </form>
+
+            <div class="table-responsive">
+                <table class="table table-striped table-hover muontra-table">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Stt</th>
+                            <th>Bạn đọc</th>
+                            <th>Tên sách</th>
+                            <th>Ngày mượn</th>
+                            <th>Ngày trả</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.TenBanDoc</td>
+                                    <td>@item.TenSach</td>
+                                    <td>@item.NgayMuon.ToString("dd/MM/yyyy")</td>
+                                    <td>@item.NgayTra?.ToString("dd/MM/yyyy")</td>
+                                    <td>
+                                        <a href="javascript:void(0);"
+                                           onclick="confirmHold('@item.TenSach')"
+                                           class="btn btn-sm btn-warning">
+                                            📚 Giữ chỗ
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="6" class="text-center text-muted">Không có dữ liệu mượn – trả</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div id="muonTraList" class="muontra-pagination"></div>
+        </div>
+    </div>
+
+
+    <!-- ====== TAB 2: CHÍNH SÁCH ====== -->
+    <div id="chinh-sach-tab" class="tab-content">
+        <div class="policy-container">
+            <h2>📘 Chính Sách – Hạn ngạch – Chế tài</h2>
+
+            <!-- 🌟 III.1 - Khai báo chính sách mượn -->
+            <details class="policy-section" open>
+                <summary>📗 Khai báo chính sách mượn</summary>
+                <div class="form-group">
+                    <label>Nhóm đối tượng:</label>
+                    <select id="policyGroup" class="input-box">
+                        <option value="">-- Chọn nhóm --</option>
+                        <option value="SV">Sinh viên</option>
+                        <option value="GV">Giảng viên</option>
+                        <option value="NV">Nhân viên</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Loại tài liệu:</label>
+                    <select id="policyType" class="input-box">
+                        <option value="">-- Chọn loại tài liệu --</option>
+                        <option value="SGK">Giáo trình</option>
+                        <option value="TL">Tài liệu tham khảo</option>
+                        <option value="TT">Tạp chí</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Thời hạn mượn (ngày):</label>
+                    <input type="number" id="policyDays" class="input-box" min="1" max="60" />
+                </div>
+
+                <div class="form-group">
+                    <label>Số lượng mượn tối đa:</label>
+                    <input type="number" id="policyLimit" class="input-box" min="1" max="20" />
+                </div>
+
+                <button class="btn-save" onclick="savePolicy()">💾 Lưu chính sách</button>
+
+                <div id="policySummary" class="summary-box"></div>
+            </details>
+
+            <!-- 🌟 III.2 - Quy tắc phạt và miễn giảm -->
+            <details class="policy-section">
+                <summary>💸 Quy tắc phạt & Miễn giảm</summary>
+                <div class="form-group">
+                    <label>Mức phạt trễ hạn (VNĐ/ngày):</label>
+                    <input type="number" id="finePerDay" class="input-box" placeholder="VD: 2000" />
+                </div>
+
+                <div class="form-group">
+                    <label>Giới hạn tối đa (VNĐ):</label>
+                    <input type="number" id="fineMax" class="input-box" placeholder="VD: 50000" />
+                </div>
+
+                <div class="form-group">
+                    <label>Nhóm được miễn/giảm:</label>
+                    <select id="fineDiscountGroup" class="input-box">
+                        <option value="">-- Chọn nhóm --</option>
+                        <option value="GV">Giảng viên (miễn phạt)</option>
+                        <option value="SV">Sinh viên (giảm 50%)</option>
+                    </select>
+                </div>
+
+                <button class="btn-save" onclick="saveFineRule()">💾 Lưu quy tắc phạt</button>
+                <div id="fineSummary" class="summary-box"></div>
+            </details>
+
+            <!-- 🌟 III.3 - Lịch làm việc -->
+            <details class="policy-section">
+                <summary>🗓️ Lịch làm việc & Ngày nghỉ</summary>
+
+                <div class="form-group">
+                    <label>⏰ Giờ mở cửa</label>
+                    <input type="time" id="openTime" class="input-box" value="08:00" />
+                </div>
+
+                <div class="form-group">
+                    <label>🕔 Giờ đóng cửa</label>
+                    <input type="time" id="closeTime" class="input-box" value="17:00" />
+                </div>
+
+                <div class="form-group">
+                    <label>📅 Ngày nghỉ trong tuần</label>
+                    <select multiple id="offDays" class="input-box">
+                        <option value="Thứ 2">Thứ 2</option>
+                        <option value="Thứ 3">Thứ 3</option>
+                        <option value="Thứ 4">Thứ 4</option>
+                        <option value="Thứ 5">Thứ 5</option>
+                        <option value="Thứ 6">Thứ 6</option>
+                        <option value="Thứ 7">Thứ 7</option>
+                        <option value="Chủ nhật" selected>Chủ nhật</option>
+                    </select>
+                </div>
+
+                <button class="btn-save" onclick="saveSchedule()">💾 Lưu lịch làm việc</button>
+                <div id="scheduleSummary" class="summary-box"></div>
+            </details>
+
+            <!-- 🌟 III.4 - Kiểm tra hợp lệ -->
+            <details class="policy-section">
+                <summary>⚖️ Kiểm tra hợp lệ giao dịch</summary>
+
+                <div class="form-group">
+                    <label>Chọn bạn đọc:</label>
+                    <select id="checkReader" class="input-box">
+                        <option value="">-- Chọn bạn đọc --</option>
+                        <option value="BD001">Nguyễn Văn A</option>
+                        <option value="BD002">Trần Thị B</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Nhập mã sách:</label>
+                    <input type="text" id="checkBookCode" class="input-box" placeholder="Nhập mã sách..." />
+                </div>
+
+                <button class="btn-save" onclick="kiemTraHopLe()">✅ Kiểm tra hợp lệ</button>
+                <div id="checkResult" class="summary-box" style="display:none;"></div>
+            </details>
+
+            <!-- 🌟 III.5 - Xuất / Nhập cấu hình -->
+            <details class="policy-section">
+                <summary>📂 Xuất / Nhập Cấu hình</summary>
+                <div class="form-group">
+                    <button class="btn-info" onclick="exportConfig()">💾 Xuất cấu hình</button>
+                    <label class="btn-primary">
+                        📥 Nhập cấu hình
+                        <input type="file" id="importFile" accept=".json" onchange="importConfig(this)" hidden>
+                    </label>
+                </div>
+                <div id="configSummary" class="summary-box"></div>
+            </details>
+        </div>
+    </div>
+
+    <!-- ===== TAB 3: QUẢN LÝ THẺ & LỊCH THƯ VIỆN ===== -->
+    <div id="lich-tab" class="tab-content">
+        <h2>📅 Quản lý Thẻ & Lịch Thư Viện</h2>
+
+        <!-- 🔹 1. Thống kê nhanh -->
+        <div class="summary-cards">
+            <div class="card stat-card">
+                <h4>🪪 Thẻ đang hoạt động</h4>
+                <p id="stat-active">0</p>
+            </div>
+            <div class="card stat-card">
+                <h4>🔒 Thẻ bị khóa</h4>
+                <p id="stat-locked">0</p>
+            </div>
+            <div class="card stat-card">
+                <h4>⏳ Chờ duyệt</h4>
+                <p id="stat-pending">0</p>
+            </div>
+            <div class="card stat-card">
+                <h4>📅 Hết hạn gần nhất</h4>
+                <p id="stat-expiry">--</p>
+            </div>
+        </div>
+
+        <!-- 🔹 2. Danh sách thẻ bạn đọc -->
+        <div class="policy-section">
+            <h3>🪪 Danh sách thẻ bạn đọc</h3>
+            <input type="text" id="searchCard" class="input-box" placeholder="🔍 Tìm theo tên hoặc mã thẻ..." onkeyup="filterCards()" />
+
+            <table class="styled-table" id="cardTable">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Mã thẻ</th>
+                        <th>Tên bạn đọc</th>
+                        <th>Ngày cấp</th>
+                        <th>Ngày hết hạn</th>
+                        <th>Trạng thái</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody id="cardBody"></tbody>
+            </table>
+        </div>
+
+        <!-- 🔹 3. Yêu cầu thẻ mới / gia hạn -->
+        <div class="policy-section">
+            <h3>📩 Yêu cầu cấp / gia hạn thẻ</h3>
+            <table class="styled-table" id="requestTable">
+                <thead>
+                    <tr>
+                        <th>Mã YC</th>
+                        <th>Bạn đọc</th>
+                        <th>Loại yêu cầu</th>
+                        <th>Ngày gửi</th>
+                        <th>Trạng thái</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="requestBody"></tbody>
+            </table>
+        </div>
+
+        <!-- 🔹 4. Lịch hoạt động thư viện -->
+        <div class="policy-section">
+            <h3>📆 Lịch hoạt động thư viện</h3>
+            <button class="btn-info" onclick="toggleSchedule()">📅 Xem / Ẩn lịch</button>
+            <div id="librarySchedule" class="schedule-box" style="display:none;">
+                <ul>
+                    <li><strong>Thứ 2 - Thứ 6:</strong> 7h30 - 17h00</li>
+                    <li><strong>Thứ 7:</strong> 8h00 - 12h00</li>
+                    <li><strong>Chủ nhật:</strong> Nghỉ</li>
+                    <li><strong>Ngày lễ:</strong> Đóng cửa</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<audio id="scanSound" src="https://assets.mixkit.co/sfx/preview/mixkit-barcode-scanner-beep-933.mp3"></audio>
+

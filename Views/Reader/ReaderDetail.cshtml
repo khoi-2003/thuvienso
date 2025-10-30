@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+	<meta charset="UTF-8">
+	<title>Chi tiết bạn đọc</title>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="~/css/readerdetail.css" />
+</head>
+<body>
+
+	<div class="detail-container">
+		<!-- Header -->
+		<div class="header-actions">
+
+			<h3><i class="fa fa-user-circle"></i> Thông tin bạn đọc</h3>
+			<a asp-controller="Reader" asp-action="Index" class="btn back-btn">
+				<i class="fa fa-arrow-left"></i> Quay lại
+			</a>
+		</div>
+
+		<!-- Thông tin bạn đọc -->
+		<div class="reader-info">
+			<div class="reader-photo">
+				<img src="https://i.pravatar.cc/120?img=3" alt="Ảnh bạn đọc">
+			</div>
+			<div class="reader-details">
+				<h4>Nguyễn Văn A <small>(Mã thẻ: BD001)</small></h4>
+				<p><i class="fa fa-envelope"></i> vana@example.com</p>
+				<p><i class="fa fa-phone"></i> 0901 234 567</p>
+				<p><i class="fa fa-calendar"></i> Ngày sinh: 12/05/2000</p>
+				<p><i class="fa fa-users"></i> Nhóm: Sinh viên</p>
+				<p><i class="fa fa-id-card"></i> Ngày cấp thẻ: 12/05/2023</p>
+				<p><i class="fa fa-hourglass-half"></i> Ngày hết hạn: 12/05/2026</p>
+				<p><span class="label-status label-success">Đang hoạt động</span></p>
+			</div>
+		</div>
+
+		<!-- Lịch sử mượn sách -->
+		<div class="history-section">
+			<h4 class="section-title"><i class="fa fa-book"></i> Lịch sử mượn sách</h4>
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>STT</th>
+						<th>Tên tài liệu</th>
+						<th>Ngày mượn</th>
+						<th>Hạn trả</th>
+						<th>Ngày trả</th>
+						<th>Trạng thái</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>Lập trình Java nâng cao</td>
+						<td>10/09/2025</td>
+						<td>25/09/2025</td>
+						<td>23/09/2025</td>
+						<td><span class="badge-status success">Đã trả</span></td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Cơ sở dữ liệu SQL</td>
+						<td>05/10/2025</td>
+						<td>20/10/2025</td>
+						<td>-</td>
+						<td><span class="badge-status warning">Đang mượn</span></td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>Thiết kế Web hiện đại</td>
+						<td>01/09/2025</td>
+						<td>16/09/2025</td>
+						<td>-</td>
+						<td><span class="badge-status danger">Quá hạn</span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="footer-note">
+			<i class="fa fa-clock"></i> Cập nhật lần cuối: 25/10/2025
+		</div>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</body>
+</html>

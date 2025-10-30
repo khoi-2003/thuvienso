@@ -1,0 +1,72 @@
+﻿<link rel="stylesheet" href="~/css/giucho.css" />
+<script src="/js/giucho.js"></script>
+
+
+<div class="reserve-container">
+    <h2>📘 Quản lý Giữ Chỗ</h2>
+
+    <!-- 🔹 Thông tin bạn đọc -->
+    <div class="form-section">
+        <h3>Thông tin bạn đọc</h3>
+        <div class="reader-table-container" style="margin-top:15px;">
+            <table class="reader-table">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Mã số</th>
+                        <th>Họ và tên</th>
+                        <th>Địa điểm</th>
+                        <th>SĐT</th>
+                        <th>Đối tượng</th>
+                    </tr>
+                </thead>
+                <tbody id="readerInfoTable">
+                    <!-- Dữ liệu sẽ được JS điền vào -->
+                </tbody>
+            </table>
+            <div id="readerPagination" class="pagination-container"></div>
+        </div>
+    </div>
+
+    <!-- 🔹 Chọn ấn phẩm cụ thể -->
+    <div class="form-section">
+        <h3>Thông tin ấn phẩm</h3>
+        <select id="reserveBookCopy" class="input-box">
+            <option value="">-- Chọn ấn phẩm cụ thể --</option>
+            <option value="AP001">Lập trình C# - Bản 1 (Đang mượn)</option>
+            <option value="AP002">Lập trình C# - Bản 2 (Có sẵn)</option>
+            <option value="AP003">Cấu trúc dữ liệu - Bản 1 (Đang mượn)</option>
+            <option value="AP004">Giải tích 1 - Bản 1 (Có sẵn)</option>
+        </select>
+
+        <div class="button-group">
+            <button class="btn-save" onclick="reserveBook()">📚 Giữ chỗ</button>
+        </div>
+    </div>
+
+    <!-- 🔹 Danh sách giữ chỗ -->
+    <div class="form-section">
+        <h3>Danh sách giữ chỗ</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Mã sách</th>
+                    <th>Tên sách</th>
+                    <th>Ngày giữ</th>
+                    <th>Hạn giữ</th>
+                    <th>Trạng thái</th>
+                    <th>Bạn đọc</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody id="reserveList"></tbody>
+        </table>
+    </div>
+
+    <!-- 🔹 Hành động -->
+    <div class="footer-section">
+        <button class="btn-cancel" onclick="clearReserve()">🗑️ Hủy tất cả</button>
+        <button class="btn-info" onclick="markAsReturned('AP001')">🔔 Giả lập trả ấn phẩm AP001</button>
+    </div>
+</div>
+

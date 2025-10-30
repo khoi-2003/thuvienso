@@ -1,0 +1,194 @@
+﻿body {
+    color: #1e293b;
+}
+
+.page-header h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1e3a8a;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ===== Summary Cards ===== */
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+    margin: 25px 0 30px;
+}
+
+.summary-card {
+    background: white;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    transition: all .25s ease;
+    gap: 15px;
+}
+
+    .summary-card i {
+        font-size: 34px;
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .summary-card h3 {
+        font-weight: 700;
+        margin: 0;
+        color: #0f172a;
+    }
+
+    .summary-card p {
+        margin: 0;
+        font-size: 13.5px;
+        color: #64748b;
+    }
+
+    .summary-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+    }
+
+    .summary-card.blue i {
+        background: linear-gradient(135deg, #2563eb, #3b82f6);
+    }
+
+    .summary-card.green i {
+        background: linear-gradient(135deg, #16a34a, #22c55e);
+    }
+
+    .summary-card.cyan i {
+        background: linear-gradient(135deg, #0891b2, #06b6d4);
+    }
+
+    .summary-card.gray i {
+        background: linear-gradient(135deg, #4b5563, #9ca3af);
+    }
+
+/* ===== Toolbar ===== */
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+    .toolbar input {
+        flex: 1;
+        max-width: 300px;
+        padding: 10px 12px;
+        border: 1px solid #cbd5e1;
+        border-radius: 10px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        font-size: 14px;
+    }
+
+        .toolbar input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+        }
+
+/* Nút Từ điển */
+.btn-dictionary {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.2s;
+}
+
+    .btn-dictionary:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+    }
+
+.btn-main {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-weight: 600;
+    box-shadow: 0 2px 5px rgba(59,130,246,0.3);
+}
+
+    .btn-main:hover {
+        opacity: 0.95;
+    }
+
+/* ===== Table ===== */
+.modern-table {
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+.table thead tr {
+    background: linear-gradient(90deg, #2563eb, #3b82f6);
+    color: white;
+}
+
+.table thead th {
+    font-weight: 600;
+    text-align: center;
+    border: none;
+    padding: 10px;
+    font-size: 13.5px;
+}
+
+.table tbody td {
+    vertical-align: middle;
+    font-size: 13.5px;
+}
+
+.table tbody tr:hover {
+    background: #f8fafc;
+}
+
+/* ===== Pagination ===== */
+.pagination-footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pagination > li > a {
+    color: #2563eb;
+    border-radius: 6px !important;
+}
+
+.pagination > li.active > a {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    color: white;
+    border: none;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+        .toolbar input {
+            max-width: 100%;
+        }
+}

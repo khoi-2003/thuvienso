@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Từ điển kiểm soát</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/dictionary.css">
+</head>
+<body>
+
+    <div style="padding-left:30px; padding-right:30px">
+        <header class="page-header">
+            <h2>📖 Từ điển</h2>
+        </header>
+        <!-- Form thêm -->
+        <div class="form-inline">
+            <select id="dictType" class="form-control">
+                <option value="language">Ngôn ngữ</option>
+                <option value="doctype">Loại hình tài liệu</option>
+                <option value="subject">Chủ đề</option>
+            </select>
+
+            <input type="text" id="dictValue" class="form-control" placeholder="Nhập giá trị mới...">
+
+            <button id="addDict" class="btn btn-gradient"><i class="fa fa-plus"></i> Thêm</button>
+        </div>
+
+        <!-- Bảng dữ liệu -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover" id="dictTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Giá trị</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- JS sẽ render các dòng ở đây -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="/js/dictionary.js"></script>
+</body>
+</html>
