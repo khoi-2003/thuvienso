@@ -8,8 +8,13 @@
     flex-direction: column;
 }
 
-.row{
-    margin:0;
+.title-sidebar
+{
+    margin-left:5px;
+}
+
+.row {
+    margin: 0;
 }
 /* ===== Scrollbar ===== */
 ::-webkit-scrollbar {

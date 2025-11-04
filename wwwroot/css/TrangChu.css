@@ -54,10 +54,9 @@
 
 /* ========== FEATURES ========== */
 .features {
-    margin: 60px auto;
-    max-width: 1100px;
-    background-color:#072a55;
-    padding:30px;
+    margin: 0px auto;
+    background-color: #072a55;
+    padding: 30px 30px 60px 30px; /* trên, phải, dưới, trái */
 }
 
 .feature-box {
