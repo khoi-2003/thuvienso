@@ -180,6 +180,10 @@
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
 }
+    /* Khi card full width */
+    .result-card.full-width {
+        height: 220px;
+    }
 
     .result-card:hover {
         transform: translateY(-4px);
@@ -210,7 +214,7 @@
         margin-bottom: 6px;
         line-height: 1.3em;
         display: -webkit-box;
-        -webkit-line-clamp: 2; /* hiển thị tối đa 2 dòng */
+        -webkit-line-clamp: 1; /* hiển thị tối đa 1 dòng */
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -223,7 +227,7 @@
         color: #555;
         margin-bottom: 10px;
         display: -webkit-box;
-        -webkit-line-clamp: 3; /* hiển thị tối đa 3 dòng */
+        -webkit-line-clamp: 2; /* hiển thị tối đa 2 dòng */
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -233,3 +237,17 @@
     .result-card .btn {
         align-self: flex-start;
     }
+
+    /* --- Tăng kích thước nút Tải và Chi tiết --- */
+    .result-card .btn,
+    .collection-info .btn {
+        padding: 5px 10px; /* tăng vùng nhấn */
+        font-size: 12px; /* chữ to hơn một chút */
+        border-radius: 4px; /* bo góc nhẹ cho mềm mại */
+    }
+
+        /* Cách icon ra khỏi chữ */
+        .result-card .btn i,
+        .collection-info .btn i {
+            margin-right: 4px;
+        }

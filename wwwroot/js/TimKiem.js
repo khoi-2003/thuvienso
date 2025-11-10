@@ -11,7 +11,7 @@
         { id: 2, title: "Cơ sở Kinh tế học", author: "Trần Thị B", year: 2022, lang: "vi", type: "Sách", hasFile: false, views: 982, subject: "Kinh tế", image: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=800", desc: "Giáo trình nhập môn kinh tế dành cho sinh viên đại học." },
         { id: 3, title: "Ứng dụng AI trong Giáo dục", author: "Lê Minh B", year: 2024, lang: "en", type: "Tài liệu số", hasFile: true, views: 875, subject: "Công nghệ", image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800", desc: "Nghiên cứu về việc ứng dụng trí tuệ nhân tạo trong giáo dục." },
         { id: 4, title: "Phân tích dữ liệu lớn", author: "Phạm C", year: 2019, lang: "en", type: "Luận văn", hasFile: true, views: 512, subject: "Công nghệ", image: "https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?w=800", desc: "Luận văn nghiên cứu quy trình xử lý dữ liệu lớn." },
-        { id: 5, title: "Lịch sử Việt Nam giai đoạn đổi mới", author: "Vũ D", year: 2010, lang: "vi", type: "Sách", hasFile: false, views: 740, subject: "Lịch sử", image: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800", desc: "Tư liệu về sự phát triển xã hội Việt Nam từ 1986 đến nay." },
+        { id: 5, title: "Lịch sử Việt Nam giai đoạn đổi mới", author: "Vũ D", year: 2010, lang: "vi", type: "Sách", hasFile: false, views: 740, subject: "Lịch sử", image: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800", desc: "Tư liệu về sự phát triển xã hội Việt Nam từ 1986 đến nay. Tư liệu về sự phát triển xã hội Việt Nam từ 1986 đến nay. Tư liệu về sự phát triển xã hội Việt Nam từ 1986 đến nay." },
         { id: 6, title: "Pháp luật và Xã hội", author: "Nguyễn Văn E", year: 2020, lang: "vi", type: "Tài liệu", hasFile: true, views: 620, subject: "Luật học", image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800", desc: "Phân tích mối quan hệ giữa pháp luật và xã hội hiện đại." },
         { id: 7, title: "Cấu trúc dữ liệu và Giải thuật", author: "Trần Văn F", year: 2023, lang: "vi", type: "Sách", hasFile: true, views: 1105, subject: "Tin học", image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800", desc: "Tổng hợp các cấu trúc dữ liệu và giải thuật cơ bản." },
         { id: 8, title: "Kỹ năng mềm cho sinh viên", author: "Phạm G", year: 2018, lang: "vi", type: "Tài liệu", hasFile: false, views: 824, subject: "Giáo dục", image: "https://images.unsplash.com/photo-1513258496099-48168024aec0?w=800", desc: "Rèn luyện kỹ năng giao tiếp, làm việc nhóm và lãnh đạo." },
@@ -155,7 +155,7 @@
                 <p class="text-muted small">${escapeHtml(d.desc)}</p>
                 <div class="actions text-right">
                   <button class="btn btn-xs btn-success btn-download" data-id="${d.id}"><i class="glyphicon glyphicon-download"></i> Tải</button>
-                  <button class="btn btn-xs btn-default btn-detail" data-id="${d.id}"><i class="glyphicon glyphicon-eye-open"></i> Chi tiết</button>
+                  <a href="/tailieudientu/chitietsach?id=${d.id}" class="btn btn-xs btn-default btn-detail"><i class="glyphicon glyphicon-eye-open"></i> Chi tiết</a>
                 </div>
               </div>
             </div>`
@@ -178,12 +178,13 @@
                   <p class="text-muted small">${escapeHtml(d.desc)}</p>
                   <div class="actions text-right">
                     <button class="btn btn-xs btn-success btn-download" data-id="${d.id}"><i class="glyphicon glyphicon-download"></i> Tải</button>
-                    <button class="btn btn-xs btn-default btn-detail" data-id="${d.id}"><i class="glyphicon glyphicon-eye-open"></i> Chi tiết</button>
+                    <a href="/tailieudientu/chitietsach?id=${d.id}" class="btn btn-xs btn-default btn-detail"><i class="glyphicon glyphicon-eye-open"></i> Chi tiết</a>
                   </div>
                 </div>
               </div>
             </div>`
                 );
+                if (state.view === 'list') $card.addClass('full-width');
                 $col.append($card);
                 $container.append($col);
                 imageFallback($card.find('img.thumb'));
@@ -280,18 +281,18 @@
             $('#btn-apply').click();
         });
 
-        // results actions (delegated)
-        $('#results-container').off('click').on('click', '.btn-detail', function () {
-            const id = Number($(this).data('id'));
-            const item = SAMPLE_DATA.find(x => x.id === id);
-            if (item) {
-                $('#detail-img').attr('src', item.image);
-                $('#detail-title').text(item.title);
-                $('#detail-meta').html('Tác giả: ' + item.author + ' • ' + item.year + ' • ' + item.type);
-                $('#detail-desc').text(item.desc);
-                $('#modal-detail').modal('show');
-            }
-        });
+        // $('#results-container').off('click').on('click', '.btn-detail', function () {
+        //     const id = Number($(this).data('id'));
+        //     const item = SAMPLE_DATA.find(x => x.id === id);
+        //     if (item) {
+        //         $('#detail-img').attr('src', item.image);
+        //         $('#detail-title').text(item.title);
+        //         $('#detail-meta').html('Tác giả: ' + item.author + ' • ' + item.year + ' • ' + item.type);
+        //         $('#detail-desc').text(item.desc);
+        //         $('#modal-detail').modal('show');
+        //     }
+        // });
+
 
         $('#results-container').on('click', '.btn-download', function () {
             const id = Number($(this).data('id'));

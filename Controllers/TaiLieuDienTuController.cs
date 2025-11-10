@@ -8,5 +8,10 @@ namespace ThuVienSo.Controllers
         {
             return View();
         }
+
+        public IActionResult ChiTietSach()
+        {
+            return View();
+        }
     }
 }
