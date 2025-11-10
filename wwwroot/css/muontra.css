@@ -2,6 +2,36 @@
 /* ============================
    🎯 TAB CHÍNH (Mượn - Trả / Chính sách / Lịch - Thẻ)
    ============================ */
+#tab-dangky thead tr.info {
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+}
+
+    #tab-dangky thead tr.info th {
+        color: #fff;
+        text-align: center;
+        font-weight: bold;
+        border: none;
+        background: transparent; /* quan trọng: để th trong suốt, hiển thị gradient từ tr cha */
+    }
+
+
+
+
+#subTabGroup .btn-success,
+#subTabGroup .btn-warning,
+#subTabGroup .btn-info,
+#subTabGroup .btn-danger {
+    background: #f5f5f5 !important;
+    color: #333 !important;
+    border: 1px solid #ddd !important;
+}
+
+#subTabGroup .btn.active {
+    background: linear-gradient(90deg, #007bff, #0056b3) !important;
+    color: #fff !important;
+    border: none !important;
+}
+
 
 .tabs-wrapper {
     width: 100%;
@@ -11,6 +41,7 @@
     overflow: hidden;
     font-family: "Segoe UI", sans-serif;
     margin-top: 50px;
+
 }
 
 /* --- Thanh danh sách tab --- */
@@ -22,7 +53,7 @@
     margin: 0;
     padding: 0;
     background: #f5f7fb;
-    border-bottom: 1px solid #d6e0f3;
+
 }
 
     /* --- Mỗi tab --- */
@@ -38,6 +69,7 @@
         transition: all 0.25s ease;
         user-select: none;
         letter-spacing: 0.3px;
+        border-radius: 8px 8px 0 0;
     }
 
         .main-tabs li:last-child {
@@ -52,8 +84,8 @@
 
         /* --- Tab đang chọn --- */
         .main-tabs li.active {
-            background: linear-gradient(180deg, #007bff, #0062d1);
-            color: #fff;
+            background: linear-gradient(90deg, #007bff, #0056b3);
+            color: white;
             font-weight: 700;
             box-shadow: inset 0 -3px 0 #004ecb;
         }
@@ -87,6 +119,18 @@
    📚 TAB 1 — MƯỢN / TRẢ
    (Chỉ áp dụng trong #muontra-tab)
 ========================================== */
+/* Hàng chứa input */
+.row {
+    margin: 0; /* loại bỏ margin mặc định nếu cần */
+}
+
+/* Cột chứa input */
+.col-md-4 {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+
 
 #muontra-tab {
     padding: 20px 25px;
@@ -111,6 +155,7 @@
         margin-top: 25px;
         margin-bottom: 10px;
         font-weight: 600;
+        font-size: 24px;
     }
 
 /* --- Container --- */
@@ -925,3 +970,40 @@
 #tab-dangmuon tr:hover {
     background-color: #f9f9f9;
 }
+#tab-dangmuon thead tr.warning th {
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    color: #fff;
+    border: none;
+}
+
+/* Cho gradient trải dài toàn hàng */
+#tab-dangmuon thead tr.warning {
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+}
+
+    /* Bỏ màu mặc định Bootstrap */
+    #tab-dangmuon thead tr.warning > th {
+        background: transparent !important;
+    }
+/* 🎨 Header gradient cho tab Đã trả */
+#tab-datra thead tr.info {
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+}
+
+    /* Cho phép gradient phủ toàn hàng */
+    #tab-datra thead tr.info th {
+        background: transparent !important;
+        color: #fff;
+        border: none;
+    }
+/* 🎨 Header gradient cho tab Quá hạn */
+#tab-quahan thead tr.danger {
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+}
+
+    /* Giúp gradient phủ toàn hàng */
+    #tab-quahan thead tr.danger th {
+        background: transparent !important;
+        color: #fff;
+        border: none;
+    }

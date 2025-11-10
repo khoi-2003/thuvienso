@@ -157,3 +157,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // =============================
     renderTable();
 });
+
+function moModal(index) {
+    try {
+        const item = listBaiTrich[index];
+        if (!item) return; // 🛑 nếu undefined thì thoát luôn
+        // phần còn lại...
+    } catch (err) {
+        console.error("moModal error:", err);
+    }
+}

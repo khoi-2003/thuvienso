@@ -1,181 +1,185 @@
-﻿
-    // ======================
-    // 🔸 DỮ LIỆU MẪU
-    // ======================
-    const sampleBooks = [
-    {code: "S001", copy: "AP001", name: "Lập trình C# (Bản 1)", status: "Đang mượn" },
-    {code: "S001", copy: "AP002", name: "Lập trình C# (Bản 2)", status: "Có sẵn" },
-    {code: "S002", copy: "AP003", name: "Cấu trúc dữ liệu (Bản 1)", status: "Đang mượn" },
-    {code: "S003", copy: "AP004", name: "Giải tích 1 (Bản 1)", status: "Có sẵn" }
-    ];
+﻿/* ============================
+   📘 giucho.js
+   Chức năng quản lý Giữ Chỗ
+   - Hiển thị danh sách bạn đọc (demo)
+   - Phân trang
+   - Giữ chỗ ấn phẩm
+   - Giả lập trả ấn phẩm
+   - Xóa toàn bộ giữ chỗ
+=============================== */
 
-    const readers = [
-    {id: "BD001", name: "Nguyễn Văn A", phone: "0912345678", location: "Kho A", priority: 3 },
-    {id: "BD002", name: "Trần Thị B", phone: "0978123456", location: "Kho B", priority: 2 },
-    {id: "BD003", name: "Lê Văn C", phone: "0909123123", location: "Kho C", priority: 3 },
-    {id: "BD004", name: "Phạm Thị D", phone: "0933222111", location: "Khoa Toán", priority: 1 },
-    {id: "BD005", name: "Ngô Văn E", phone: "0988777666", location: "Khoa Lý", priority: 2 },
-    {id: "BD006", name: "Đỗ Thị F", phone: "0944333222", location: "Khoa Hóa", priority: 3 },
-    {id: "BD007", name: "Hoàng Văn G", phone: "0911456789", location: "Khoa CNTT", priority: 1 },
-    {id: "BD008", name: "Phan Thị H", phone: "0922567890", location: "Kho D", priority: 2 },
-    {id: "BD009", name: "Trương Văn I", phone: "0933123456", location: "Kho E", priority: 3 },
-    {id: "BD010", name: "Bùi Thị K", phone: "0909998888", location: "Khoa Sinh", priority: 2 }
-    ];
+// ----------------------------
+// 🔹 DỮ LIỆU GIẢ LẬP
+// ----------------------------
+const readers = [
+    { id: 1, ma: "BD001", ten: "Nguyễn Văn A", diachi: "Hà Nội", sdt: "0905123456", doituong: "Sinh viên" },
+    { id: 2, ma: "BD002", ten: "Trần Thị B", diachi: "Đà Nẵng", sdt: "0912345678", doituong: "Giảng viên" },
+    { id: 3, ma: "BD003", ten: "Lê Văn C", diachi: "Hồ Chí Minh", sdt: "0987654321", doituong: "Sinh viên" },
+    { id: 4, ma: "BD004", ten: "Phạm Thị D", diachi: "Cần Thơ", sdt: "0977123123", doituong: "Sinh viên" },
+    { id: 5, ma: "BD005", ten: "Nguyễn Hữu E", diachi: "Huế", sdt: "0922334455", doituong: "Giảng viên" },
+    { id: 6, ma: "BD006", ten: "Lê Hồng F", diachi: "Nha Trang", sdt: "0956677889", doituong: "Sinh viên" },
+    { id: 7, ma: "BD007", ten: "Trịnh Văn G", diachi: "Đà Lạt", sdt: "0944556677", doituong: "Sinh viên" },
+    { id: 8, ma: "BD008", ten: "Phan Thị H", diachi: "Quảng Ninh", sdt: "0911223344", doituong: "Giảng viên" },
+    { id: 9, ma: "BD009", ten: "Nguyễn Văn I", diachi: "Bình Dương", sdt: "0933344556", doituong: "Sinh viên" },
+    { id: 10, ma: "BD010", ten: "Đỗ Thị K", diachi: "Nam Định", sdt: "0989988776", doituong: "Sinh viên" },
+];
 
-    let reader = null;
-    let reservations = [];
+let reserveList = []; // Danh sách giữ chỗ
+let currentPage = 1;
+const pageSize = 5;
 
-    // ======================
-    // 🔹 PHÂN TRANG CHO BẢNG BẠN ĐỌC
-    // ======================
-    const rowsPerPage = 5;
-    let currentPage = 1;
-
-    function renderReaders() {
-        const tbody = document.getElementById("readerInfoTable");
-    const pagination = document.getElementById("readerPagination");
-    const totalPages = Math.ceil(readers.length / rowsPerPage);
-
-    const start = (currentPage - 1) * rowsPerPage;
-    const end = start + rowsPerPage;
-    const displayedReaders = readers.slice(start, end);
-
-        tbody.innerHTML = displayedReaders.map((r, index) => `
-    <tr onclick="selectReader('${r.id}')" style="cursor:pointer;">
-        <td>${start + index + 1}</td>
-        <td>${r.id}</td>
-        <td>${r.name}</td>
-        <td>${r.location}</td>
-        <td>${r.phone}</td>
-        <td>${priorityLabel(r.priority)}</td>
-    </tr>
-    `).join("");
-
-    // Thanh phân trang
-    pagination.innerHTML = `
-    <button ${currentPage === 1 ? "disabled" : ""} onclick="changeReaderPage(${currentPage - 1})">⬅ Trước</button>
-    ${Array.from({ length: totalPages }, (_, i) => `
-                <button class="${currentPage === i + 1 ? "active" : ""}" onclick="changeReaderPage(${i + 1})">${i + 1}</button>
-            `).join("")}
-    <button ${currentPage === totalPages ? "disabled" : ""} onclick="changeReaderPage(${currentPage + 1})">Tiếp ➡</button>
-    `;
-    }
-
-    function changeReaderPage(page) {
-        const totalPages = Math.ceil(readers.length / rowsPerPage);
-    if (page < 1 || page > totalPages) return;
+// ----------------------------
+// 🔹 HIỂN THỊ DANH SÁCH BẠN ĐỌC
+// ----------------------------
+function renderReaders(page = 1) {
     currentPage = page;
-    renderReaders();
+    const start = (page - 1) * pageSize;
+    const end = start + pageSize;
+    const pageReaders = readers.slice(start, end);
+
+    const tbody = document.getElementById("readerInfoTable");
+    tbody.innerHTML = pageReaders
+        .map((r, i) => `
+            <tr onclick="selectReader('${r.ma}', '${r.ten}')">
+                <td>${start + i + 1}</td>
+                <td>${r.ma}</td>
+                <td>${r.ten}</td>
+                <td>${r.diachi}</td>
+                <td>${r.sdt}</td>
+                <td>${r.doituong}</td>
+            </tr>
+        `)
+        .join("");
+
+    renderPagination();
+}
+
+// ----------------------------
+// 🔹 PHÂN TRANG
+// ----------------------------
+function renderPagination() {
+    const totalPages = Math.ceil(readers.length / pageSize);
+    const container = document.getElementById("readerPagination");
+
+    container.innerHTML = `
+        <button ${currentPage === 1 ? "disabled" : ""} onclick="renderReaders(${currentPage - 1})">⬅️</button>
+        ${Array.from({ length: totalPages }, (_, i) => `
+            <button class="${currentPage === i + 1 ? "active" : ""}" onclick="renderReaders(${i + 1})">${i + 1}</button>
+        `).join("")}
+        <button ${currentPage === totalPages ? "disabled" : ""} onclick="renderReaders(${currentPage + 1})">➡️</button>
+    `;
+}
+
+// ----------------------------
+// 🔹 CHỌN BẠN ĐỌC
+// ----------------------------
+let selectedReader = null;
+function selectReader(ma, ten) {
+    selectedReader = { ma, ten };
+    alert(`📘 Đã chọn bạn đọc: ${ten} (${ma})`);
+}
+
+// ----------------------------
+// 🔹 GIỮ CHỖ ẤN PHẨM
+// ----------------------------
+function reserveBook() {
+    const bookSelect = document.getElementById("reserveBookCopy");
+    const bookValue = bookSelect.value;
+    const bookName = bookSelect.options[bookSelect.selectedIndex]?.text;
+
+    if (!selectedReader) {
+        alert("⚠️ Hãy chọn bạn đọc trước khi giữ chỗ!");
+        return;
     }
-
-    // ======================
-    // 🔹 CHỌN BẠN ĐỌC
-    // ======================
-    function selectReader(id) {
-        reader = readers.find(r => r.id === id);
-    if (reader) showNotification(`✅ Đã chọn bạn đọc: ${reader.name}`);
+    if (!bookValue) {
+        alert("⚠️ Hãy chọn ấn phẩm cụ thể!");
+        return;
     }
-
-    // ======================
-    // 🔹 GIỮ CHỖ
-    // ======================
-    function reserveBook() {
-        if (!reader) return alert("Vui lòng chọn bạn đọc từ bảng trên!");
-    const copyCode = document.getElementById("reserveBookCopy").value.trim();
-    if (!copyCode) return alert("Vui lòng chọn ấn phẩm cụ thể!");
-
-        const book = sampleBooks.find(b => b.copy === copyCode);
-    if (!book) return alert("Không tìm thấy ấn phẩm!");
-    if (book.status === "Có sẵn")
-    return alert("📗 Ấn phẩm này đang sẵn có, không cần giữ chỗ!");
-
-        if (reservations.some(r => r.copy === copyCode && r.readerId === reader.id))
-    return alert("⚠️ Bạn đã giữ chỗ ấn phẩm này rồi!");
-        if (reservations.filter(r => r.readerId === reader.id).length >= 3)
-    return alert("🚫 Mỗi bạn đọc chỉ được giữ tối đa 3 ấn phẩm!");
 
     const now = new Date();
-    const expire = new Date();
-    expire.setDate(now.getDate() + 3);
+    const due = new Date(now);
+    due.setDate(now.getDate() + 7);
 
-    reservations.push({
-        readerId: reader.id,
-    readerName: reader.name,
-    readerPriority: reader.priority,
-    code: book.code,
-    copy: book.copy,
-    name: book.name,
-    date: now.toLocaleDateString(),
-    expire: expire.toLocaleDateString(),
-    status: "Đang chờ"
-        });
+    reserveList.push({
+        maSach: bookValue,
+        tenSach: bookName,
+        ngayGiu: now.toLocaleDateString("vi-VN"),
+        hanGiu: due.toLocaleDateString("vi-VN"),
+        trangThai: "Đang giữ",
+        banDoc: selectedReader.ten,
+    });
 
-    renderReserves();
-    document.getElementById("reserveBookCopy").value = "";
-    }
+    renderReserveList();
+    alert(`✅ Đã giữ chỗ ấn phẩm cho ${selectedReader.ten}`);
+}
 
-    // ======================
-    // 🔹 DANH SÁCH GIỮ CHỖ
-    // ======================
-    function sortReservations() {
-        reservations.sort((a, b) => {
-            if (a.readerPriority !== b.readerPriority)
-                return a.readerPriority - b.readerPriority;
-            return new Date(a.date) - new Date(b.date);
-        });
-    }
-
-    function renderReserves() {
-        sortReservations();
+// ----------------------------
+// 🔹 HIỂN THỊ DANH SÁCH GIỮ CHỖ
+// ----------------------------
+function renderReserveList() {
     const tbody = document.getElementById("reserveList");
-        tbody.innerHTML = reservations.map(r => `
-    <tr>
-        <td>${r.code}</td>
-        <td>${r.name}</td>
-        <td>${r.date}</td>
-        <td>${r.expire}</td>
-        <td>${r.status}</td>
-        <td>${r.readerName} (${priorityLabel(r.readerPriority)})</td>
-        <td>
-            <button class="btn-cancel" onclick="cancelReserve('${r.copy}')">❌ Hủy</button>
-        </td>
-    </tr>`).join("");
+    if (reserveList.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7">Chưa có dữ liệu giữ chỗ</td></tr>`;
+        return;
     }
 
-    // ======================
-    // 🔹 CÁC HÀM KHÁC
-    // ======================
-    function cancelReserve(copy) {
-        reservations = reservations.filter(r => r.copy !== copy);
-    renderReserves();
-    }
+    tbody.innerHTML = reserveList.map((r, i) => `
+        <tr>
+            <td>${r.maSach}</td>
+            <td>${r.tenSach}</td>
+            <td>${r.ngayGiu}</td>
+            <td>${r.hanGiu}</td>
+            <td>${r.trangThai}</td>
+            <td>${r.banDoc}</td>
+            <td>
+                <button onclick="cancelReserve(${i})">❌ Hủy</button>
+            </td>
+        </tr>
+    `).join("");
+}
 
-    function clearReserve() {
-        reservations = [];
-    renderReserves();
+// ----------------------------
+// 🔹 HỦY GIỮ CHỖ CỤ THỂ
+// ----------------------------
+function cancelReserve(index) {
+    if (confirm("Bạn có chắc muốn hủy giữ chỗ này không?")) {
+        reserveList.splice(index, 1);
+        renderReserveList();
     }
+}
 
-    function markAsReturned(copyCode) {
-        const reservation = reservations.find(r => r.copy === copyCode);
-    if (!reservation) return alert("Không có bạn đọc nào đang giữ chỗ ấn phẩm này.");
-    reservation.status = "Đã đến lượt";
-    renderReserves();
-    showNotification(`📢 Ấn phẩm ${reservation.copy} (${reservation.name}) đã sẵn sàng cho ${reservation.readerName}!`);
+// ----------------------------
+// 🔹 HỦY TẤT CẢ GIỮ CHỖ
+// ----------------------------
+function clearReserve() {
+    if (reserveList.length === 0) {
+        alert("Không có dữ liệu để xóa!");
+        return;
     }
-
-    function priorityLabel(level) {
-        if (level === 1) return "🎓 Giảng viên";
-    if (level === 2) return "📘 Cao học";
-    return "👩‍🎓 Sinh viên";
+    if (confirm("Bạn có chắc muốn xóa toàn bộ giữ chỗ không?")) {
+        reserveList = [];
+        renderReserveList();
     }
+}
 
-    function showNotification(message) {
-        let note = document.createElement("div");
-    note.className = "notify-popup";
-    note.innerText = message;
-    document.body.appendChild(note);
-        setTimeout(() => note.remove(), 4000);
+// ----------------------------
+// 🔹 GIẢ LẬP TRẢ ẤN PHẨM
+// ----------------------------
+function markAsReturned(maSach) {
+    const item = reserveList.find(r => r.maSach === maSach);
+    if (!item) {
+        alert("Không tìm thấy ấn phẩm trong danh sách giữ chỗ!");
+        return;
     }
+    item.trangThai = "Đã trả";
+    renderReserveList();
+    alert(`📗 Ấn phẩm ${maSach} đã được đánh dấu là ĐÃ TRẢ.`);
+}
 
-    // 🚀 Khởi tạo khi load
-    window.onload = renderReaders;
+// ----------------------------
+// 🔹 KHỞI TẠO KHI TẢI TRANG
+// ----------------------------
+document.addEventListener("DOMContentLoaded", () => {
+    renderReaders();
+    renderReserveList();
+});

@@ -35,6 +35,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const statsTo = document.getElementById("statsTo");
     const statsTopic = document.getElementById("statsTopic");
 
+    // ====== DỮ LIỆU MẪU ======
+    localStorage.setItem(STORAGE_KEY, JSON.stringify([
+        {
+            publicationName: "Tạp chí Khoa học",
+            issueNumber: "Số 10/2025",
+            releaseDate: "2025-10-05",
+            topic: "Nghiên cứu ứng dụng trí tuệ nhân tạo",
+            status: "published"
+        },
+        {
+            publicationName: "Bản tin Công nghệ",
+            issueNumber: "Số 11/2025",
+            releaseDate: "2025-11-15",
+            topic: "Xu hướng phát triển công nghệ năm 2026",
+            status: "pending"
+        }
+    ]));
+
     // ====== TOAST ======
     function showToast(msg, type = "success") {
         const t = document.getElementById("toast");
@@ -69,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
     }
 
-    // ====== HIỂN THỊ BẢNG ======
+    // ====== HIỂN THỊ BẢNG CHÍNH ======
     function renderTable() {
         const list = loadSchedules();
         if (list.length === 0) {
@@ -79,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         scheduleBody.innerHTML = list.map((s, i) => `
             <tr>
-                <td>${escapeHtml(s.publicationName)}</td>
+                <td style="text-align:left">${escapeHtml(s.publicationName)}</td>
                 <td style="text-align:center">${escapeHtml(String(s.issueNumber || ""))}</td>
                 <td style="text-align:center">${escapeHtml(s.releaseDate)}</td>
                 <td style="text-align:center">${statusLabel(s.status)}</td>
@@ -164,8 +182,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     renderTable();
 
-    // ====== CÁC MODAL PHỤ ======
-    window.openSpecialModal = () => { loadSpecialOptions(); renderSpecialTable(); specialModal.style.display = "block"; };
+    // ==============================
+    // 🔹 CÁC MODAL PHỤ
+    // ==============================
+    // ----- ẤN PHẨM CÁ BIỆT -----
+    window.openSpecialModal = () => {
+        loadSpecialOptions();
+        renderSpecialTable();
+        specialModal.style.display = "block";
+    };
     window.closeSpecialModal = () => specialModal.style.display = "none";
 
     function loadSpecialOptions() {
@@ -219,6 +244,76 @@ document.addEventListener("DOMContentLoaded", () => {
         renderSpecialTable();
         showToast("Đã xóa");
     };
+
+    // ----- ẤN PHẨM ĐIỆN TỬ -----
+    window.openDigitalModal = () => {
+        digitalModal.style.display = "block";
+        renderDigitalTable();
+    };
+    window.closeDigitalModal = () => digitalModal.style.display = "none";
+
+    function renderDigitalTable() {
+        const arr = JSON.parse(localStorage.getItem(DIGITAL_KEY) || "[]");
+        if (arr.length === 0)
+            return digitalTable.innerHTML = `<tr><td colspan="3" style="text-align:center;color:#666">Chưa có bản tin điện tử</td></tr>`;
+        digitalTable.innerHTML = arr.map((x, i) => `
+            <tr>
+                <td>${x.title}</td>
+                <td>${x.link}</td>
+                <td><button class="btn-delete" onclick="deleteDigital(${i})">Xóa</button></td>
+            </tr>
+        `).join('');
+    }
+
+    window.deleteDigital = (i) => {
+        const arr = JSON.parse(localStorage.getItem(DIGITAL_KEY) || "[]");
+        arr.splice(i, 1);
+        localStorage.setItem(DIGITAL_KEY, JSON.stringify(arr));
+        renderDigitalTable();
+        showToast("Đã xóa bản tin điện tử");
+    };
+
+    // ----- THỐNG KÊ -----
+    window.openStatsModal = () => {
+        statsModal.style.display = "block";
+        renderStatsTable();
+    };
+    window.closeStatsModal = () => statsModal.style.display = "none";
+
+    function renderStatsTable() {
+        const arr = loadSchedules();
+        if (arr.length === 0)
+            return statsTableBody.innerHTML = `<tr><td colspan="5" style="text-align:center;color:#666">Không có dữ liệu thống kê</td></tr>`;
+        statsTableBody.innerHTML = arr.map(x => `
+            <tr>
+                <td>${x.publicationName}</td>
+                <td>${x.issueNumber}</td>
+                <td>${x.releaseDate}</td>
+                <td>${x.topic}</td>
+                <td>${x.status}</td>
+            </tr>
+        `).join('');
+    }
+
+    // ----- DỰ BÁO -----
+    window.openForecastModal = () => {
+        forecastModal.style.display = "block";
+        renderForecastTable();
+    };
+    window.closeForecastModal = () => forecastModal.style.display = "none";
+
+    function renderForecastTable() {
+        const arr = JSON.parse(localStorage.getItem(FORECAST_KEY) || "[]");
+        if (arr.length === 0)
+            return forecastTable.innerHTML = `<tr><td colspan="3" style="text-align:center;color:#666">Chưa có dữ liệu dự báo</td></tr>`;
+        forecastTable.innerHTML = arr.map(f => `
+            <tr>
+                <td>${f.publication}</td>
+                <td>${f.forecastDate}</td>
+                <td>${f.note}</td>
+            </tr>
+        `).join('');
+    }
 
     // ====== CLICK RA NGOÀI ĐỂ ĐÓNG ======
     window.onclick = (e) => {
