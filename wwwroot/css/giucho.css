@@ -1,215 +1,352 @@
-﻿/* ================================
-   📘 QUẢN LÝ GIỮ CHỖ — giucho.css
-   (Không đụng vào navbar, layout, footer, sidebar, button)
-================================ */
+﻿/* giucho.css
+   Toàn bộ CSS cho trang Quản lý Giữ Chỗ
+   - Tất cả <th> có gradient: linear-gradient(90deg,#6a11cb,#2575fc)
+   - Body của bảng và các khu khác giữ nền trắng
+   - Bao gồm: reader-table, reserve-section, phân trang, nút, responsive
+*/
 
-/* Toàn khung */
+/* ---------- Global / Reset nhỏ ---------- */
+:root {
+    --grad1: #6a11cb;
+    --grad2: #2575fc;
+    --accent: #2575fc;
+    --danger: #ff4b5c;
+    --muted: #f2f4f8;
+    --text: #333;
+    --card-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    --radius: 12px;
+    --radius-sm: 8px;
+}
+
+* {
+    box-sizing: border-box
+}
+
+body {
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--text);
+    background: #fafbfd;
+    margin: 0;
+    padding: 0;
+}
+
+/* ---------- Container chính ---------- */
 .reserve-container {
-    background: #fff;
-    border-radius: 12px;
-    padding: 24px 30px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-    max-width: 1100px;
-    margin: 0 auto;
-    animation: fadeIn 0.4s ease;
+    max-width: 1200px;
+    margin: 28px auto;
+    padding: 18px;
 }
 
-    /* Tiêu đề chính */
+    /* Heading */
     .reserve-container h2 {
-        font-size: 22px;
-        color: #004aad;
-        font-weight: 700;
-        margin-bottom: 18px;
-        border-left: 5px solid #007bff;
-        padding-left: 10px;
-    }
-
-/* Mỗi phần trong form */
-.form-section {
-    background: #f9fbff;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    padding: 18px 22px;
-    margin-bottom: 25px;
-    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.02);
-}
-
-    .form-section h3 {
-        color: #0056d6;
-        font-size: 17px;
-        margin-bottom: 12px;
+        font-size: 20px;
+        margin: 6px 0 18px;
         display: flex;
         align-items: center;
-        gap: 6px;
+        gap: 10px;
     }
 
-/* Input và Select */
-.input-box {
-    width: 100%;
-    padding: 10px 12px;
-    font-size: 15px;
-    border: 1.5px solid #d3e3ff;
-    border-radius: 8px;
-    outline: none;
-    transition: all 0.25s ease;
+/* ---------- Card / form-section (Reader block) ---------- */
+.form-section {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 16px;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 18px;
 }
 
-    .input-box:focus {
-        border-color: #007bff;
-        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+    /* Title inside each block */
+    .form-section h3,
+    .reserve-section h3 {
+        font-size: 18px;
+        font-weight: 700;
+        margin: 0 0 12px 0;
+        color: var(--text);
     }
 
-/* ===== Bảng ===== */
-.reader-table,
+/* Reader table container */
+.reader-table-container {
+    margin-top: 8px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+/* Reader table */
+.reader-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff; /* body trắng */
+    overflow: hidden;
+    border-radius: 10px;
+    table-layout: fixed;
+}
+
+/* ---------- GLOBAL: tất cả th đều gradient full ---------- */
+table th {
+    background: linear-gradient(90deg, var(--grad1), var(--grad2));
+    color: #fff;
+    font-weight: 700;
+    padding: 12px 10px;
+    text-align: left;
+    vertical-align: middle;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: none;
+}
+
+/* Bo góc cho header (khi table bo tròn) */
+.reader-table thead th:first-child,
+.table thead th:first-child {
+    border-top-left-radius: 10px;
+}
+
+.reader-table thead th:last-child,
+.table thead th:last-child {
+    border-top-right-radius: 10px;
+}
+
+/* Reader table body cells */
+.reader-table tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    background: #fff;
+    color: #333;
+    vertical-align: middle;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+/* Row hover */
+.reader-table tbody tr:hover td {
+    background: var(--muted);
+    transition: background .18s ease;
+    cursor: pointer;
+}
+
+/* Pagination container for readers */
+.pagination-container {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    padding: 12px;
+}
+
+/* Pagination buttons */
+#readerPagination button {
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: linear-gradient(90deg,var(--grad1),var(--grad2));
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .18s ease;
+}
+
+    #readerPagination button:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 14px rgba(37,117,252,0.18);
+    }
+
+    #readerPagination button.active {
+        background: #fff;
+        color: var(--grad2);
+        border: 2px solid var(--grad2);
+        box-shadow: 0 6px 18px rgba(106,17,203,0.12);
+    }
+
+    #readerPagination button:disabled {
+        background: #e6e9ef;
+        color: #9aa3b2;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+    }
+
+/* ---------- Reserve section (chọn ấn phẩm + nút) ---------- */
+.reserve-section {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 16px;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 18px;
+}
+
+    /* Select input */
+    .reserve-section .input-box {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: var(--radius-sm);
+        border: 1px solid #e0e4ea;
+        font-size: 14px;
+        background: #fff;
+        color: #222;
+    }
+
+        .reserve-section .input-box:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 8px rgba(37,117,252,0.18);
+        }
+
+    /* Button group */
+    .reserve-section .button-group {
+        margin-top: 12px;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .reserve-section .btn-save {
+        background: linear-gradient(90deg,var(--grad1),var(--grad2));
+        color: #fff;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 700;
+        transition: all .18s ease;
+    }
+
+        .reserve-section .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37,117,252,0.18);
+        }
+
+/* ---------- Danh sách giữ chỗ (table with class .table) ---------- */
 .table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
-    font-size: 15px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    table-layout: fixed;
 }
 
-    .reader-table thead,
-    .table thead {
-        background: #f0f4ff;
-        color: #004aad;
-    }
-
-    .reader-table th,
-    .reader-table td,
-    .table th,
+    /* Table body cells for reserve list */
     .table td {
-        border: 1px solid #e2e8f0;
+        padding: 10px;
         text-align: center;
-        padding: 10px 8px;
-    }
-
-    .reader-table tbody tr:nth-child(even),
-    .table tbody tr:nth-child(even) {
-        background: #fafcff;
-    }
-
-    .reader-table tbody tr:hover,
-    .table tbody tr:hover {
-        background: #eef5ff;
-        transition: 0.25s;
-    }
-
-/* ===== Phân trang ===== */
-.pagination-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 14px;
-    gap: 8px;
-}
-
-    .pagination-container button {
-        background: #ffffff;
-        border: 1.8px solid #007bff;
-        color: #007bff;
-        padding: 5px 12px;
-        font-size: 14px;
-        font-weight: 600;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: all 0.25s ease;
-    }
-
-        .pagination-container button:hover:not(:disabled) {
-            background: #007bff;
-            color: #fff;
-            transform: translateY(-1px);
-        }
-
-        .pagination-container button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            background: #f8f8f8;
-            border-color: #ccc;
-            color: #aaa;
-        }
-
-    .pagination-container span {
-        font-size: 15px;
+        border-bottom: 1px solid #eee;
+        background: #fff;
         color: #333;
-        font-weight: 600;
-        background: #f0f4ff;
-        padding: 5px 12px;
-        border-radius: 6px;
-        border: 1px solid #d3e3ff;
-        min-width: 110px;
-        text-align: center;
     }
 
-/* ===== Footer Section ===== */
+    /* Hover for reserve list */
+    .table tbody tr:hover td {
+        background: var(--muted);
+        transition: background .18s;
+    }
+
+/* Make the header of reserve list also use the global th style */
+/* (already covered by table th rule) */
+
+/* ---------- Footer action buttons (still white background) ---------- */
 .footer-section {
     display: flex;
+    gap: 12px;
     justify-content: flex-end;
-    gap: 10px;
-    margin-top: 18px;
-}
-
-/* ===== Hiệu ứng mượt ===== */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(6px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-/* ====== Button Group trong trang Giữ Chỗ ====== */
-.button-group {
-    display: flex;
-    justify-content: center; /* căn giữa theo chiều ngang */
-    align-items: center;
     margin-top: 16px;
-    margin-bottom: 10px;
-    gap: 10px; /* khoảng cách giữa các nút (nếu có thêm nút sau này) */
-    padding: 8px 0;
-}
-
-    /* Nếu sau này có nhiều nút, sắp xếp hàng ngang gọn gàng */
-    .button-group button {
-        min-width: 140px;
-        font-size: 15px;
-        font-weight: 600;
-        border-radius: 8px;
-        transition: all 0.25s ease;
-    }
-
-        /* Hiệu ứng hover nhẹ — KHÔNG đổi màu gốc của .btn-save */
-        .button-group button:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-        }
-/* ====== Footer Section trong trang Giữ Chỗ ====== */
-.footer-section {
-    display: flex;
-    justify-content: flex-end; /* căn nút về bên phải */
     align-items: center;
-    gap: 12px; /* khoảng cách giữa các nút */
-    padding: 15px 10px;
-    border-top: 1px solid #e5e9f2;
-    margin-top: 20px;
-    background-color: #fafbff;
-    border-radius: 0 0 10px 10px;
 }
 
-    /* Tinh chỉnh nhẹ cho các nút trong footer */
+    /* Buttons style */
     .footer-section button {
-        min-width: 130px;
-        font-size: 14.5px;
-        font-weight: 600;
+        padding: 10px 16px;
         border-radius: 8px;
-        transition: all 0.25s ease;
+        border: none;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all .18s;
     }
 
-        /* Hiệu ứng hover nhẹ, không đổi màu gốc */
-        .footer-section button:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    .footer-section .btn-cancel {
+        background: var(--danger);
+        color: #fff;
+    }
+
+        .footer-section .btn-cancel:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255,75,92,0.18);
         }
+
+    .footer-section .btn-info {
+        background: linear-gradient(90deg,var(--grad2),var(--grad1));
+        color: #fff;
+    }
+
+        .footer-section .btn-info:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37,117,252,0.18);
+        }
+
+/* ---------- Utilities & responsive ---------- */
+@media (max-width:900px) {
+    .reserve-container {
+        padding: 12px
+    }
+
+    table th, table td {
+        font-size: 13px
+    }
+
+    .footer-section {
+        flex-direction: column-reverse;
+        gap: 8px
+    }
+
+        .footer-section button {
+            width: 100%
+        }
+
+    .reserve-section .button-group {
+        justify-content: center
+    }
+}
+
+@media (max-width:560px) {
+    .reserve-container h2 {
+        font-size: 18px
+    }
+
+    table th, table td {
+        padding: 8px;
+        font-size: 13px
+    }
+}
+/* ========== Gradient header tràn toàn hàng ========== */
+
+/* Bỏ nền riêng từng th */
+table thead th {
+    background: transparent !important;
+    position: relative;
+    z-index: 1;
+}
+
+/* Thêm lớp phủ gradient cho cả hàng đầu */
+table thead tr {
+    background: linear-gradient(90deg, var(--grad1), var(--grad2));
+    position: relative;
+}
+
+    /* Nếu muốn bo góc header */
+    table thead tr:first-child th:first-child {
+        border-top-left-radius: 10px;
+    }
+
+    table thead tr:first-child th:last-child {
+        border-top-right-radius: 10px;
+    }
+
+/* Giữ text trắng trong header */
+table thead th {
+    color: #fff;
+    font-weight: 700;
+}
+
+    /* Loại bỏ đường viền giữa các th */
+    table thead th + th {
+        border-left: none !important;
+    }

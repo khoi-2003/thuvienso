@@ -21,33 +21,86 @@ Chỉ áp dụng trong .serials-page
     }
 
 /* ===== Thanh Tab ===== */
+/* =============================
+   🔹 TAB NAVIGATION - KHÔNG RÀNG BUỘC BORDER
+   Active có gradient, bình thường trắng
+   ============================= */
+
 .tab-nav {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 25px;
+    justify-content: flex-start;
+    gap: 6px;
+    margin-bottom: 18px;
+    background: transparent; /* không bị khung bao */
+}
+
+/* 🔹 Tab bình thường */
+.tab-nav {
+    display: flex;
+    border-bottom: 2px solid #e0e0e0;
+    background: #f8f9fa;
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+    padding: 0;
 }
 
 .tab-link {
-    padding: 8px 14px;
-    border: 1px solid #d0d7e2;
-    border-radius: 6px;
-    background: #fff;
-    font-size: 14px;
+    flex: 1;
+    min-width: 100px;
+    padding: 10px 10px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #555;
+    background: transparent;
+    border: none;
     cursor: pointer;
-    transition: 0.25s;
+    transition: all 0.3s ease;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
+
+    .tab-link:last-child {
+        border-right: none;
+    }
+
     .tab-link:hover {
-        background: #e8efff;
-        border-color: #a4b5ff;
+        background: #e9ecef;
     }
 
     .tab-link.active {
-        background: #1e40af;
         color: #fff;
-        border-color: #1e40af;
+        background: linear-gradient(90deg, #007bff, #0056b3);
+        border-bottom: none;
+        font-weight: 600;
+        /* 👇 Bo tròn trên rõ hơn khi active */
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        box-shadow: inset 0 -2px 0 #0056b3;
     }
+
+/* Hiệu ứng fade-in khi đổi tab */
+.tab-content {
+    display: none;
+    animation: fadeIn 2s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease;
+}
 
 /* ===== Khu vực nội dung tab ===== */
 .tab-content {
@@ -179,11 +232,12 @@ Chỉ áp dụng trong .serials-page
     width: 100%;
     border-collapse: collapse;
     font-size: 14px;
+    
 }
 
     #serialTable thead {
-        background: #e5e7eb;
-        color: #1f2937;
+        background: linear-gradient(90deg,#6a11cb,#2575fc);
+        color: white;
     }
 
     #serialTable th,
@@ -191,10 +245,6 @@ Chỉ áp dụng trong .serials-page
         padding: 10px;
         border-bottom: 1px solid #e2e8f0;
         text-align: left;
-    }
-
-    #serialTable tr:hover {
-        background: #f9fafb;
     }
 
 /* =========================
@@ -295,6 +345,7 @@ Chỉ áp dụng trong .serials-page
         color: #333;
         text-align: center;
         margin-bottom: 20px;
+        color: #1e3a8a;
     }
 
 /* === Form === */
@@ -376,12 +427,16 @@ Chỉ áp dụng trong .serials-page
         padding: 10px;
         text-align: left;
         border-bottom: 1px solid #eee;
+        background: transparent;
+    }
+    .archive-table thead {
+        background: linear-gradient(90deg, #6a11cb, #2575fc);
     }
 
     .archive-table th {
-        background: #f1f1f1;
         font-weight: 600;
-        color: #333;
+        color: white;
+        background: transparent;
     }
 
 .status.success {
@@ -550,8 +605,9 @@ Chỉ áp dụng trong .serials-page
     #baitrich h2 {
         color: #1e293b;
         margin-bottom: 15px;
-        font-size: 1.4rem;
-        text-align:center;
+        font-size: 24px;
+        text-align: center;
+        color: #1e3a8a;
     }
 
     /* --- FORM --- */
@@ -638,13 +694,8 @@ Chỉ áp dụng trong .serials-page
         }
 
         #baitrich .archive-table th {
-            background: #f1f5f9;
             font-weight: 600;
-            color: #1e293b;
-        }
-
-        #baitrich .archive-table tr:hover {
-            background: #f9fafb;
+            color: white;
         }
 
         #baitrich .archive-table .empty {
@@ -807,18 +858,35 @@ Chỉ áp dụng trong .serials-page
    📅 LỊCH PHÁT HÀNH
 ========================== */
 
+.schedule-table th,
+.schedule-table td {
+    text-align: left !important; /* ép căn trái, override inline style */
+    vertical-align: middle !important;
+    padding: 10px !important;
+}
+
+    /* ✅ Nếu muốn riêng cột Thao tác căn giữa */
+    .schedule-table td:last-child,
+    .schedule-table th:last-child {
+        text-align: center !important;
+    }
 #lichphathanh {
     margin-left: 20px; /* ✅ Cách layout bên trái 20px */
     margin-top: 15px;
     animation: fadeIn 0.3s ease;
+    text-align: left;
+    margin-bottom: 100px;
 }
 
     /* --- Tiêu đề --- */
     #lichphathanh h2 {
         color: #333;
         margin-bottom: 15px;
-        font-size: 20px;
+        font-size: 24px;
         font-weight: 600;
+        text-align: center;
+        margin-bottom: 25px;
+        color: #1e3a8a;
     }
 
 /* --- Bọc bảng --- */
@@ -835,10 +903,12 @@ Chỉ áp dụng trong .serials-page
     border-collapse: collapse;
     background: #fff;
 }
-
+    .schedule-table thead {
+        background: linear-gradient(90deg, #6a11cb, #2575fc);
+    }
     .schedule-table th {
-        background: #f4f6f9;
-        color: #333;
+        background: transparent;
+        color: white;
         text-align: left;
         padding: 10px;
         font-weight: 600;
@@ -849,6 +919,7 @@ Chỉ áp dụng trong .serials-page
         padding: 10px;
         border-bottom: 1px solid #eee;
         vertical-align: middle;
+        text-align: left;
     }
 
     .schedule-table tr:hover {
@@ -1140,10 +1211,13 @@ Chỉ áp dụng trong .serials-page
     border-collapse: collapse;
     margin-top: 10px;
 }
+    #holdingsTable thead {
+        background: linear-gradient(90deg, #6a11cb, #2575fc);
+    }
 
     #holdingsTable th {
-        background: #f4f6f9;
-        color: #333;
+        background: transparent;
+        color: white;
         text-align: left;
         padding: 10px;
         border-bottom: 2px solid #ddd;
@@ -1186,15 +1260,20 @@ Chỉ áp dụng trong .serials-page
     padding: 20px 25px;
     animation: fadeIn 0.4s ease;
 }
-
-/* ========== Thanh tiến trình ========== */
-.progress-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 25px 0 30px;
-    position: relative;
-}
+    #dongtap h2 {
+        font-size: 24px;
+        color: #1e3a8a;
+        text-align:center;
+        margin-bottom: 30px
+    }
+    /* ========== Thanh tiến trình ========== */
+    .progress-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 25px 0 30px;
+        position: relative;
+    }
 
 .progress-step {
     flex: 1;
@@ -1281,9 +1360,12 @@ Chỉ áp dụng trong .serials-page
     margin-top: 15px;
     font-size: 0.95rem;
 }
+    #bindingTable thead {
+        background: linear-gradient(90deg, #6a11cb, #2575fc)
+    }
 
     #bindingTable th {
-        background: #007bff;
+        background: transparent;
         color: white;
         text-align: left;
         padding: 10px;
@@ -1359,9 +1441,10 @@ Chỉ áp dụng trong .serials-page
         font-size: 1.5rem;
         margin-bottom: 15px;
         color: #1e293b;
-        display: flex;
-        align-items: center;
         gap: 8px;
+        color: #1e3a8a;
+        text-align:center;
+        margin-bottom:30px
     }
 
     /* ===== FORM ===== */
@@ -1448,15 +1531,17 @@ Chỉ áp dụng trong .serials-page
 
         #luanchuyen .transfer-table th,
         #luanchuyen .transfer-table td {
-            border: 1px solid #e2e8f0;
             padding: 10px 12px;
             text-align: left;
             font-size: 0.95rem;
         }
+        #luanchuyen .transfer-table thead {
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
+        }
 
         #luanchuyen .transfer-table th {
-            background: #f1f5f9;
-            color: #1e293b;
+            background: transparent;
+            color: white;
             font-weight: 700;
         }
 
@@ -1717,9 +1802,12 @@ Chỉ áp dụng trong .serials-page
         overflow: hidden;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
+        #thuebao .sub-table thead {
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
+        }
 
         #thuebao .sub-table th {
-            background-color: #2563eb;
+            background: transparent;
             color: white;
             padding: 10px;
             text-align: left;
@@ -1731,9 +1819,6 @@ Chỉ áp dụng trong .serials-page
             border-bottom: 1px solid #e5e7eb;
         }
 
-        #thuebao .sub-table tr:hover {
-            background-color: #f3f4f6;
-        }
 
         #thuebao .sub-table .empty {
             text-align: center;
@@ -1930,9 +2015,12 @@ Chỉ áp dụng trong .serials-page
         overflow: hidden;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
+        #luutru .archive-table thead {
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
+        }
 
         #luutru .archive-table th {
-            background-color: #2563eb;
+            background: transparent;
             color: white;
             padding: 10px;
             text-align: left;
@@ -2037,6 +2125,11 @@ Chỉ áp dụng trong .serials-page
     #baocao h2 {
         color: #2c3e50;
         margin-bottom: 10px;
+        color: #1e3a8a;
+        font-size:24px;
+        text-align:center;
+        margin-bottom:30px;
+        
     }
 
     #baocao p {
@@ -2136,3 +2229,4 @@ Chỉ áp dụng trong .serials-page
         transform: translateY(0);
     }
 }
+

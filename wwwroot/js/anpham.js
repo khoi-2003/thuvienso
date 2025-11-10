@@ -1,29 +1,24 @@
-﻿document.addEventListener("DOMContentLoaded", () => {
-    // ============================================================
-    // 🔹 KHỞI TẠO TAB ĐẦU TIÊN
-    // ============================================================
-    document.getElementById("trangchinh").style.display = "block";  // Hiển thị tab đầu tiên
+﻿function openTab(evt, tabName) {
+    // Ẩn tất cả nội dung tab
+    const tabContent = document.getElementsByClassName("tab-content");
+    for (let i = 0; i < tabContent.length; i++) {
+        tabContent[i].style.display = "none";
+        tabContent[i].classList.remove("fade-in");
+    }
 
-    // ============================================================
-    // 🔸 CHUYỂN TAB
-    // ============================================================
-    // Gán openTab vào window để có thể sử dụng trong HTML
-    window.openTab = function (evt, tabName) {
-        // Ẩn tất cả các tab-content
-        document.querySelectorAll(".tab-content").forEach(tab => {
-            tab.style.display = "none";
-            tab.classList.remove("active");
-        });
+    // Bỏ active ở tất cả tab-link
+    const tabLinks = document.getElementsByClassName("tab-link");
+    for (let i = 0; i < tabLinks.length; i++) {
+        tabLinks[i].classList.remove("active");
+    }
 
-        // Gỡ bỏ active class của tất cả các nút tab
-        document.querySelectorAll(".tab-link").forEach(btn => btn.classList.remove("active"));
+    // Hiển thị tab được chọn
+    const activeTab = document.getElementById(tabName);
+    if (activeTab) {
+        activeTab.style.display = "block";
+        activeTab.classList.add("fade-in");
+    }
 
-        // Hiển thị tab được chọn
-        const tab = document.getElementById(tabName);
-        tab.style.display = "block";
-        tab.classList.add("active");
-
-        // Thêm active class vào nút bấm hiện tại
-        evt.currentTarget.classList.add("active");
-    };
-});
+    // Đánh dấu nút hiện tại là active
+    evt.currentTarget.classList.add("active");
+}
