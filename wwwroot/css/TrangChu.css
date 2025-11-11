@@ -404,3 +404,11 @@
         opacity: 1;
         transform: translateY(0);
     }
+
+
+a.no-hover,
+a.no-hover:hover,
+a.no-hover:focus {
+    color: inherit !important;
+    text-decoration: none !important;
+}

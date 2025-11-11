@@ -241,8 +241,8 @@
     /* --- Tăng kích thước nút Tải và Chi tiết --- */
     .result-card .btn,
     .collection-info .btn {
-        padding: 5px 10px; /* tăng vùng nhấn */
-        font-size: 12px; /* chữ to hơn một chút */
+        padding: 6px 14px; /* tăng vùng nhấn */
+        font-size: 14px; /* chữ to hơn một chút */
         border-radius: 4px; /* bo góc nhẹ cho mềm mại */
     }
 

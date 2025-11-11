@@ -596,7 +596,7 @@ a, button {
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     min-width: 180px;
     font-size: 14px;
-    padding: 5px 0;
+    padding: 2px;
     background-color: #fff;
 }
 
@@ -613,6 +613,7 @@ a, button {
 
 /* 🔴 Đăng xuất nổi bật đỏ – ép ưu tiên */
 .logout-link {
+    border-radius: 8px;
     background-color: #fc9393 !important;
 }
 
