@@ -29,16 +29,69 @@
         });
     });
 
+    // Kiểm tra trạng thái sidebar trong localStorage khi trang tải
+    const sidebarState = localStorage.getItem("sidebarState");
+
+    // Nếu có trạng thái đã lưu, áp dụng nó
+    if (sidebarState === "open") {
+        sidebar.classList.add("expanded");
+        content.classList.add("expanded");
+    } else if (sidebarState === "closed") {
+        sidebar.classList.remove("expanded");
+        content.classList.remove("expanded");
+    } else {
+        // Mặc định khi không có trạng thái lưu
+        if (window.innerWidth <= 992) {
+            sidebar.classList.remove("expanded");
+            content.classList.remove("expanded");
+        } else {
+            sidebar.classList.add("expanded");
+            content.classList.add("expanded");
+        }
+    }
+
     /* ===== TOGGLE SIDEBAR ===== */
     toggleBtn?.addEventListener("click", function () {
         if (window.innerWidth <= 992) {
+            // Nếu màn hình nhỏ hơn hoặc bằng 992px, toggle sidebar và lưu trạng thái
             sidebar.classList.toggle("expanded");
             content.classList.toggle("expanded");
+
+            // Lưu trạng thái vào localStorage
+            if (sidebar.classList.contains("expanded")) {
+                localStorage.setItem("sidebarState", "open");
+            } else {
+                localStorage.setItem("sidebarState", "closed");
+            }
         } else {
+            // Nếu màn hình lớn hơn 992px, toggle trạng thái sidebar mà không thay đổi dữ liệu lưu trữ
             sidebar.classList.toggle("collapsed");
             content.classList.toggle("collapsed");
             document.querySelector(".navbar-fixed-top")?.classList.toggle("collapsed");
             document.querySelector(".navbar-static-bottom")?.classList.toggle("collapsed");
+        }
+    });
+
+    /* ===== Xử lý khi thay đổi kích thước cửa sổ ===== */
+    window.addEventListener("resize", function () {
+        if (window.innerWidth > 992) {
+            // Nếu màn hình lớn hơn 992px, đảm bảo rằng trạng thái sidebar được lưu trữ đúng từ localStorage
+            if (localStorage.getItem("sidebarState") === "open") {
+                sidebar.classList.add("expanded");
+                content.classList.add("expanded");
+            } else if (localStorage.getItem("sidebarState") === "closed") {
+                sidebar.classList.remove("expanded");
+                content.classList.remove("expanded");
+            }
+        } else {
+            // Nếu màn hình nhỏ hơn hoặc bằng 992px, kiểm tra trạng thái từ localStorage
+            if (localStorage.getItem("sidebarState") === "open") {
+                sidebar.classList.add("expanded");
+                content.classList.add("expanded");
+            } else {
+                sidebar.classList.remove("expanded");
+                content.classList.remove("expanded");
+            }
         }
     });
 
@@ -130,3 +183,5 @@
         });
     });
 });
+
+

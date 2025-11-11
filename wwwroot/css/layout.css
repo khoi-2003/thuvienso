@@ -224,7 +224,16 @@
     footer img {
         margin: 0 auto;
     }
+
 }
+
+/* Ẩn form tìm kiếm khi màn hình nhỏ hơn 1100px */
+@media (max-width: 1100px) {
+    .navbar-form {
+        display: none !important;
+    }
+}
+
 /* ===== Navbar (Bootstrap 3 tuỳ chỉnh) ===== */
 .navbar-default {
     background-color: #ffffff; /* nền trắng */
@@ -267,7 +276,7 @@
 }
 
 .navbar-desktop .navbar-form {
-    display: flex !important;
+    display: flex;
     flex: 1;
     justify-content: center;
     align-items: center;
@@ -352,7 +361,7 @@
     position: absolute !important;
     top: 100%;
     right: 0;
-    left: auto;
+    left: -180px;
     background-color: #ffffff !important;
     border: 1px solid #ccc;
     border-radius: 8px;

@@ -18,28 +18,28 @@
 <body>
     <div class="sidebar">
         <ul class="nav nav-pills nav-stacked">
-            <li class="toggle-btn text-center" style="height:50px; margin-bottom:3px">
+            <li class="toggle-btn text-center" style="height:50px; margin-bottom:3px" data-toggle="tooltip" title="Thu nhỏ/Mở rộng">
                 <a href="javascript:void(0);" id="toggleSidebar" style="margin-top:7px">
                     <i class="glyphicon glyphicon-menu-hamburger"></i>
                 </a>
             </li>
-            <li><a href="/"><i class="glyphicon glyphicon-home"></i> <span class="title-sidebar"> Trang Chủ</span></a></li>
-            <li><a href="/QuanLy/index"><i class="glyphicon glyphicon-list-alt"></i> <span class="title-sidebar"> Quản trị hệ thống</span></a></li>
+            <li data-toggle="tooltip" title="Trang chủ"><a href="/"><i class="glyphicon glyphicon-home"></i> <span class="title-sidebar"> Trang Chủ</span></a></li>
+            <li data-toggle="tooltip" title="Quản trị hệ thống"><a href="/QuanLy/index"><i class="glyphicon glyphicon-cog"></i> <span class="title-sidebar"> Quản trị hệ thống</span></a></li>
 
-            <li class="dropdown-submenu">
+            <li class="dropdown-submenu" data-toggle="tooltip" title="Tra cứu">
                 <a href="javascript:void(0);" class="submenu-toggle">
                     <i class="glyphicon glyphicon-search"></i>
                     <span class="title-sidebar"> Tra cứu</span>
                     <i class="glyphicon glyphicon-chevron-down pull-right small-arrow"></i>
                 </a>
                 <ul class="nav submenu">
-                    <li>
+                    <li data-toggle="tooltip" title="Tra cứu chính">
                         <a href="/TimKiem/index">
-                            <i class="glyphicon glyphicon-list-alt"></i>
+                            <i class="glyphicon glyphicon-search"></i>
                             <span class="title-sidebar"> Tra cứu chính</span>
                         </a>
                     </li>
-                    <li>
+                    <li data-toggle="tooltip" title="Bộ sưu tập">
                         <a href="/TimKiem/BoSuuTap">
                             <i class="glyphicon glyphicon-th-large"></i>
                             <span class="title-sidebar"> Bộ sưu tập</span>
@@ -48,27 +48,27 @@
                 </ul>
             </li>
 
-            <li>
+            <li data-toggle="tooltip" title="Bổ sung">
                 <a href="/BoSung/index">
-                    <i class="glyphicon glyphicon-plus-sign"></i>
+                    <i class="glyphicon glyphicon-plus"></i>
                     <span class="title-sidebar"> Bổ sung</span>
                 </a>
             </li>
 
-            <li class="dropdown-submenu">
+            <li class="dropdown-submenu" data-toggle="tooltip" title="Biên mục">
                 <a href="javascript:void(0);" class="submenu-toggle">
                     <i class="glyphicon glyphicon-book"></i>
                     <span class="title-sidebar"> Biên mục</span>
                     <i class="glyphicon glyphicon-chevron-down pull-right small-arrow"></i>
                 </a>
                 <ul class="nav submenu">
-                    <li>
+                    <li data-toggle="tooltip" title="Biên mục chính">
                         <a href="/BienMuc/index">
                             <i class="glyphicon glyphicon-list-alt"></i>
                             <span class="title-sidebar"> Biên mục chính</span>
                         </a>
                     </li>
-                    <li>
+                    <li data-toggle="tooltip" title="Từ điển">
                         <a href="/BienMuc/TuDien">
                             <i class="glyphicon glyphicon-education"></i>
                             <span class="title-sidebar"> Từ điển</span>
@@ -77,34 +77,34 @@
                 </ul>
             </li>
 
-            <li>
-                <a href="/BanDoc/Index">
+            <li data-toggle="tooltip" title="Quản lý bạn đọc">
+                <a href="/BanDoc/Index"> 
                     <i class="glyphicon glyphicon-user"></i>
                     <span class="title-sidebar"> Quản lý bạn đọc</span>
                 </a>
             </li>
 
-            <li>
+            <li data-toggle="tooltip" title="Quản lý tài liệu điện tử">
                 <a href="/TaiLieuDienTu/QuanLy">
-                    <i class="glyphicon glyphicon-file"></i>
+                    <i class="glyphicon glyphicon-folder-open"></i>
                     <span class="title-sidebar"> Quản lý tài liệu điện tử</span>
                 </a>
             </li>
 
-            <li class="dropdown-submenu">
+            <li class="dropdown-submenu" data-toggle="tooltip" title="Mượn trả giữ chỗ">
                 <a href="javascript:void(0);" class="submenu-toggle">
-                    <i class="glyphicon glyphicon-retweet"></i>
+                    <i class="glyphicon glyphicon-transfer"></i>
                     <span class="title-sidebar"> Mượn trả & Giữ chỗ</span>
                     <i class="glyphicon glyphicon-chevron-down pull-right small-arrow"></i>
                 </a>
                 <ul class="nav submenu">
-                    <li>
+                    <li data-toggle="tooltip" title="Mượn trả">
                         <a href="/MuonTra/Index">
                             <i class="glyphicon glyphicon-retweet"></i>
                             <span class="title-sidebar"> Mượn trả</span>
                         </a>
                     </li>
-                    <li>
+                    <li data-toggle="tooltip" title="Giữ chỗ">
                         <a href="/MuonTra/GiuCho">
                             <i class="glyphicon glyphicon-education"></i>
                             <span class="title-sidebar"> Giữ chỗ</span>
@@ -113,17 +113,17 @@
                 </ul>
             </li>
 
-            <li>
+            <li data-toggle="tooltip" title="Ấn phẩm định kỳ, nhiều kỳ">
                 <a href="/AnPham/Index">
                     <i class="glyphicon glyphicon-bookmark"></i>
-                    <span class="title-sidebar"> Ấn phẩm định kỳ / Nhiều kỳ</span>
+                    <span class="title-sidebar"> Ấn phẩm</span>
                 </a>
             </li>
 
-            <li>
+            <li data-toggle="tooltip" title="Thông báo nhắc việc">
                 <a href="/ThongBao/Index">
                     <i class="glyphicon glyphicon-bullhorn"></i>
-                    <span class="title-sidebar">Thông Báo & Nhắc Việc</span>
+                    <span class="title-sidebar">Thông Báo</span>
                 </a>
             </li>
 

@@ -3,6 +3,18 @@
     margin: 0;
 }
 
+.panel-body {
+    display: flex;
+    flex-direction: column; /* Sắp xếp các phần tử theo cột */
+    justify-content: space-between; /* Đảm bảo rằng các phần tử sẽ có không gian đều giữa chúng */
+    height: 100%; /* Đảm bảo chiều cao của panel body đầy đủ */
+}
+
+.actions {
+    margin-top: auto; /* Đẩy các nút xuống dưới cùng */
+}
+
+
 /* ==== Tiêu đề chính ==== */
 /*.opac-page header h2 {
     background: linear-gradient(90deg, #6a11cb, #2575fc);
