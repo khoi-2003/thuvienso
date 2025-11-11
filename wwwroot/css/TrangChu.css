@@ -413,19 +413,3 @@ a.no-hover:focus {
     color: inherit !important;
     text-decoration: none !important;
 }
-
-
-/* ==================== CARD THỐNG KÊ ==================== */
-.row {
-    display: flex;
-    justify-content: space-between; /* Căn giữa và chia đều các cột */
-    align-items: center; /* Căn giữa theo chiều dọc */
-    margin-bottom: 30px; /* Khoảng cách dưới cùng */
-}
-
-.cardcouter{
-    transform:translateY(-100px);
-    background:#f9f9f9;
-    width:90%;
-    margin:0 auto;
-}
