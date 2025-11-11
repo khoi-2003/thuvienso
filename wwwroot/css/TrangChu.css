@@ -22,7 +22,7 @@
     position: relative;
     color: white;
     text-align: center;
-    padding: 40px 15px;
+    padding: 120px 15px;
     overflow: hidden;
 }
 
@@ -321,13 +321,14 @@
         box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     }
 
-/* ===== THỐNG KÊ NGAY TRONG HERO ===== */
+
 .stats-inline {
     margin-top: 60px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 50px;
+    width:100%;
     position: relative;
     z-index: 2;
 }
@@ -411,4 +412,20 @@ a.no-hover:hover,
 a.no-hover:focus {
     color: inherit !important;
     text-decoration: none !important;
+}
+
+
+/* ==================== CARD THỐNG KÊ ==================== */
+.row {
+    display: flex;
+    justify-content: space-between; /* Căn giữa và chia đều các cột */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    margin-bottom: 30px; /* Khoảng cách dưới cùng */
+}
+
+.cardcouter{
+    transform:translateY(-100px);
+    background:#f9f9f9;
+    width:90%;
+    margin:0 auto;
 }

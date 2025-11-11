@@ -360,11 +360,10 @@
     margin-top: 10px !important;
     position: absolute !important;
     top: 100%;
-    right: 0;
-    left: -180px;
+    right: auto;
+    left: -115px;
     background-color: #ffffff !important;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    border-radius: 20px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     z-index: 1000;
 }
@@ -372,11 +371,13 @@
     .navbar .dropdown-menu > li > a {
         color: #333 !important;
         padding: 8px 15px;
+        border-radius: 20px !important;
     }
 
         .navbar .dropdown-menu > li > a:hover {
             background-color: #f0f0f0 !important;
             color: #000 !important;
+            border-radius: 20px !important;
         }
 
 /* ===== Animation ===== */
@@ -601,11 +602,11 @@ a, button {
 
 /* 🔹 Dropdown menu */
 .user-menu {
-    border-radius: 8px;
+    border-radius: 20px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     min-width: 180px;
     font-size: 14px;
-    padding: 2px;
+    padding: 0px;
     background-color: #fff;
 }
 
@@ -622,8 +623,7 @@ a, button {
 
 /* 🔴 Đăng xuất nổi bật đỏ – ép ưu tiên */
 .logout-link {
-    border-radius: 8px;
-    background-color: #fc9393 !important;
+    border-radius: 20px !important;
 }
 
 /* Nếu có icon trong dropdown – căn chỉnh gọn */
