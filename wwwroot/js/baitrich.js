@@ -109,7 +109,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function xoaBaiTrich(index) {
-        if (!confirm("Bạn có chắc muốn xóa bài trích này không?")) return;
         const list = loadData();
         list.splice(index, 1);
         saveData(list);

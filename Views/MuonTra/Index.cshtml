@@ -13,11 +13,11 @@
 
 
 <!-- Moment.js -->
-<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/min/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 
 <!-- Daterangepicker -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-<script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.js"></script>
 
 
 <script src="~/js/muontra.js"></script>
@@ -70,23 +70,25 @@
             </div>
 
             <!-- ✅ Bộ lọc tìm kiếm -->
-            <div class="row" style="margin-top:15px;">
+            <div class="row filter-bar">
                 <div class="col-md-4">
                     <input type="text" class="form-control" placeholder="🔍 Nhập mã thành viên hoặc nhan đề sách">
                 </div>
-            <div class="col-md-4">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                        <input type="text" class="form-control" id="dateRange" placeholder="Ngày bắt đầu - Ngày kết thúc">
+
+                <div class="date-range">
+                    <label for="startDate">Từ</label>
+                    <input type="date" id="startDate" class="form-control">
+
+                    <label for="endDate">Đến</label>
+                    <input type="date" id="endDate" class="form-control">
                 </div>
-            </div>
 
                 <div class="col-md-2 text-right">
                     <button class="btn btn-default"><i class="fa fa-refresh"></i> Tải lại</button>
-                </div> <div class="col-md-2 text-right">
-                    <div class="col-md-2 text-right">
-                        <button id="btnMoModal" class="btn btn-add">➕ Đăng ký số mới</button>
-                    </div>
+                </div>
+
+                <div class="col-md-2 text-right">
+                    <button id="btnMoModal" class="btn btn-add">➕ Đăng ký số mới</button>
                 </div>
             </div>
 

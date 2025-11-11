@@ -240,40 +240,23 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // NGÀY BẮT ĐẦU _ NGÀY KẾT THÚC 
-$(function () {
-    const $dateRange = $('#dateRange');
+function formatDMY(iso) {
+    if (!iso) return '';
+    const d = new Date(iso);
+    const dd = String(d.getDate()).padStart(2, '0');
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    const yy = d.getFullYear();
+    return dd + '/' + mm + '/' + yy;
+}
 
-    $dateRange.daterangepicker({
-        autoUpdateInput: false,
-        locale: {
-            applyLabel: 'Chọn',
-            cancelLabel: 'Xóa',
-            format: 'DD/MM/YYYY',
-            separator: ' - ',
-            daysOfWeek: ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'],
-            monthNames: [
-                'Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4',
-                'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8',
-                'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'
-            ],
-            firstDay: 1
-        }
-    });
-
-    // Khi click icon thì mở lịch
-    $('.input-group-addon').on('click', function () {
-        $('#dateRange').trigger('click');
-    });
-
-    // Cập nhật giá trị khi chọn ngày
-    $dateRange.on('apply.daterangepicker', function (ev, picker) {
-        $(this).val(`${picker.startDate.format('DD/MM/YYYY')} - ${picker.endDate.format('DD/MM/YYYY')}`);
-    });
-
-    // Xóa giá trị khi hủy
-    $dateRange.on('cancel.daterangepicker', function () {
-        $(this).val('');
-    });
+document.addEventListener("DOMContentLoaded", function () {
+    const btnMoModal = document.getElementById("btnMoModal");
+    if (btnMoModal) {
+        btnMoModal.addEventListener("click", function () {
+            console.log("Nút được bấm!");
+            // Code mở modal hoặc xử lý khác
+        });
+    }
 });
 
 

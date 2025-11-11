@@ -138,7 +138,7 @@ table th {
     border: none;
     padding: 8px 12px;
     border-radius: 8px;
-    background: linear-gradient(90deg,var(--grad1),var(--grad2));
+    background: #337ab7;
     color: #fff;
     font-weight: 600;
     cursor: pointer;
@@ -153,7 +153,6 @@ table th {
     #readerPagination button.active {
         background: #fff;
         color: var(--grad2);
-        border: 2px solid var(--grad2);
         box-shadow: 0 6px 18px rgba(106,17,203,0.12);
     }
 
@@ -199,7 +198,7 @@ table th {
     }
 
     .reserve-section .btn-save {
-        background: linear-gradient(90deg,var(--grad1),var(--grad2));
+        background: #337AB7;
         color: #fff;
         border: none;
         padding: 10px 16px;
@@ -273,7 +272,7 @@ table th {
         }
 
     .footer-section .btn-info {
-        background: linear-gradient(90deg,var(--grad2),var(--grad1));
+        background: #337ab7;
         color: #fff;
     }
 
