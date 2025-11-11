@@ -8,26 +8,27 @@
     <link rel="stylesheet" href="~/css/TrangChu.css" />
 </head>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const titles = document.querySelectorAll(".animated-title");
-
-        function revealTitles() {
-            titles.forEach(title => {
-                const rect = title.getBoundingClientRect();
-                if (rect.top < window.innerHeight - 100) {
-                    title.classList.add("show");
-                }
-            });
-        }
-
-        window.addEventListener("scroll", revealTitles);
-        revealTitles(); // gọi lần đầu để hiện phần trên cùng
-    });
-</script>
 
 
 <body>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const titles = document.querySelectorAll(".animated-title");
+
+            function revealTitles() {
+                titles.forEach(title => {
+                    const rect = title.getBoundingClientRect();
+                    if (rect.top < window.innerHeight - 100) {
+                        title.classList.add("show");
+                    }
+                });
+            }
+
+            window.addEventListener("scroll", revealTitles);
+            revealTitles(); // gọi lần đầu để hiện phần trên cùng
+        });
+    </script>
+
     <!-- HERO -->
     <section class="hero">
         <video autoplay muted loop playsinline class="hero-video">

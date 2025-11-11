@@ -10,12 +10,13 @@
 
     <!-- Bootstrap 3 -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
 
     <style>
         html, body {
             height: 100%;
             margin: 0;
-            font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-family: "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
             background: linear-gradient(135deg, #2b5876, #4e4376);
         }
 
@@ -25,7 +26,7 @@
             overflow: hidden;
         }
 
-        /* 🔹 Bên trái - ảnh động thư viện số */
+        /* 🔹 Bên trái */
         .login-left {
             flex: 1;
             background: url('https://cdnl.iconscout.com/lottie/premium/thumb/online-library-animation-gif-download-3009896.gif') center center no-repeat;
@@ -46,7 +47,7 @@
 
         }
 
-        /* 🔹 Bên phải - form đăng nhập */
+        /* 🔹 Bên phải */
         .login-right {
             flex: 1;
             background-color: #ffffff;
@@ -69,7 +70,6 @@
         }
 
             .login-box:hover {
-                transform: translateY(-5px);
                 box-shadow: 0 0 35px rgba(0,0,0,0.3);
             }
 
@@ -80,20 +80,69 @@
                 font-size: 26px;
             }
 
+        /* 🔹 Floating label kiểu cũ + mới kết hợp */
+        .form-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
         .form-control {
+            width: 100%;
             border-radius: 25px;
             height: 45px;
-            padding-left: 20px;
+            padding: 10px 15px;
             border: 1px solid #ccc;
-            margin-bottom: 20px;
             transition: all 0.3s ease;
+            font-size: 15px;
+            background: transparent;
         }
 
             .form-control:focus {
                 border-color: #4e4376;
-                box-shadow: 0 0 5px rgba(78, 67, 118, 0.5);
+                box-shadow: 0 0 5px rgba(78, 67, 118, 0.4);
+                outline: none;
             }
 
+        /* 🔹 Nhãn bay */
+        .form-label {
+            position: absolute;
+            top: 9px;
+            left: 25px;
+            color: #999;
+            border-radius: 10px;
+            font-size: 15px;
+            pointer-events: none;
+            background: #fff;
+            padding: 0 6px;
+            transform-origin: top;
+            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), color 0.25s ease, opacity 0.25s ease;
+        }
+
+        /* 🔹 Khi focus hoặc có text */
+        .form-control:focus + .form-label,
+        .form-control:not(:placeholder-shown) + .form-label {
+            transform: translate(-4px, -16px) scale(0.85);
+            color: #4e4376;
+            opacity: 1;
+        }
+
+
+        /* 🔹 Icon */
+        .input-icon {
+            position: absolute;
+            right: 18px;
+            top: 13px;
+            color: #aaa;
+            font-size: 15px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+            .input-icon:hover {
+                color: #4e4376;
+            }
+
+        /* 🔹 Nút đăng nhập */
         .btn-login {
             width: 100%;
             border-radius: 25px;
@@ -107,6 +156,8 @@
         }
 
             .btn-login:hover {
+                color: white;
+                transform: scale(1.03);
                 background: linear-gradient(90deg, #5f4f91, #3d6992);
             }
 
@@ -132,7 +183,6 @@
         }
 
         .login-right {
-            flex: 1;
             padding: 30px;
         }
 
@@ -141,36 +191,54 @@
 </head>
 <body>
     <div class="login-container">
-        <!-- 🔹 Bên trái -->
         <div class="login-left"></div>
 
-        <!-- 🔹 Bên phải -->
         <div class="login-right">
             <div class="login-box">
                 <h2>Đăng nhập tài khoản</h2>
-                <form id="loginForm">
-                    <input id="username" type="text" class="form-control" placeholder="Tên đăng nhập" required>
-                    <input id="password" type="password" class="form-control" placeholder="Mật khẩu" required>
+                <form id="loginForm" autocomplete="off">
+                    <div class="form-group">
+                        <input id="username" type="text" class="form-control" required placeholder=" ">
+                        <label class="form-label" for="username">Tên đăng nhập</label>
+                    </div>
+
+                    <div class="form-group">
+                        <input id="password" type="password" class="form-control" required placeholder=" ">
+                        <label class="form-label" for="password">Mật khẩu</label>
+                        <i class="fa-solid fa-eye-slash input-icon" id="togglePassword"></i>
+                    </div>
+
                     <button type="submit" class="btn btn-login">Đăng nhập</button>
+
+                    <div class="login-links">
+                        <p>Chưa có tài khoản? <a href="/TaiKhoan/DangKy">Đăng ký ngay</a></p>
+                        <p><a href="/TaiKhoan/QuenMatKhau">Quên mật khẩu?</a></p>
+                    </div>
                 </form>
-                <div class="login-links">
-                    <p>Chưa có tài khoản? <a href="/TaiKhoan/DangKy">Đăng ký ngay</a></p>
-                    <p><a href="/TaiKhoan/QuenMatKhau">Quên mật khẩu?</a></p>
-                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // 🔹 Giả lập đăng nhập (frontend)
+        // 🔹 Giả lập đăng nhập
         document.getElementById('loginForm').addEventListener('submit', function (e) {
             e.preventDefault();
-
             const username = document.getElementById('username').value.trim();
             if (username) {
                 localStorage.setItem('loggedInUser', username);
-                window.location.href = '/'; // quay lại trang chính
+                window.location.href = '/';
             }
+        });
+
+        // 🔹 Ẩn / hiện mật khẩu
+        const toggle = document.getElementById('togglePassword');
+        const password = document.getElementById('password');
+
+        toggle.addEventListener('click', () => {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            toggle.classList.toggle('fa-eye');
+            toggle.classList.toggle('fa-eye-slash');
         });
     </script>
 </body>

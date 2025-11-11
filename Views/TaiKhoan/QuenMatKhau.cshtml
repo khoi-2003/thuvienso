@@ -73,19 +73,53 @@
             font-size: 15px;
         }
 
+
+        .form-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
         .form-control {
             border-radius: 25px;
-            height: 45px;
-            padding-left: 20px;
-            margin-bottom: 20px;
+            height: 48px;
+            padding: 12px 20px;
             border: 1px solid #ccc;
-            transition: all 0.3s ease;
+            font-size: 15px;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.3s ease;
+            background-color: #fff;
         }
 
             .form-control:focus {
                 border-color: #2b5876;
-                box-shadow: 0 0 8px rgba(43, 88, 118, 0.3);
+                box-shadow: 0 0 8px rgba(43, 88, 118, 0.35);
+                background-color: #fff;
+                outline: none;
             }
+
+        /* 🔹 Label nổi (mượt hơn) */
+        .floating-label {
+            position: absolute;
+            top: 11px;
+            left: 22px;
+            color: #999;
+            font-size: 15px;
+            pointer-events: none;
+            background: #fff;
+            padding: 0 6px;
+            border-radius: 6px;
+            transform-origin: 0 0;
+            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), color 0.25s ease, top 0.25s ease, opacity 0.25s ease;
+        }
+
+        /* 🔹 Khi có focus hoặc có chữ */
+        .form-control:focus + .floating-label,
+        .form-control:not(:placeholder-shown) + .floating-label {
+            transform: scale(0.88) translateY(-22px);
+            top: 8px;
+            left: 18px;
+            color: #4e4376;
+        }
+
 
         .btn-reset {
             width: 100%;
@@ -154,7 +188,10 @@
         <p>Nhập địa chỉ email của bạn để nhận liên kết đặt lại mật khẩu.</p>
 
         <form id="forgotForm">
-            <input id="email" type="email" class="form-control" placeholder="Nhập email của bạn" required>
+            <div class="form-group">
+                <input id="email" type="email" class="form-control" placeholder=" " required>
+                <label class="floating-label" for="email">Nhập email của bạn</label>
+            </div>
             <button type="submit" class="btn btn-reset">Gửi liên kết đặt lại</button>
         </form>
 
